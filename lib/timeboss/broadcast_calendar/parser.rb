@@ -26,7 +26,6 @@ module TimeBoss
 
         def parse_period(identifier)
           return BroadcastCalendar.send(identifier) if BroadcastCalendar.respond_to?(identifier.to_s)
-          return parse_term(Date.today.to_s) if %w[today now].include?(identifier.to_s)
           parse_term(identifier || Date.today.year.to_s)
         end
 

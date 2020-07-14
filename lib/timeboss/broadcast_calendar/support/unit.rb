@@ -22,10 +22,20 @@ module TimeBoss
           range.to_a.map { |d| Day.new(d) }
         end
 
-        %w[month quarter half year].each do |period|
+        %w[week month quarter half year].each do |period|
           define_method period.pluralize do
             BroadcastCalendar.send("#{period.pluralize}_for", self)
           end
+
+          define_method period do
+            entries = send(period.pluralize)
+            return nil unless entries.length == 1
+            entries.first
+          end
+        end
+
+        def day
+          start_date if start_date == end_date
         end
 
         def +(value)
