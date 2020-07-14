@@ -416,10 +416,25 @@ module TimeBoss
         expect(date.end_date).to eq Date.parse('2017-04-08')
       end
 
-      it 'gives you nothing if you give it nothing' do
-        expect(described_class.parse(nil)).to be nil
-        expect(described_class.parse('')).to be nil
+      it 'gives you this year if you give it nothing' do
+        year = described_class.this_year
+        expect(described_class.parse(nil)).to eq year
+        expect(described_class.parse('')).to eq year
       end
+    end
+  end
+
+  xcontext 'expressions' do
+    it 'can parse waypoints' do
+    end
+
+    it 'can parse range expressions' do
+    end
+
+    it 'can parse mathematic expressions' do
+    end
+
+    it 'can parse complicated stuff' do
     end
   end
 
