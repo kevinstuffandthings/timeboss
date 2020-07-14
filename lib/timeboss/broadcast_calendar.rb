@@ -2,7 +2,7 @@
 require 'active_support/inflector'
 require 'active_support/core_ext/numeric/time'
 
-%w[day week month quarter year].each { |f| require_relative "./broadcast_calendar/#{f}" }
+%w[day week month quarter half year].each { |f| require_relative "./broadcast_calendar/#{f}" }
 %w[waypoints period parser].each { |f| require_relative "./broadcast_calendar/#{f}" }
 
 module TimeBoss

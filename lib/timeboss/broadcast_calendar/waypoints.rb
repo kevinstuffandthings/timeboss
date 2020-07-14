@@ -6,13 +6,9 @@ module TimeBoss
     module Waypoints
       extend self
 
-      %i[month quarter year].each do |type|
+      %i[month quarter half year].each do |type|
         klass = TimeBoss::BroadcastCalendar.const_get(type.to_s.classify)
         size = klass.const_get("NUM_MONTHS")
-
-        define_method("this_#{type}") { send("#{type}_for", Date.today) }
-        define_method("last_#{type}") { send("this_#{type}").previous }
-        define_method("next_#{type}") { send("this_#{type}").next }
 
         define_method type do |year, index = 1|
           month = (index * size) - size + 1
@@ -26,6 +22,22 @@ module TimeBoss
           return window.next if date > window.end_date
           return window.previous if date < window.start_date
         end
+
+        define_method "this_#{type}_last_year" do
+          window = send("this_#{type}")
+          send(type, window.year - 1, window.index)
+        end
+
+        define_method "this_#{type}_next_year" do
+          window = send("this_#{type}")
+          send(type, window.year + 1, window.index)
+        end
+      end
+
+      %i[week month quarter half year].each do |type|
+        define_method("this_#{type}") { send("#{type}_for", Date.today) }
+        define_method("last_#{type}") { send("this_#{type}").previous }
+        define_method("next_#{type}") { send("this_#{type}").next }
 
         define_method "#{type.to_s.pluralize}_for" do |entry|
           first = send("#{type}_for", entry.start_date)
@@ -58,28 +70,17 @@ module TimeBoss
           end
           windows
         end
+      end
 
-        define_method "this_#{type}_last_year" do
-          window = send("this_#{type}")
-          send(type, window.year - 1, window.index)
-        end
-
-        define_method "this_#{type}_next_year" do
-          window = send("this_#{type}")
-          send(type, window.year + 1, window.index)
+      %i[last next].each do |period|
+        define_method "this_week_#{period}_year" do
+          week = this_week
+          send("#{period}_year").weeks.find { |w| w.index == week.index }
         end
       end
 
-      def this_week
-        this_year.weeks.find(&:current?)
-      end
-
-      def last_week
-        this_week.previous
-      end
-
-      def next_week
-        this_week.next
+      def week_for(date)
+        year_for(date).weeks.find { |w| w.range.include?(date) }
       end
     end
   end

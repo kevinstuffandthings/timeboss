@@ -5,6 +5,7 @@ module TimeBoss
   module BroadcastCalendar
     Week = Struct.new(:parent, :index, :start_date, :end_date) do
       include Support::HasNavigation
+      delegate :year, to: :start_date
 
       def name
         "#{parent.name}W#{index}"

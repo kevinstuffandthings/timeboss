@@ -38,6 +38,7 @@ module TimeBoss
           end
           return BroadcastCalendar.month(*identifier.split('M').map(&:to_i)) if identifier.include?('M')
           return BroadcastCalendar.quarter(*identifier.split('Q').map(&:to_i)) if identifier.include?('Q')
+          return BroadcastCalendar.half(*identifier.split('H').map(&:to_i)) if identifier.include?('H')
           return BroadcastCalendar.year(identifier.to_i) if identifier.match(/^20[0-9][0-9]$/)
           suppress(ArgumentError) { Day.new(Date.parse(identifier)) }
         end
