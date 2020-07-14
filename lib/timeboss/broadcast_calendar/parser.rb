@@ -30,16 +30,16 @@ module TimeBoss
         end
 
         def parse_term(identifier)
-          return nil if identifier.blank?
-          if identifier.include?('W')
-            parent = parse(identifier.split('W').first)
-            return parent.weeks[identifier.split('W').last.to_i - 1]
+          return Day.new(Date.parse(identifier)) if identifier.match(/^[0-9]{4}-?[01][0-9]-?[0-3][0-9]$/)
+
+          period = if identifier.to_i == 0 then BroadcastCalendar.this_year else BroadcastCalendar.year(identifier.to_i) end
+          %w[half quarter month week day].each do |size|
+            prefix = size[0].upcase
+            next unless identifier.include?(prefix)
+            identifier = identifier.split(prefix).last
+            period = period.send(size.pluralize)[identifier.to_i - 1]
           end
-          return BroadcastCalendar.month(*identifier.split('M').map(&:to_i)) if identifier.include?('M')
-          return BroadcastCalendar.quarter(*identifier.split('Q').map(&:to_i)) if identifier.include?('Q')
-          return BroadcastCalendar.half(*identifier.split('H').map(&:to_i)) if identifier.include?('H')
-          return BroadcastCalendar.year(identifier.to_i) if identifier.match(/^20[0-9][0-9]$/)
-          suppress(ArgumentError) { Day.new(Date.parse(identifier)) }
+          period
         end
       end
     end

@@ -76,6 +76,10 @@ module TimeBoss
         define_method(period) { Day.new(Date.send(period)) }
       end
 
+      def day(year, index)
+        year(year).days[index - 1]
+      end
+
       %i[last next].each do |period|
         define_method "this_week_#{period}_year" do
           week = this_week
