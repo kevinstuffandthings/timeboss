@@ -30,14 +30,15 @@ module TimeBoss
         end
 
         def parse_term(identifier)
-          return Day.new(Date.parse(identifier)) if identifier.match(/^[0-9]{4}-?[01][0-9]-?[0-3][0-9]$/)
+          return Day.new(Date.parse(identifier)) if identifier.match?(/^[0-9]{4}-?[01][0-9]-?[0-3][0-9]$/)
 
           period = if identifier.to_i == 0 then BroadcastCalendar.this_year else BroadcastCalendar.year(identifier.to_i) end
           %w[half quarter month week day].each do |size|
             prefix = size[0].upcase
             next unless identifier.include?(prefix)
-            identifier = identifier.split(prefix).last
-            period = period.send(size.pluralize)[identifier.to_i - 1]
+            junk, identifier = identifier.split(prefix)
+            raise InvalidPeriodIdentifierError if junk.match?(/\D/)
+            period = period.send(size.pluralize)[identifier.to_i - 1] or raise InvalidPeriodIdentifierError
           end
           period
         end
