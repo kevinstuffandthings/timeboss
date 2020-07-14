@@ -1,10 +1,10 @@
 # frozen_string_literal: true
-require_relative './support/has_navigation'
+require_relative './support/unit'
 
 module TimeBoss
   module BroadcastCalendar
     Day = Struct.new(:start_date) do
-      include Support::HasNavigation
+      include Support::Unit
       alias_method :end_date, :start_date
 
       def name
@@ -17,6 +17,10 @@ module TimeBoss
 
       def to_s
         name
+      end
+
+      def index
+        @_index ||= (start_date - TimeBoss::BroadcastCalendar.year_for(start_date).start_date).to_i + 1
       end
 
       def previous

@@ -1,11 +1,10 @@
 # frozen_string_literal: true
-require_relative './support/has_navigation'
+require_relative './support/unit'
 
 module TimeBoss
   module BroadcastCalendar
     Week = Struct.new(:parent, :index, :start_date, :end_date) do
-      include Support::HasNavigation
-      delegate :year, to: :start_date
+      include Support::Unit
 
       def name
         "#{parent.name}W#{index}"

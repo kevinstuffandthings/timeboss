@@ -1,11 +1,11 @@
 # frozen_string_literal: true
-require_relative './has_navigation'
+require_relative './unit'
 
 module TimeBoss
   module BroadcastCalendar
     module Support
       class MonthBased
-        include Support::HasNavigation
+        include Support::Unit
         attr_reader :year, :index, :start_date, :end_date
 
         def self.type
