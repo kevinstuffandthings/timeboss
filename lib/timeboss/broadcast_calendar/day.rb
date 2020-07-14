@@ -5,6 +5,7 @@ module TimeBoss
   module BroadcastCalendar
     Day = Struct.new(:start_date) do
       include Support::HasNavigation
+      alias_method :end_date, :start_date
 
       def name
         start_date.to_s
@@ -26,8 +27,8 @@ module TimeBoss
         self.class.new(start_date + 1.day)
       end
 
-      def end_date
-        start_date
+      def range
+        start_date..end_date
       end
     end
   end

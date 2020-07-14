@@ -11,13 +11,12 @@ module TimeBoss
         "#{parent.name}W#{index}"
       end
 
-      def next
-        weeks = parent.weeks
-        if index == weeks.last.index
-          parent.next.weeks.first
-        else
-          weeks[index]
-        end
+      def title
+        "Week of #{start_date.strftime('%B %-d, %Y')}"
+      end
+
+      def to_s
+        "#{name}: #{start_date} thru #{end_date}"
       end
 
       def previous
@@ -29,16 +28,17 @@ module TimeBoss
         end
       end
 
+      def next
+        weeks = parent.weeks
+        if index == weeks.last.index
+          parent.next.weeks.first
+        else
+          weeks[index]
+        end
+      end
+
       def range
         start_date..end_date
-      end
-
-      def title
-        "Week of #{start_date.strftime('%B %-d, %Y')}"
-      end
-
-      def to_s
-        "#{name}: #{start_date} thru #{end_date}"
       end
     end
   end
