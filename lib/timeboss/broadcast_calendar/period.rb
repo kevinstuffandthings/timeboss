@@ -1,7 +1,18 @@
+# frozen_string_literal: true
 module TimeBoss
   module BroadcastCalendar
     class Period
       attr_reader :begin, :end
+      delegate :start_date, to: :begin
+      delegate :end_date, to: :end
+
+      %i[name title to_s].each do |message|
+        define_method(message) do
+          text = self.begin.send(message)
+          text = "#{text} #{Parser::RANGE_DELIMITER} #{self.end.send(message)}" unless self.end == self.begin
+          text
+        end
+      end
 
       %i[months quarters years].each do |size|
         define_method(size) do
@@ -10,10 +21,8 @@ module TimeBoss
         end
       end
 
-      def name
-        name = self.begin.name
-        name = "#{name} thru #{self.end.name}" unless self.end == self.begin
-        name
+      def days
+        (start_date .. end_date).map { |d| Day.new(d) }
       end
 
       def weeks
@@ -25,7 +34,7 @@ module TimeBoss
       private
 
       def initialize(begin_basis, end_basis = nil)
-        @begin = begin_bases
+        @begin = begin_basis
         @end = end_basis || @begin
       end
 
@@ -38,25 +47,8 @@ module TimeBoss
         end
         entries
       end
-
-      class Entry
-        attr_reader :entry
-        delegate :name, :title, :start_date, :end_date, :current?, :to_s, to: :entry
-
-        def initialize(entry)
-          @entry = entry
-        end
-
-        def to_h
-          {
-            name: name,
-            title: title,
-            start_date: start_date,
-            end_date: end_date,
-            is_current: current?
-          }
-        end
-      end
     end
   end
 end
+
+require_relative './period/entry'

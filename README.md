@@ -59,3 +59,15 @@ TimeBoss::BroadcastCalendar.this_year.weeks.last.to_s
 ```
 
 For more examples, check out the unit tests at [spec/broadcast_calendar_spec.rb](spec/broadcast_calendar_spec.rb).
+
+### Shell
+To open an IRB shell for the broadcast calendar, use the `timeboss:broadcast_calendar:shell` rake task:
+```bash
+$ rake timeboss:broadcast_calendar:shell
+2.4.1 :001 > next_quarter
+ => #<TimeBoss::BroadcastCalendar::Quarter:0x007fcfc308e270 @year=2020, @index=4, @start_date=#<Date: 2020-09-28 ((2459121j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2020-12-27 ((2459211j,0s,0n),+0s,2299161j)>>
+2.4.1 :002 > last_year
+ => #<TimeBoss::BroadcastCalendar::Year:0x007fcfc3085f58 @year=2019, @index=1, @start_date=#<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
+2.4.1 :003 > parse('this_quarter .. this_quarter+4').months.map(&:name)
+ => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3", "2021M4", "2021M5", "2021M6", "2021M7", "2021M8", "2021M9"]
+```

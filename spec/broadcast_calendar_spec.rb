@@ -428,13 +428,29 @@ module TimeBoss
     it 'can parse waypoints' do
     end
 
-    it 'can parse range expressions' do
-    end
-
     it 'can parse mathematic expressions' do
     end
 
-    it 'can parse complicated stuff' do
+    context 'ranges' do
+      it 'can parse range expressions' do
+      end
+
+      it 'can get an overall start date for a range' do
+      end
+
+      it 'can get an overall end date for a range' do
+      end
+
+      context 'sub-periods' do
+        it 'can get the months included in a range' do
+        end
+
+        it 'can get the weeks included in a range' do
+        end
+
+        it 'can get the days included in a range' do
+        end
+      end
     end
   end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module TimeBoss
   module BroadcastCalendar
     class Parser
@@ -7,7 +8,7 @@ module TimeBoss
       class << self
         def parse(identifier = nil)
           return parse_identifier(identifier.presence) unless identifier&.include?(RANGE_DELIMITER)
-          bases = identifier.split(RANGE_DELIMITER).map { |i| parse_identifier(i) } unless identifier.nil?
+          bases = identifier.split(RANGE_DELIMITER).map { |i| parse_identifier(i.strip) } unless identifier.nil?
           bases ||= [parse_identifier(nil)]
           Period.new(*bases)
         rescue ArgumentError
