@@ -19,6 +19,10 @@ module TimeBoss
           self.class == entry.class && self.start_date == entry.start_date && self.end_date == entry.end_date
         end
 
+        def thru(unit)
+          Period.new(calendar, self, unit)
+        end
+
         def current?
           Date.today.between?(start_date, end_date)
         end

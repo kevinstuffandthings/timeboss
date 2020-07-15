@@ -79,13 +79,13 @@ calendar.this_week.next_year.to_s # run 2020W29
 # => "2021W29: 2021-07-12 thru 2021-07-18"
 ```
 
-Complicated range expressions can be parsed using the `..` range operator:
+Complicated range expressions can be parsed using the `..` range operator, or evaluated with `thru`:
 
 ```ruby
 calendar.parse('2020M1 .. 2020M2').weeks.map(&:title)
 # => ["Week of December 30, 2019", "Week of January 6, 2020", "Week of January 13, 2020", "Week of January 20, 2020", "Week of January 27, 2020", "Week of February 3, 2020", "Week of February 10, 2020", "Week of February 17, 2020"]
 
-calendar.parse('this_quarter .. this_quarter+2').months.map(&:name) # run in 2020Q3
+calendar.this_quarter.thru(calendar.this_quarter+2).months.map(&:name) # run in 2020Q3
 # => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3"]
 
 period = calendar.parse('2020W3..2020Q1')
@@ -96,7 +96,8 @@ period = calendar.parse('2020W3..2020Q1')
 The examples above are just samples. Try different periods, operators, etc.
 
 ### Shell
-To open an IRB shell for the broadcast calendar, use the `timeboss:broadcast_calendar:shell` rake task:
+To open an IRB shell for the broadcast calendar, use the `timeboss:broadcast_calendar:shell` rake task.
+You will find yourself in the context of an instantiated `TimeBoss::BroadcastCalendar` object:
 ```bash
 $ rake timeboss:broadcast_calendar:shell
 2.4.1 :001 > next_quarter
