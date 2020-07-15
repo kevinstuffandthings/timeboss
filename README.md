@@ -84,7 +84,7 @@ week = calendar.this_week # run 2020W29
 "#{week.name}: #{week.in_quarter} of #{week.quarter.name}; #{week.in_year} of #{week.year.name}"
 # => "2020W29: 3 of 2020Q3; 29 of 2020"
 
-week = calendar.parse('2014W29') # run 2020W29, this generates the same as above, because shifts are relative to date run!
+week = calendar.parse('2014W29').this_week # run 2020W29, this generates the same as above, because shifts are relative to date run!
 "#{week.name}: #{week.in_quarter} of #{week.quarter.name}; #{week.in_year} of #{week.year.name}"
 # => "2020W29: 3 of 2020Q3; 29 of 2020"
 
