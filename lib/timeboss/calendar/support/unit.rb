@@ -46,11 +46,15 @@ module TimeBoss
             return unless base.length == 1
             self_periods = self.class.type.to_s.pluralize
             base_offset = base.first.send(self_periods).find_index { |p| p == self } + 1
-            (base.first - offset).send(self_periods)[base_offset - 1]
+            (calendar.send("this_#{period}") - offset).send(self_periods)[base_offset - 1]
           end
 
           define_method "last_#{period}" do
             send("#{periods}_ago", 1)
+          end
+
+          define_method "this_#{period}" do
+            send("#{periods}_ago", 0)
           end
 
           define_method "#{periods}_hence" do |offset|
