@@ -29,11 +29,11 @@ module TimeBoss
       end
 
       def previous
-        self.class.new(start_date - 1.day)
+        self.class.new(calendar, start_date - 1.day)
       end
 
       def next
-        self.class.new(start_date + 1.day)
+        self.class.new(calendar, start_date + 1.day)
       end
 
       def range
