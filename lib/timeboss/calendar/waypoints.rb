@@ -20,7 +20,7 @@ module TimeBoss
         end
       end
 
-      %i[week month quarter half year].each do |type|
+      %i[day week month quarter half year].each do |type|
         define_method("this_#{type}") { send("#{type}_for", Date.today) }
         define_method("last_#{type}") { send("this_#{type}").previous }
         define_method("next_#{type}") { send("this_#{type}").next }
@@ -72,6 +72,10 @@ module TimeBoss
 
       def day(year, index)
         year(year).days[index - 1]
+      end
+
+      def day_for(date)
+        Day.new(self, date)
       end
 
       def week_for(date)

@@ -44,8 +44,10 @@ module TimeBoss
         end
 
         def weeks
-          num_weeks = (((end_date - start_date) + 1) / 7.0).to_i
-          num_weeks.times.map { |i| Week.new(calendar, self, i + 1, start_date + (i * 7).days, start_date + ((i * 7) + 6).days) }
+          base = calendar.year(year)
+          num_weeks = (((base.end_date - base.start_date) + 1) / 7.0).to_i
+          num_weeks.times.map { |i| Week.new(calendar, year, i + 1, base.start_date + (i * 7).days, base.start_date + ((i * 7) + 6).days) }
+                         .select { |w| w.start_date.between?(start_date, end_date) }
         end
 
         private

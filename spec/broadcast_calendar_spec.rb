@@ -368,22 +368,19 @@ module TimeBoss
       it 'can parse a week within a year' do
         date = subject.parse('2018W37')
         expect(date).to be_a TimeBoss::Calendar::Week
-        expect(date.parent.name).to eq '2018'
         expect(date.name).to eq '2018W37'
       end
 
       it 'can parse a week within a quarter' do
         date = subject.parse('2017Q2W2')
         expect(date).to be_a TimeBoss::Calendar::Week
-        expect(date.parent.name).to eq '2017Q2'
-        expect(date.name).to eq '2017Q2W2'
+        expect(date.name).to eq '2017W15'
       end
 
       it 'can parse a week within a month' do
         date = subject.parse('2017M4W1')
         expect(date).to be_a TimeBoss::Calendar::Week
-        expect(date.parent.name).to eq '2017M4'
-        expect(date.name).to eq '2017M4W1'
+        expect(date.name).to eq '2017W14'
       end
 
       it 'can parse a date' do
@@ -466,32 +463,24 @@ module TimeBoss
       end
 
       context 'week' do
-        let(:start_date) { Date.parse('2048-03-09') }
-        let(:end_date) { Date.parse('2048-03-15') }
-        let(:parent) { double(name: '2048M3') }
-        let(:subject) { TimeBoss::Calendar::Week.new(calendar, parent, 2, start_date, end_date) }
-
         context 'links' do
           context 'within year' do
             let(:parent) { calendar.parse('2020') }
             let(:week) { parent.weeks.first }
 
             it 'knows itself first' do
-              expect(week.parent.name).to eq '2020'
               expect(week.to_s).to include('2020W1', '2019-12-30', '2020-01-05')
             end
 
             it 'can get its next week' do
               subject = week.next
               expect(subject).to be_a TimeBoss::Calendar::Week
-              expect(subject.parent.name).to eq '2020'
               expect(subject.to_s).to include('2020W2', '2020-01-06', '2020-01-12')
             end
 
             it 'can get its previous week' do
               subject = week.previous
               expect(subject).to be_a TimeBoss::Calendar::Week
-              expect(subject.parent.name).to eq '2019'
               expect(subject.to_s).to include('2019W52', '2019-12-23', '2019-12-29')
             end
 
@@ -510,31 +499,28 @@ module TimeBoss
             let(:week) { parent.weeks.last }
 
             it 'knows itself first' do
-              expect(week.parent.name).to eq '2019Q3'
-              expect(week.to_s).to include('2019Q3W13', '2019-09-23', '2019-09-29')
+              expect(week.to_s).to include('2019W39', '2019-09-23', '2019-09-29')
             end
 
             it 'can get its next week' do
               subject = week.next
               expect(subject).to be_a TimeBoss::Calendar::Week
-              expect(subject.parent.name).to eq '2019Q4'
-              expect(subject.to_s).to include('2019Q4W1', '2019-09-30', '2019-10-06')
+              expect(subject.to_s).to include('2019W40', '2019-09-30', '2019-10-06')
             end
 
             it 'can get its previous week' do
               subject = week.previous
               expect(subject).to be_a TimeBoss::Calendar::Week
-              expect(subject.parent.name).to eq '2019Q3'
-              expect(subject.to_s).to include('2019Q3W12', '2019-09-16', '2019-09-22')
+              expect(subject.to_s).to include('2019W38', '2019-09-16', '2019-09-22')
             end
 
             it 'can offset backwards' do
-              expect(week.offset(-4).name).to eq '2019Q3W9'
-              expect((week - 4).name).to eq '2019Q3W9'
+              expect(week.offset(-4).name).to eq '2019W35'
+              expect((week - 4).name).to eq '2019W35'
             end
 
             it 'can offset forwards' do
-              expect((week + 2).name).to eq '2019Q4W2'
+              expect((week + 2).name).to eq '2019W41'
             end
           end
         end

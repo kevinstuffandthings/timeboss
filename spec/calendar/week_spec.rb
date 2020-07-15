@@ -4,11 +4,10 @@ module TimeBoss
       let(:calendar) { instance_double(TimeBoss::Calendar) }
       let(:start_date) { Date.parse('2048-03-09') }
       let(:end_date) { Date.parse('2048-03-15') }
-      let(:parent) { double(name: '2048M3') }
-      let(:subject) { described_class.new(calendar, parent, 2, start_date, end_date) }
+      let(:subject) { described_class.new(calendar, 2048, 15, start_date, end_date) }
 
       it 'knows its stuff' do
-        expect(subject.name).to eq '2048M3W2'
+        expect(subject.name).to eq '2048W15'
         expect(subject.start_date).to eq start_date
         expect(subject.end_date).to eq end_date
         expect(subject.range).to eq start_date..end_date
