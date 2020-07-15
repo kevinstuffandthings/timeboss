@@ -14,7 +14,7 @@ module TimeBoss
         return parse_identifier(identifier.presence) unless identifier&.include?(RANGE_DELIMITER)
         bases = identifier.split(RANGE_DELIMITER).map { |i| parse_identifier(i.strip) } unless identifier.nil?
         bases ||= [parse_identifier(nil)]
-        Period.new(*bases)
+        Period.new(calendar, *bases)
       rescue ArgumentError
         raise InvalidPeriodIdentifierError
       end

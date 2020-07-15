@@ -14,33 +14,42 @@ module TimeBoss
         end
       end
 
-      %i[months quarters years].each do |size|
-        define_method(size) do
-          entry = Calendar.send("#{size.to_s.singularize}_for", self.begin.start_date)
+      %w[week month quarter half year].each do |size|
+        define_method(size.pluralize) do
+          entry = calendar.send("#{size}_for", self.begin.start_date)
           build_entries entry
+        end
+
+        define_method(size) do
+          entries = send(size.pluralize)
+          return nil unless entries.length == 1
+          entries.first
         end
       end
 
       def days
-        (start_date .. end_date).map { |d| Day.new(d) }
+        (start_date .. end_date).map { |d| Day.new(calendar, d) }
       end
 
-      def weeks
-        year = Calendar.send("year_for", self.begin.start_date)
-        entry = year.weeks.find { |w| w.range.include?(self.begin.start_date) }
-        build_entries entry
+      def day
+        entries = days
+        return nil unless entries.length == 1
+        entries.first
       end
 
       private
 
-      def initialize(begin_basis, end_basis = nil)
+      attr_reader :calendar
+
+      def initialize(calendar, begin_basis, end_basis = nil)
+        @calendar = calendar
         @begin = begin_basis
         @end = end_basis || @begin
       end
 
       def build_entries(entry)
         return [] if entry.start_date > self.end.end_date
-        entries = [Entry.new(entry)]
+        entries = [entry]
         while entry.end_date < self.end.end_date
           entry = entry.next
           entries << entry

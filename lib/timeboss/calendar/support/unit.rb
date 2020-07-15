@@ -25,7 +25,7 @@ module TimeBoss
         end
 
         def days
-          range.to_a.map { |d| Day.new(d) }
+          range.to_a.map { |d| Day.new(calendar, d) }
         end
 
         %w[week month quarter half year].each do |period|

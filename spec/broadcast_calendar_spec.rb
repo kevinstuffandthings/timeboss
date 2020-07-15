@@ -424,33 +424,33 @@ module TimeBoss
         expect(subject.parse('')).to eq year
       end
     end
-  end
 
-  xcontext 'expressions' do
-    it 'can parse waypoints' do
-    end
-
-    it 'can parse mathematic expressions' do
-    end
-
-    context 'ranges' do
-      it 'can parse range expressions' do
+    xcontext 'expressions' do
+      it 'can parse waypoints' do
       end
 
-      it 'can get an overall start date for a range' do
+      it 'can parse mathematic expressions' do
       end
 
-      it 'can get an overall end date for a range' do
-      end
-
-      context 'sub-periods' do
-        it 'can get the months included in a range' do
+      context 'ranges' do
+        it 'can parse range expressions' do
         end
 
-        it 'can get the weeks included in a range' do
+        it 'can get an overall start date for a range' do
         end
 
-        it 'can get the days included in a range' do
+        it 'can get an overall end date for a range' do
+        end
+
+        context 'sub-periods' do
+          it 'can get the months included in a range' do
+          end
+
+          it 'can get the weeks included in a range' do
+          end
+
+          it 'can get the days included in a range' do
+          end
         end
       end
     end
@@ -458,9 +458,9 @@ module TimeBoss
     context 'units' do
       let(:calendar) { described_class.new }
 
-      describe TimeBoss::Calendar::Day do
+      context 'day' do
         let(:start_date) { Date.parse('2019-09-30') }
-        let(:subject) { described_class.new(calendar, start_date) }
+        let(:subject) { TimeBoss::Calendar::Day.new(calendar, start_date) }
 
         context 'links' do
           it 'can get its previous' do
@@ -483,11 +483,11 @@ module TimeBoss
         end
       end
 
-      describe Calendar::Week do
+      context 'week' do
         let(:start_date) { Date.parse('2048-03-09') }
         let(:end_date) { Date.parse('2048-03-15') }
         let(:parent) { double(name: '2048M3') }
-        let(:subject) { described_class.new(calendar, parent, 2, start_date, end_date) }
+        let(:subject) { TimeBoss::Calendar::Week.new(calendar, parent, 2, start_date, end_date) }
 
         context 'links' do
           context 'within year' do
@@ -501,14 +501,14 @@ module TimeBoss
 
             it 'can get its next week' do
               subject = week.next
-              expect(subject).to be_a described_class
+              expect(subject).to be_a TimeBoss::Calendar::Week
               expect(subject.parent.name).to eq '2020'
               expect(subject.to_s).to include('2020W2', '2020-01-06', '2020-01-12')
             end
 
             it 'can get its previous week' do
               subject = week.previous
-              expect(subject).to be_a described_class
+              expect(subject).to be_a TimeBoss::Calendar::Week
               expect(subject.parent.name).to eq '2019'
               expect(subject.to_s).to include('2019W52', '2019-12-23', '2019-12-29')
             end
@@ -534,14 +534,14 @@ module TimeBoss
 
             it 'can get its next week' do
               subject = week.next
-              expect(subject).to be_a described_class
+              expect(subject).to be_a TimeBoss::Calendar::Week
               expect(subject.parent.name).to eq '2019Q4'
               expect(subject.to_s).to include('2019Q4W1', '2019-09-30', '2019-10-06')
             end
 
             it 'can get its previous week' do
               subject = week.previous
-              expect(subject).to be_a described_class
+              expect(subject).to be_a TimeBoss::Calendar::Week
               expect(subject.parent.name).to eq '2019Q3'
               expect(subject.to_s).to include('2019Q3W12', '2019-09-16', '2019-09-22')
             end
@@ -558,10 +558,10 @@ module TimeBoss
         end
       end
 
-      describe Calendar::Quarter do
+      context 'quarter' do
         let(:start_date) { Date.parse('2019-09-30') }
         let(:end_date) { Date.parse('2019-12-29') }
-        let(:subject) { described_class.new(calendar, 2019, 4, start_date, end_date) }
+        let(:subject) { TimeBoss::Calendar::Quarter.new(calendar, 2019, 4, start_date, end_date) }
 
         context 'links' do
           it 'can get the next quarter' do
