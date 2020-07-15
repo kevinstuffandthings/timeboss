@@ -5,7 +5,7 @@ module TimeBoss
   module Calendars
     class Broadcast < Calendar
       def initialize
-        super(basis: Broadcast::Basis)
+        super(basis: Basis)
       end
 
       private

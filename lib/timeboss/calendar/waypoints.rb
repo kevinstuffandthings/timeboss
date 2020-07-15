@@ -8,8 +8,8 @@ module TimeBoss
 
         define_method type do |year_index, index = 1|
           month = (index * size) - size + 1
-          months = (month .. month + size - 1).map { |i| basis.new(year_index, i).to_range }
-          klass.new(self, year_index, index, months.first.begin, months.last.end)
+          months = (month .. month + size - 1).map { |i| basis.new(year_index, i) }
+          klass.new(self, year_index, index, months.first.start_date, months.last.end_date)
         end
 
         define_method "#{type}_for" do |date|
