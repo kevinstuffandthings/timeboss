@@ -74,11 +74,19 @@ calendar.parse('2020Q1').months.map(&:name)
 # => ["2020M1", "2020M2", "2020M3"]
 ```
 
-Period shifting is easy:
+Period shifting is easy. Note that the shifts are relative to today, not the base date. A shift examines the base period to find its offset into the shifting period size, and project it relative to now.
 
 ```ruby
 calendar.parse('Q3').years_ago(5).title
 # => "Q3 2015"
+
+week = calendar.this_week # run 2020W29
+"#{week.name}: #{week.in_quarter} of #{week.quarter.name}; #{week.in_year} of #{week.year.name}"
+# => "2020W29: 3 of 2020Q3; 29 of 2020"
+
+week = calendar.parse('2014W29') # run 2020W29, this generates the same as above, because shifts are relative to date run!
+"#{week.name}: #{week.in_quarter} of #{week.quarter.name}; #{week.in_year} of #{week.year.name}"
+# => "2020W29: 3 of 2020Q3; 29 of 2020"
 
 calendar.this_week.next_year.to_s # run 2020W29
 # => "2021W29: 2021-07-12 thru 2021-07-18"

@@ -24,7 +24,7 @@ module TimeBoss
       def parse_identifier(identifier)
         captures = identifier&.match(/^([^-]+)(\s*[+-]\s*[0-9]+)$/)&.captures
         base, offset = captures || [identifier, '0']
-        period = parse_period(base) or raise InvalidPeriodIdentifierError
+        period = parse_period(base&.strip) or raise InvalidPeriodIdentifierError
         period.offset(offset.gsub(/\s+/, '').to_i)
       end
 

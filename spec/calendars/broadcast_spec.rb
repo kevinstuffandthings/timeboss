@@ -427,80 +427,160 @@ module TimeBoss
       end
     end
 
-    xcontext 'expressions' do
+    context 'expressions' do
       it 'can parse waypoints' do
+        result = subject.parse('this_year')
+        expect(result).to be_a TimeBoss::Calendar::Year
+        expect(result).to be_current
       end
 
       it 'can parse mathematic expressions' do
+        result = subject.parse('this_month + 2')
+        expect(result).to be_a TimeBoss::Calendar::Month
+        expect(result).to eq subject.months_hence(2)
       end
 
       context 'ranges' do
+        before(:each) { allow(subject).to receive(:this_year).and_return subject.year(2018) }
+        let(:result) { subject.parse('this_year-2 .. this_year') }
+
         it 'can parse range expressions' do
+          expect(result).to be_a TimeBoss::Calendar::Period
+          expect(result.to_s).to eq "2016: 2015-12-28 thru 2016-12-25 .. 2018: 2018-01-01 thru 2018-12-30"
         end
 
         it 'can get an overall start date for a range' do
+          expect(result.start_date).to eq Date.parse('2015-12-28')
         end
 
         it 'can get an overall end date for a range' do
+          expect(result.end_date).to eq Date.parse('2018-12-30')
         end
 
         context 'sub-periods' do
           it 'can get the months included in a range' do
+            entries = result.months
+            entries.each { |e| expect(e).to be_a TimeBoss::Calendar::Month }
+            expect(entries.map(&:name)).to include('2016M1', '2016M9', '2017M3', '2018M12')
           end
 
           it 'can get the weeks included in a range' do
+            entries = result.weeks
+            entries.each { |e| expect(e).to be_a TimeBoss::Calendar::Week }
+            expect(entries.map(&:name)).to include('2016W1', '2016W38', '2017W15', '2017W53', '2018W52')
           end
 
           it 'can get the days included in a range' do
+            entries = result.days
+            entries.each { |e| expect(e).to be_a TimeBoss::Calendar::Day }
+            expect(entries.map(&:name)).to include('2015-12-28', '2016-04-30', '2017-09-22', '2018-12-30')
           end
         end
       end
     end
 
-    xcontext 'shifting' do
+    context 'shifting' do
       context 'from day' do
+        let(:basis) { subject.parse('2020-04-21') }
+
         it 'can shift to a different week' do
+          allow(subject).to receive(:this_week).and_return subject.parse('2020W23')
+          result = basis.last_week
+          expect(result).to be_a TimeBoss::Calendar::Day
+          expect(result.to_s).to eq '2020-05-26'
+          expect(basis.in_week).to eq 2
         end
 
         it 'can shift to a different quarter' do
+          allow(subject).to receive(:this_quarter).and_return subject.parse('2020Q3')
+          result = basis.quarters_ago(2)
+          expect(result).to be_a TimeBoss::Calendar::Day
+          expect(result.to_s).to eq '2020-01-21'
+          expect(basis.in_quarter).to eq 23
         end
 
         it 'can shift to a different year' do
+          allow(subject).to receive(:this_year).and_return subject.parse('2019')
+          result = basis.years_hence(3)
+          expect(result).to be_a TimeBoss::Calendar::Day
+          expect(result.to_s).to eq '2022-04-19'
+          expect(basis.in_year).to eq 114
         end
       end
 
       context 'from week' do
+        let(:basis) { subject.parse('2017W8') }
+
         it 'cannot shift to a different day' do
+          expect(basis.last_day).to be nil
+          expect(basis.in_day).to be nil
         end
 
         it 'can shift to a different month' do
+          allow(subject).to receive(:this_month).and_return subject.parse('2020M4')
+          result = basis.next_month
+          expect(result).to be_a TimeBoss::Calendar::Week
+          expect(result.to_s).to eq '2020W20: 2020-05-11 thru 2020-05-17'
+          expect(basis.in_month).to eq 3
         end
 
         it 'can shift to a different half' do
+          allow(subject).to receive(:this_half).and_return subject.parse('2019H1')
+          result = basis.last_half
+          expect(result).to be_a TimeBoss::Calendar::Week
+          expect(result.to_s).to eq '2018W33: 2018-08-13 thru 2018-08-19'
+          expect(basis.in_half).to eq 8
         end
       end
 
       context 'from month' do
+        let(:basis) { subject.parse('2017M4') }
+
         it 'cannot shift to a different week' do
+          expect(basis.last_week).to be nil
+          expect(basis.in_week).to be nil
         end
 
         it 'can shift to a different year' do
+          allow(subject).to receive(:this_year).and_return subject.parse('2020')
+          result = basis.years_hence(4)
+          expect(result).to be_a TimeBoss::Calendar::Month
+          expect(result.name).to eq '2024M4'
+          expect(basis.in_year).to eq 4
         end
       end
 
       context 'from quarter' do
+        let(:basis) { subject.parse('2018Q2') }
+
         it 'cannot shift to a different month' do
+          expect(basis.months_ago(4)).to be nil
+          expect(basis.in_month).to be nil
         end
 
-        it 'can shift to a different quarter' do
+        it 'can shift to a different half' do
+          allow(subject).to receive(:this_half).and_return subject.parse('2020H1')
+          result = basis.last_half
+          expect(result).to be_a TimeBoss::Calendar::Quarter
+          expect(result.name).to eq '2019Q4'
+          expect(basis.in_half).to eq 2
         end
       end
 
       context 'from year' do
+        let(:basis) { subject.parse('2014') }
+
         it 'cannot shift to a different half' do
+          expect(basis.next_half).to be nil
+          expect(basis.in_half).to be nil
         end
 
         it 'shifts to a different year, but knows how useless that is' do
+          allow(subject).to receive(:this_year).and_return subject.parse('2020')
+          result = basis.years_ago(2)
+          expect(result).to be_a TimeBoss::Calendar::Year
+          expect(result.name).to eq '2018'
+          expect(basis.in_year).to eq 1
         end
       end
     end
