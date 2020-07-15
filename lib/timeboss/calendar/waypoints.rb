@@ -13,10 +13,11 @@ module TimeBoss
         end
 
         define_method "#{type}_for" do |date|
-          window = send(type, date.year, (date.month / size.to_f).ceil)
-          return window if date.between?(window.start_date, window.end_date)
-          return window.next if date > window.end_date
-          return window.previous if date < window.start_date
+          window = send(type, date.year - 1, 1)
+          while true
+            break window if window.to_range.include?(date)
+            window = window.next
+          end
         end
       end
 
