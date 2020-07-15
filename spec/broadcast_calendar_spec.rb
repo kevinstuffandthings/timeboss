@@ -8,7 +8,7 @@ module TimeBoss
           quarter = subject.quarter(2017, 2)
           expect(quarter.name).to eq '2017Q2'
           expect(quarter.title).to eq 'Q2 2017'
-          expect(quarter.year).to eq 2017
+          expect(quarter.year_index).to eq 2017
           expect(quarter.index).to eq 2
           expect(quarter.start_date).to eq Date.parse('2017-03-27')
           expect(quarter.end_date).to eq Date.parse('2017-06-25')
@@ -19,7 +19,7 @@ module TimeBoss
           quarter = subject.quarter(2018, 3)
           expect(quarter.name).to eq '2018Q3'
           expect(quarter.title).to eq 'Q3 2018'
-          expect(quarter.year).to eq 2018
+          expect(quarter.year_index).to eq 2018
           expect(quarter.index).to eq 3
           expect(quarter.start_date).to eq Date.parse('2018-06-25')
           expect(quarter.end_date).to eq Date.parse('2018-09-30')
@@ -28,7 +28,7 @@ module TimeBoss
 
         it 'knows 2019Q4' do
           quarter = subject.quarter(2019, 4)
-          expect(quarter.year).to eq 2019
+          expect(quarter.year_index).to eq 2019
           expect(quarter.index).to eq 4
           expect(quarter.name).to eq '2019Q4'
           expect(quarter.title).to eq 'Q4 2019'
@@ -112,7 +112,7 @@ module TimeBoss
           month = subject.month(2017, 2)
           expect(month.name).to eq '2017M2'
           expect(month.title).to eq 'February 2017'
-          expect(month.year).to eq 2017
+          expect(month.year_index).to eq 2017
           expect(month.index).to eq 2
           expect(month.start_date).to eq Date.parse('2017-01-30')
           expect(month.end_date).to eq Date.parse('2017-02-26')
@@ -123,7 +123,7 @@ module TimeBoss
           month = subject.month(2018, 3)
           expect(month.name).to eq '2018M3'
           expect(month.title).to eq 'March 2018'
-          expect(month.year).to eq 2018
+          expect(month.year_index).to eq 2018
           expect(month.index).to eq 3
           expect(month.start_date).to eq Date.parse('2018-02-26')
           expect(month.end_date).to eq Date.parse('2018-03-25')
@@ -132,7 +132,7 @@ module TimeBoss
 
         it 'knows 2019M11' do
           month = subject.month(2019, 11)
-          expect(month.year).to eq 2019
+          expect(month.year_index).to eq 2019
           expect(month.index).to eq 11
           expect(month.name).to eq '2019M11'
           expect(month.title).to eq 'November 2019'
@@ -242,7 +242,7 @@ module TimeBoss
           year = subject.year(2016)
           expect(year.name).to eq '2016'
           expect(year.title).to eq '2016'
-          expect(year.year).to eq 2016
+          expect(year.year_index).to eq 2016
           expect(year.index).to eq 1
           expect(year.start_date).to eq Date.parse('2015-12-28')
           expect(year.end_date).to eq Date.parse('2016-12-25')
@@ -253,7 +253,7 @@ module TimeBoss
           year = subject.year(2017)
           expect(year.name).to eq '2017'
           expect(year.title).to eq '2017'
-          expect(year.year).to eq 2017
+          expect(year.year_index).to eq 2017
           expect(year.index).to eq 1
           expect(year.start_date).to eq Date.parse('2016-12-26')
           expect(year.end_date).to eq Date.parse('2017-12-31')
@@ -264,7 +264,7 @@ module TimeBoss
           year = subject.year(2018)
           expect(year.name).to eq '2018'
           expect(year.title).to eq '2018'
-          expect(year.year).to eq 2018
+          expect(year.year_index).to eq 2018
           expect(year.index).to eq 1
           expect(year.start_date).to eq Date.parse('2018-01-01')
           expect(year.end_date).to eq Date.parse('2018-12-30')

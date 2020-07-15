@@ -7,7 +7,7 @@ module TimeBoss
       NUM_MONTHS = 12
 
       def name
-        year.to_s
+        year_index.to_s
       end
 
       def title

@@ -6,10 +6,10 @@ module TimeBoss
         klass = TimeBoss::Calendar.const_get(type.to_s.classify)
         size = klass.const_get("NUM_MONTHS")
 
-        define_method type do |year, index = 1|
+        define_method type do |year_index, index = 1|
           month = (index * size) - size + 1
-          months = (month .. month + size - 1).map { |i| basis.new(year, i).to_range }
-          klass.new(self, year, index, months.first.begin, months.last.end)
+          months = (month .. month + size - 1).map { |i| basis.new(year_index, i).to_range }
+          klass.new(self, year_index, index, months.first.begin, months.last.end)
         end
 
         define_method "#{type}_for" do |date|
@@ -70,8 +70,8 @@ module TimeBoss
         define_method(period) { Day.new(self, Date.send(period)) }
       end
 
-      def day(year, index)
-        year(year).days[index - 1]
+      def day(year_index, index)
+        year(year_index).days[index - 1]
       end
 
       def day_for(date)

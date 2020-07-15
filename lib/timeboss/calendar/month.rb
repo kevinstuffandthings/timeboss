@@ -7,11 +7,11 @@ module TimeBoss
       NUM_MONTHS = 1
 
       def name
-        "#{year}M#{index}"
+        "#{year_index}M#{index}"
       end
 
       def title
-        "#{Date::MONTHNAMES[index]} #{year}"
+        "#{Date::MONTHNAMES[index]} #{year_index}"
       end
     end
   end

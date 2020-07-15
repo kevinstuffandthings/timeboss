@@ -4,18 +4,18 @@ require_relative './support/unit'
 module TimeBoss
   class Calendar
     class Week < Support::Unit
-      attr_reader :year, :index, :start_date, :end_date
+      attr_reader :year_index, :index, :start_date, :end_date
 
-      def initialize(calendar, year, index, start_date, end_date)
+      def initialize(calendar, year_index, index, start_date, end_date)
         super(calendar)
-        @year = year
+        @year_index = year_index
         @index = index
         @start_date = start_date
         @end_date = end_date
       end
 
       def name
-        "#{year}W#{index}"
+        "#{year_index}W#{index}"
       end
 
       def title
@@ -30,14 +30,14 @@ module TimeBoss
         if index == 1
           (calendar.year_for(start_date) - 1).weeks.last
         else
-          self.class.new(calendar, year, index - 1, start_date - 1.week, end_date - 1.week)
+          self.class.new(calendar, year_index, index - 1, start_date - 1.week, end_date - 1.week)
         end
       end
 
       def next
         weeks = calendar.year_for(start_date).weeks
         if index == weeks.last.index
-          self.class.new(calendar, year + 1, 1, start_date + 1.week, end_date + 1.week)
+          self.class.new(calendar, year_index + 1, 1, start_date + 1.week, end_date + 1.week)
         else
           weeks[index]
         end
