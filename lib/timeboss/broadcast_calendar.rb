@@ -2,21 +2,41 @@
 require 'active_support/inflector'
 require 'active_support/core_ext/numeric/time'
 
-%w[day week month quarter half year].each { |f| require_relative "./broadcast_calendar/#{f}" }
-%w[waypoints period parser].each { |f| require_relative "./broadcast_calendar/#{f}" }
+require_relative './calendar'
 
 module TimeBoss
-  module BroadcastCalendar
-    extend self
-    delegate :parse, to: Parser
-
-    def method_missing(message, *args, &block)
-      return Waypoints.send(message, *args, &block) if Waypoints.respond_to?(message)
-      super
+  class BroadcastCalendar < Calendar
+    def initialize
+      super(basis: BroadcastCalendar::Basis)
     end
 
-    def respond_to_missing?(message, include_private = false)
-      Waypoints.respond_to? message
+    private
+
+    class Basis
+      attr_reader :year, :month
+
+      def initialize(year, month)
+        @year = year
+        @month = month
+      end
+
+      def start_date
+        @_start_date ||= begin
+                           date = Date.civil(year, month, 1)
+                           date - (date.wday + 6) % 7
+                         end
+      end
+
+      def end_date
+        @_end_date ||= begin
+                         date = Date.civil(year, month, -1)
+                         date - date.wday
+                       end
+      end
+
+      def to_range
+        start_date .. end_date
+      end
     end
   end
 end

@@ -19,11 +19,14 @@ $ gem install timeboss
 ```
 
 ## Usage
-Supports `year`, `quarter`, `month`, `week` (partial) and `date`.
+Supports `year`, `half`, `quarter`, `month`, `week`, and `date`.
 
 ```ruby
-period = TimeBoss::BroadcastCalendar.parse('2019Q4') # or '2018', or '2018M3', or '2019-12-21', or '2020W32', or '2020M3W2'
-# => #<struct TimeBoss::BroadcastCalendar::Quarter year=2019, index=4, start_date=#<Date: 2019-09-30 ((2458757j,0s,0n),+0s,2299161j)>, end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
+calendar = TimeBoss::BroadcastCalendar.new
+# => #<TimeBoss::BroadcastCalendar:0x007f82d50f0af0 @basis=TimeBoss::BroadcastCalendar::Basis>
+
+period = calendar.parse('2019Q4') # or '2018', or '2018M3', or '2019-12-21', or '2020W32', or '2020M3W2'
+# => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478 @calendar=#<TimeBoss::BroadcastCalendar:0x007f82d50f0af0 @basis=TimeBoss::BroadcastCalendar::Basis, @_parser=#<TimeBoss::Calendar::Parser:0x007f82d50e8bc0 @calendar=#<TimeBoss::BroadcastCalendar:0x007f82d50f0af0 ...>>>, @year=2019, @index=4, @start_date=#<Date: 2019-09-30 ((2458757j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
 period.to_s
 # => "2019Q4: 2019-09-30 thru 2019-12-29"
 period.next.start_date.to_s # try previous, too!
@@ -35,26 +38,26 @@ period.offset(3).start_date.to_s # works with negatives, too!
 period.current? # does today fall within this period?
 # => false
 
-TimeBoss::BroadcastCalendar.this_month_last_year.to_s
+calendar.this_month_last_year.to_s # your results may vary
 # => "2018M12: 2018-11-26 thru 2018-12-30"
 
-TimeBoss::BroadcastCalendar.year_for(Date.parse('2018-12-31')).to_s
+calendar.year_for(Date.parse('2018-12-31')).to_s
 # => "2019: 2018-12-31 thru 2019-12-29"
 
-TimeBoss::BroadcastCalendar.this_month.to_s # your results may vary
+calendar.this_month.to_s # your results may vary
 # => "2019M12: 2019-11-25 thru 2019-12-29"
 
-TimeBoss::BroadcastCalendar.years_back(2).map(&:start_date)
+calendar.years_back(2).map(&:start_date)
 # => [#<Date: 2018-01-01 ((2458120j,0s,0n),+0s,2299161j)>, #<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>]
 ```
 
 Additionally, each `year`, `quarter`, and `month` period support fetching of the constituent `weeks`.
 
 ```ruby
-TimeBoss::BroadcastCalendar.this_month.weeks.map(&:to_s)
+calendar.this_month.weeks.map(&:to_s)
 # => ["2020M1W1: 2019-12-30 thru 2020-01-05", "2020M1W2: 2020-01-06 thru 2020-01-12", "2020M1W3: 2020-01-13 thru 2020-01-19", "2020M1W4: 2020-01-20 thru 2020-01-26"]
 
-TimeBoss::BroadcastCalendar.this_year.weeks.last.to_s
+calendar.this_year.weeks.last.to_s
 # => "2020W52: 2020-12-21 thru 2020-12-27"
 ```
 

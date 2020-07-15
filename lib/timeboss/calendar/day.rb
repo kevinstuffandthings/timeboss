@@ -2,10 +2,15 @@
 require_relative './support/unit'
 
 module TimeBoss
-  module BroadcastCalendar
-    Day = Struct.new(:start_date) do
-      include Support::Unit
+  class Calendar
+    class Day < Support::Unit
+      attr_reader :start_date
       alias_method :end_date, :start_date
+
+      def initialize(calendar, start_date)
+        super(calendar)
+        @start_date = start_date
+      end
 
       def name
         start_date.to_s
@@ -20,7 +25,7 @@ module TimeBoss
       end
 
       def index
-        @_index ||= (start_date - TimeBoss::BroadcastCalendar.year_for(start_date).start_date).to_i + 1
+        @_index ||= (start_date - calendar.year_for(start_date).start_date).to_i + 1
       end
 
       def previous

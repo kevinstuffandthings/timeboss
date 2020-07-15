@@ -2,16 +2,16 @@
 require_relative './support/month_based'
 
 module TimeBoss
-  module BroadcastCalendar
-    class Half < Support::MonthBased
-      NUM_MONTHS = 6
+  class Calendar
+    class Quarter < Support::MonthBased
+      NUM_MONTHS = 3
 
       def name
-        "#{year}H#{index}"
+        "#{year}Q#{index}"
       end
 
       def title
-        "H#{index} #{year}"
+        "Q#{index} #{year}"
       end
     end
   end

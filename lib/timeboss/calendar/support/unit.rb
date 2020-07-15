@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 module TimeBoss
-  module BroadcastCalendar
+  class Calendar
     module Support
-      module Unit
+      class Unit
+        attr_reader :calendar
+
+        def initialize(calendar)
+          @calendar = calendar
+        end
+
         def ==(entry)
           self.class == entry.class && self.start_date == entry.start_date && self.end_date == entry.end_date
         end
@@ -24,7 +30,7 @@ module TimeBoss
 
         %w[week month quarter half year].each do |period|
           define_method period.pluralize do
-            BroadcastCalendar.send("#{period.pluralize}_for", self)
+            calendar.send("#{period.pluralize}_for", self)
           end
 
           define_method period do

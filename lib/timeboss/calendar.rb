@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+require 'active_support/inflector'
+require 'active_support/core_ext/numeric/time'
+
+%w[day week month quarter half year].each { |f| require_relative "./calendar/#{f}" }
+%w[waypoints period parser].each { |f| require_relative "./calendar/#{f}" }
+
+module TimeBoss
+  class Calendar
+    include Waypoints
+    delegate :parse, to: :parser
+
+    protected
+
+    attr_reader :basis
+
+    def initialize(basis:)
+      @basis = basis
+    end
+
+    private
+
+    def parser
+      @_parser ||= Parser.new(self)
+    end
+  end
+end

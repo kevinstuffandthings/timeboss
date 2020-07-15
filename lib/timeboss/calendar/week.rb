@@ -2,9 +2,17 @@
 require_relative './support/unit'
 
 module TimeBoss
-  module BroadcastCalendar
-    Week = Struct.new(:parent, :index, :start_date, :end_date) do
-      include Support::Unit
+  class Calendar
+    class Week < Support::Unit
+      attr_reader :parent, :index, :start_date, :end_date
+
+      def initialize(calendar, parent, index, start_date, end_date)
+        super(calendar)
+        @parent = parent
+        @index = index
+        @start_date = start_date
+        @end_date = end_date
+      end
 
       def name
         "#{parent.name}W#{index}"

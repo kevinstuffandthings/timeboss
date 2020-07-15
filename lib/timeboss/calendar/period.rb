@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module TimeBoss
-  module BroadcastCalendar
+  class Calendar
     class Period
       attr_reader :begin, :end
       delegate :start_date, to: :begin
@@ -16,7 +16,7 @@ module TimeBoss
 
       %i[months quarters years].each do |size|
         define_method(size) do
-          entry = BroadcastCalendar.send("#{size.to_s.singularize}_for", self.begin.start_date)
+          entry = Calendar.send("#{size.to_s.singularize}_for", self.begin.start_date)
           build_entries entry
         end
       end
@@ -26,7 +26,7 @@ module TimeBoss
       end
 
       def weeks
-        year = BroadcastCalendar.send("year_for", self.begin.start_date)
+        year = Calendar.send("year_for", self.begin.start_date)
         entry = year.weeks.find { |w| w.range.include?(self.begin.start_date) }
         build_entries entry
       end
@@ -43,12 +43,10 @@ module TimeBoss
         entries = [Entry.new(entry)]
         while entry.end_date < self.end.end_date
           entry = entry.next
-          entries << Entry.new(entry)
+          entries << entry
         end
         entries
       end
     end
   end
 end
-
-require_relative './period/entry'

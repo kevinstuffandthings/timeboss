@@ -1,19 +1,15 @@
 # frozen_string_literal: true
-require_relative './support/basis'
-
 module TimeBoss
-  module BroadcastCalendar
+  class Calendar
     module Waypoints
-      extend self
-
       %i[month quarter half year].each do |type|
-        klass = TimeBoss::BroadcastCalendar.const_get(type.to_s.classify)
+        klass = TimeBoss::Calendar.const_get(type.to_s.classify)
         size = klass.const_get("NUM_MONTHS")
 
         define_method type do |year, index = 1|
           month = (index * size) - size + 1
-          months = (month .. month + size - 1).map { |i| Support::Basis.new(year, i).to_range }
-          klass.new(year, index, months.first.begin, months.last.end)
+          months = (month .. month + size - 1).map { |i| basis.new(year, i).to_range }
+          klass.new(self, year, index, months.first.begin, months.last.end)
         end
 
         define_method "#{type}_for" do |date|
@@ -73,7 +69,7 @@ module TimeBoss
       end
 
       %i[yesterday today tomorrow].each do |period|
-        define_method(period) { Day.new(Date.send(period)) }
+        define_method(period) { Day.new(self, Date.send(period)) }
       end
 
       def day(year, index)
