@@ -21,7 +21,7 @@ $ gem install timeboss
 ```
 
 ## Usage
-Supports `year`, `half`, `quarter`, `month`, `week`, and `date`.
+Supports `year`, `half`, `quarter`, `month`, `week`, and `day`.
 
 ```ruby
 calendar = TimeBoss::BroadcastCalendar.new
