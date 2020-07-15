@@ -5,6 +5,10 @@ module TimeBoss
       class Unit
         attr_reader :calendar
 
+        def self.type
+          self.name.demodulize.underscore
+        end
+
         def initialize(calendar)
           @calendar = calendar
         end
@@ -25,14 +29,36 @@ module TimeBoss
         end
 
         %w[day week month quarter half year].each do |period|
-          define_method period.pluralize do
-            calendar.send("#{period.pluralize}_for", self)
+          periods = period.pluralize
+
+          define_method periods do
+            calendar.send("#{periods}_for", self)
           end
 
           define_method period do
-            entries = send(period.pluralize)
+            entries = send(periods)
             return nil unless entries.length == 1
             entries.first
+          end
+
+          define_method "#{periods}_ago" do |offset|
+            base = send(periods)
+            return unless base.length == 1
+            self_periods = self.class.type.to_s.pluralize
+            base_offset = base.first.send(self_periods).find_index { |p| p == self } + 1
+            (base.first - offset).send(self_periods)[base_offset - 1]
+          end
+
+          define_method "last_#{period}" do
+            send("#{periods}_ago", 1)
+          end
+
+          define_method "#{periods}_hence" do |offset|
+            send("#{periods}_ago", offset * -1)
+          end
+
+          define_method "next_#{period}" do
+            send("#{periods}_hence", 1)
           end
         end
 

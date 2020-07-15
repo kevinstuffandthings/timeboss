@@ -7,10 +7,6 @@ module TimeBoss
       class MonthBased < Unit
         attr_reader :year, :index, :start_date, :end_date
 
-        def self.type
-          self.name.demodulize.underscore
-        end
-
         def initialize(calendar, year, index, start_date, end_date)
           super(calendar)
           @year = year
