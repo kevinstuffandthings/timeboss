@@ -24,11 +24,7 @@ module TimeBoss
           base
         end
 
-        def days
-          range.to_a.map { |d| Day.new(calendar, d) }
-        end
-
-        %w[week month quarter half year].each do |period|
+        %w[day week month quarter half year].each do |period|
           define_method period.pluralize do
             calendar.send("#{period.pluralize}_for", self)
           end
@@ -38,10 +34,6 @@ module TimeBoss
             return nil unless entries.length == 1
             entries.first
           end
-        end
-
-        def day
-          start_date if start_date == end_date
         end
 
         def +(value)
