@@ -3,14 +3,16 @@ module TimeBoss
   class Calendar
     module Support
       class Unit
-        attr_reader :calendar
+        attr_reader :calendar, :start_date, :end_date
 
         def self.type
           self.name.demodulize.underscore
         end
 
-        def initialize(calendar)
+        def initialize(calendar, start_date, end_date)
           @calendar = calendar
+          @start_date = start_date
+          @end_date = end_date
         end
 
         def ==(entry)
@@ -72,6 +74,10 @@ module TimeBoss
 
         def -(value)
           offset(-value)
+        end
+
+        def range
+          start_date .. end_date
         end
       end
     end

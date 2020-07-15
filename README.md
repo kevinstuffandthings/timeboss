@@ -12,7 +12,7 @@ gem 'timeboss', '0.0.1', git: "https://github.com/kevinstuffandthings/timeboss.g
 
 And then execute:
 ```bash
-$ bundle
+$ bundle install
 ```
 
 Or install it yourself as:

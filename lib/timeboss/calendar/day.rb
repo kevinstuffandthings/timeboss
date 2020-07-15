@@ -4,12 +4,8 @@ require_relative './support/unit'
 module TimeBoss
   class Calendar
     class Day < Support::Unit
-      attr_reader :start_date
-      alias_method :end_date, :start_date
-
       def initialize(calendar, start_date)
-        super(calendar)
-        @start_date = start_date
+        super(calendar, start_date, start_date)
       end
 
       def name
@@ -34,10 +30,6 @@ module TimeBoss
 
       def next
         self.class.new(calendar, start_date + 1.day)
-      end
-
-      def range
-        start_date..end_date
       end
     end
   end

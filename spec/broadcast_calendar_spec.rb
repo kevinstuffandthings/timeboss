@@ -97,11 +97,23 @@ module TimeBoss
           expect(quarters.map(&:name)).to eq ['2015Q3', '2015Q4', '2016Q1', '2016Q2', '2016Q3']
         end
 
+        it 'can get a quarter hence' do
+          quarter = subject.quarters_hence(4)
+          expect(quarter).to be_a TimeBoss::Calendar::Quarter
+          expect(quarter.name).to eq '2016Q3'
+        end
+
         it 'can get some number of quarters back' do
           quarters = subject.quarters_back(5)
           expect(quarters.length).to eq 5
           quarters.each { |q| expect(q).to be_a TimeBoss::Calendar::Quarter }
           expect(quarters.map(&:name)).to eq ['2014Q3', '2014Q4', '2015Q1', '2015Q2', '2015Q3']
+        end
+
+        it 'can get a quarter ago' do
+          quarter = subject.quarters_ago(4)
+          expect(quarter).to be_a TimeBoss::Calendar::Quarter
+          expect(quarter.name).to eq '2014Q3'
         end
       end
     end
@@ -207,14 +219,25 @@ module TimeBoss
           expect(months.map(&:name)).to eq ['2015M3', '2015M4', '2015M5', '2015M6', '2015M7']
         end
 
+        it 'can get a month hence' do
+          month = subject.months_hence(4)
+          expect(month).to be_a TimeBoss::Calendar::Month
+          expect(month.name).to eq '2015M7'
+        end
+
         it 'can get some number of months back' do
           months = subject.months_back(5)
           expect(months.length).to eq 5
           months.each { |m| expect(m).to be_a TimeBoss::Calendar::Month }
           expect(months.map(&:name)).to eq ['2014M11', '2014M12', '2015M1', '2015M2', '2015M3']
         end
+
+        it 'can get a month ago' do
+          month = subject.months_ago(4)
+          expect(month).to be_a TimeBoss::Calendar::Month
+          expect(month.name).to eq '2014M11'
+        end
       end
- 
     end
 
     context 'weeks' do
@@ -430,6 +453,54 @@ module TimeBoss
 
           it 'can get the days included in a range' do
           end
+        end
+      end
+    end
+
+    xcontext 'shifting' do
+      context 'from day' do
+        it 'can shift to a different week' do
+        end
+
+        it 'can shift to a different quarter' do
+        end
+
+        it 'can shift to a different year' do
+        end
+      end
+
+      context 'from week' do
+        it 'cannot shift to a different day' do
+        end
+
+        it 'can shift to a different month' do
+        end
+
+        it 'can shift to a different half' do
+        end
+      end
+
+      context 'from month' do
+        it 'cannot shift to a different week' do
+        end
+
+        it 'can shift to a different year' do
+        end
+      end
+
+      context 'from quarter' do
+        it 'cannot shift to a different month' do
+        end
+
+        it 'can shift to a different quarter' do
+        end
+      end
+
+      context 'from year' do
+        it 'cannot shift to a different half' do
+        end
+
+        it 'shifts to a different year, but knows how useless that is' do
         end
       end
     end

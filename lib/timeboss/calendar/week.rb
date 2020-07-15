@@ -4,14 +4,12 @@ require_relative './support/unit'
 module TimeBoss
   class Calendar
     class Week < Support::Unit
-      attr_reader :year_index, :index, :start_date, :end_date
+      attr_reader :year_index, :index
 
       def initialize(calendar, year_index, index, start_date, end_date)
-        super(calendar)
+        super(calendar, start_date, end_date)
         @year_index = year_index
         @index = index
-        @start_date = start_date
-        @end_date = end_date
       end
 
       def name
@@ -41,10 +39,6 @@ module TimeBoss
         else
           weeks[index]
         end
-      end
-
-      def range
-        start_date..end_date
       end
     end
   end
