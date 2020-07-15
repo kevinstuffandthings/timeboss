@@ -65,6 +65,9 @@ calendar.this_month.weeks.map(&:to_s)
 calendar.this_year.weeks.last.to_s
 # => "2020W52: 2020-12-21 thru 2020-12-27"
 
+calendar.last_month.quarter.title # today is 2020-07-15
+# => "Q2 2020"
+
 calendar.parse('2020Q1').months.map(&:name)
 # => ["2020M1", "2020M2", "2020M3"]
 ```
