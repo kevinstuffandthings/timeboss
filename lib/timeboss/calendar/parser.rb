@@ -22,10 +22,10 @@ module TimeBoss
       private
 
       def parse_identifier(identifier)
-        captures = identifier&.match(/^([^-]+)([+-][1-9]+)$/)&.captures
-        base, offset = captures || [identifier, 0]
+        captures = identifier&.match(/^([^-]+)(\s*[+-]\s*[1-9]+)$/)&.captures
+        base, offset = captures || [identifier, '0']
         period = parse_period(base) or raise InvalidPeriodIdentifierError
-        period.offset(offset.to_i)
+        period.offset(offset.gsub(/\s+/, '').to_i)
       end
 
       def parse_period(identifier)
