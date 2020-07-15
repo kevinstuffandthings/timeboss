@@ -1,6 +1,8 @@
 # TimeBoss
 A gem providing convenient navigation of the [Broadcast Calendar](https://en.wikipedia.org/wiki/Broadcast_calendar).
 
+_This is a work in progress. Check back soon for the initial release!_
+
 ## Installation
 Add this line to your application's Gemfile:
 ```ruby
