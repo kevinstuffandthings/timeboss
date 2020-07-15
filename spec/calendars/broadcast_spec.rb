@@ -1,5 +1,5 @@
 module TimeBoss
-  describe BroadcastCalendar do
+  describe Calendars::Broadcast do
     let(:subject) { described_class.new }
 
     context 'quarters' do

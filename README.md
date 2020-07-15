@@ -24,8 +24,10 @@ $ gem install timeboss
 Supports `year`, `half`, `quarter`, `month`, `week`, and `day`.
 
 ```ruby
-calendar = TimeBoss::BroadcastCalendar.new
-# => #<TimeBoss::BroadcastCalendar:0x007f82d50f0af0 @basis=TimeBoss::BroadcastCalendar::Basis>
+require 'timeboss/calendars/broadcast'
+
+calendar = TimeBoss::Calendars::Broadcast.new
+# => #<TimeBoss::Calendars::Broadcast:0x007f82d50f0af0 @basis=TimeBoss::Calendars::Broadcast::Basis>
 
 period = calendar.parse('2019Q4') # or '2018', or '2018M3', or '2019-12-21', or '2020W32', or '2020M3W2'
 # => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478>
@@ -100,13 +102,13 @@ The examples above are just samples. Try different periods, operators, etc.
 
 ### Shell
 To open an IRB shell for the broadcast calendar, use the `timeboss:broadcast_calendar:shell` rake task.
-You will find yourself in the context of an instantiated `TimeBoss::BroadcastCalendar` object:
+You will find yourself in the context of an instantiated `TimeBoss::Calendars::Broadcast` object:
 ```bash
 $ rake timeboss:broadcast_calendar:shell
 2.4.1 :001 > next_quarter
- => #<TimeBoss::Calendar::Quarter:0x007fe04c16a1c8 @calendar=#<TimeBoss::BroadcastCalendar:0x007fe04c1a0458 @basis=TimeBoss::BroadcastCalendar::Basis>, @year_index=2020, @index=4, @start_date=#<Date: 2020-09-28 ((2459121j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2020-12-27 ((2459211j,0s,0n),+0s,2299161j)>>
+ => #<TimeBoss::Calendar::Quarter:0x007fe04c16a1c8 @calendar=#<TimeBoss::Calendars::Broadcast:0x007fe04c1a0458 @basis=TimeBoss::Calendars::Broadcast::Basis>, @year_index=2020, @index=4, @start_date=#<Date: 2020-09-28 ((2459121j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2020-12-27 ((2459211j,0s,0n),+0s,2299161j)>>
 2.4.1 :002 > last_year
- => #<TimeBoss::Calendar::Year:0x007fe04c161ca8 @calendar=#<TimeBoss::BroadcastCalendar:0x007fe04c1a0458 @basis=TimeBoss::BroadcastCalendar::Basis>, @year_index=2019, @index=1, @start_date=#<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
+ => #<TimeBoss::Calendar::Year:0x007fe04c161ca8 @calendar=#<TimeBoss::Calendars::Broadcast:0x007fe04c1a0458 @basis=TimeBoss::Calendars::Broadcast::Basis>, @year_index=2019, @index=1, @start_date=#<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
 2.4.1 :003 > parse('this_quarter .. this_quarter+4').months.map(&:name)
  => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3", "2021M4", "2021M5", "2021M6", "2021M7", "2021M8", "2021M9"]
 ```

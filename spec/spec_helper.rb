@@ -1,4 +1,5 @@
 require 'timeboss'
+require 'timeboss/calendars/broadcast'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

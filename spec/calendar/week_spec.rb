@@ -36,7 +36,7 @@ module TimeBoss
       end
 
       context 'navigation' do
-        let(:calendar) { TimeBoss::BroadcastCalendar.new }
+        let(:calendar) { TimeBoss::Calendars::Broadcast.new }
 
         describe '#previous' do
           it 'can back up simply' do
