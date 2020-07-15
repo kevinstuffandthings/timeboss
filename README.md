@@ -28,7 +28,7 @@ calendar = TimeBoss::BroadcastCalendar.new
 # => #<TimeBoss::BroadcastCalendar:0x007f82d50f0af0 @basis=TimeBoss::BroadcastCalendar::Basis>
 
 period = calendar.parse('2019Q4') # or '2018', or '2018M3', or '2019-12-21', or '2020W32', or '2020M3W2'
-# => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478 @calendar=#<TimeBoss::BroadcastCalendar:0x007f82d50f0af0 @basis=TimeBoss::BroadcastCalendar::Basis, @_parser=#<TimeBoss::Calendar::Parser:0x007f82d50e8bc0 @calendar=#<TimeBoss::BroadcastCalendar:0x007f82d50f0af0 ...>>>, @year=2019, @index=4, @start_date=#<Date: 2019-09-30 ((2458757j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
+# => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478>
 period.to_s
 # => "2019Q4: 2019-09-30 thru 2019-12-29"
 period.next.start_date.to_s # try previous, too!
@@ -46,8 +46,8 @@ calendar.year_for(Date.parse('2018-12-31')).to_s
 calendar.this_month.to_s # your results may vary
 # => "2019M12: 2019-11-25 thru 2019-12-29"
 
-calendar.years_back(2).map(&:start_date) # run in 2020
-# => [#<Date: 2018-01-01 ((2458120j,0s,0n),+0s,2299161j)>, #<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>]
+calendar.years_back(2).map { |y| y.start_date.to_s } # run in 2020
+# => ["2018-12-31", "2019-12-30"]
 
 calendar.months_ago(3).name # run in 2020M7
 # => "2020M4"
@@ -67,6 +67,16 @@ calendar.this_year.weeks.last.to_s
 
 calendar.parse('2020Q1').months.map(&:name)
 # => ["2020M1", "2020M2", "2020M3"]
+```
+
+Period shifting is easy:
+
+```ruby
+calendar.parse('Q3').years_ago(5).title
+# => "Q3 2015"
+
+calendar.this_week.next_year.to_s # run 2020W29
+# => "2021W29: 2021-07-12 thru 2021-07-18"
 ```
 
 Complicated range expressions can be parsed using the `..` range operator:
@@ -90,9 +100,9 @@ To open an IRB shell for the broadcast calendar, use the `timeboss:broadcast_cal
 ```bash
 $ rake timeboss:broadcast_calendar:shell
 2.4.1 :001 > next_quarter
- => #<TimeBoss::BroadcastCalendar::Quarter:0x007fcfc308e270 @year=2020, @index=4, @start_date=#<Date: 2020-09-28 ((2459121j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2020-12-27 ((2459211j,0s,0n),+0s,2299161j)>>
+ => #<TimeBoss::Calendar::Quarter:0x007fe04c16a1c8 @calendar=#<TimeBoss::BroadcastCalendar:0x007fe04c1a0458 @basis=TimeBoss::BroadcastCalendar::Basis>, @year_index=2020, @index=4, @start_date=#<Date: 2020-09-28 ((2459121j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2020-12-27 ((2459211j,0s,0n),+0s,2299161j)>>
 2.4.1 :002 > last_year
- => #<TimeBoss::BroadcastCalendar::Year:0x007fcfc3085f58 @year=2019, @index=1, @start_date=#<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
+ => #<TimeBoss::Calendar::Year:0x007fe04c161ca8 @calendar=#<TimeBoss::BroadcastCalendar:0x007fe04c1a0458 @basis=TimeBoss::BroadcastCalendar::Basis>, @year_index=2019, @index=1, @start_date=#<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
 2.4.1 :003 > parse('this_quarter .. this_quarter+4').months.map(&:name)
  => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3", "2021M4", "2021M5", "2021M6", "2021M7", "2021M8", "2021M9"]
 ```
