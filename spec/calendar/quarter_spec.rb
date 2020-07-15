@@ -10,7 +10,7 @@ module TimeBoss
         expect(subject.name).to eq '2019Q4'
         expect(subject.start_date).to eq start_date
         expect(subject.end_date).to eq end_date
-        expect(subject.range).to eq start_date..end_date
+        expect(subject.to_range).to eq start_date..end_date
       end
 
       it 'can stringify itself' do

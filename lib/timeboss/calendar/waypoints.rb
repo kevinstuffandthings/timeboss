@@ -79,7 +79,7 @@ module TimeBoss
       end
 
       def week_for(date)
-        year_for(date).weeks.find { |w| w.range.include?(date) }
+        year_for(date).weeks.find { |w| w.to_range.include?(date) }
       end
     end
   end

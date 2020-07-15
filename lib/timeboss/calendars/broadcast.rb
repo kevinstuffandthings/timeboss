@@ -10,14 +10,7 @@ module TimeBoss
 
       private
 
-      class Basis
-        attr_reader :year, :month
-
-        def initialize(year, month)
-          @year = year
-          @month = month
-        end
-
+      class Basis < Calendar::Support::MonthBasis
         def start_date
           @_start_date ||= begin
                              date = Date.civil(year, month, 1)
@@ -30,10 +23,6 @@ module TimeBoss
                            date = Date.civil(year, month, -1)
                            date - date.wday
                          end
-        end
-
-        def to_range
-          start_date .. end_date
         end
       end
     end

@@ -80,8 +80,8 @@ module TimeBoss
           offset(-value)
         end
 
-        def range
-          start_date .. end_date
+        def to_range
+          @_to_range ||= start_date .. end_date
         end
       end
     end

@@ -12,7 +12,7 @@ module TimeBoss
           expect(quarter.index).to eq 2
           expect(quarter.start_date).to eq Date.parse('2017-03-27')
           expect(quarter.end_date).to eq Date.parse('2017-06-25')
-          expect(quarter.range).to eq quarter.start_date..quarter.end_date
+          expect(quarter.to_range).to eq quarter.start_date..quarter.end_date
         end
 
         it 'knows 2018Q3' do
@@ -23,7 +23,7 @@ module TimeBoss
           expect(quarter.index).to eq 3
           expect(quarter.start_date).to eq Date.parse('2018-06-25')
           expect(quarter.end_date).to eq Date.parse('2018-09-30')
-          expect(quarter.range).to eq quarter.start_date..quarter.end_date
+          expect(quarter.to_range).to eq quarter.start_date..quarter.end_date
         end
 
         it 'knows 2019Q4' do
@@ -34,7 +34,7 @@ module TimeBoss
           expect(quarter.title).to eq 'Q4 2019'
           expect(quarter.start_date).to eq Date.parse('2019-09-30')
           expect(quarter.end_date).to eq Date.parse('2019-12-29')
-          expect(quarter.range).to eq quarter.start_date..quarter.end_date
+          expect(quarter.to_range).to eq quarter.start_date..quarter.end_date
         end
       end
 
@@ -128,7 +128,7 @@ module TimeBoss
           expect(month.index).to eq 2
           expect(month.start_date).to eq Date.parse('2017-01-30')
           expect(month.end_date).to eq Date.parse('2017-02-26')
-          expect(month.range).to eq month.start_date..month.end_date
+          expect(month.to_range).to eq month.start_date..month.end_date
         end
 
         it 'knows 2018M3' do
@@ -139,7 +139,7 @@ module TimeBoss
           expect(month.index).to eq 3
           expect(month.start_date).to eq Date.parse('2018-02-26')
           expect(month.end_date).to eq Date.parse('2018-03-25')
-          expect(month.range).to eq month.start_date..month.end_date
+          expect(month.to_range).to eq month.start_date..month.end_date
         end
 
         it 'knows 2019M11' do
@@ -150,7 +150,7 @@ module TimeBoss
           expect(month.title).to eq 'November 2019'
           expect(month.start_date).to eq Date.parse('2019-10-28')
           expect(month.end_date).to eq Date.parse('2019-11-24')
-          expect(month.range).to eq month.start_date..month.end_date
+          expect(month.to_range).to eq month.start_date..month.end_date
         end
       end
 
@@ -269,7 +269,7 @@ module TimeBoss
           expect(year.index).to eq 1
           expect(year.start_date).to eq Date.parse('2015-12-28')
           expect(year.end_date).to eq Date.parse('2016-12-25')
-          expect(year.range).to eq year.start_date..year.end_date
+          expect(year.to_range).to eq year.start_date..year.end_date
         end
 
         it 'knows 2017' do
@@ -280,7 +280,7 @@ module TimeBoss
           expect(year.index).to eq 1
           expect(year.start_date).to eq Date.parse('2016-12-26')
           expect(year.end_date).to eq Date.parse('2017-12-31')
-          expect(year.range).to eq year.start_date..year.end_date
+          expect(year.to_range).to eq year.start_date..year.end_date
         end
 
         it 'knows 2018' do
@@ -291,7 +291,7 @@ module TimeBoss
           expect(year.index).to eq 1
           expect(year.start_date).to eq Date.parse('2018-01-01')
           expect(year.end_date).to eq Date.parse('2018-12-30')
-          expect(year.range).to eq year.start_date..year.end_date
+          expect(year.to_range).to eq year.start_date..year.end_date
         end
       end
 

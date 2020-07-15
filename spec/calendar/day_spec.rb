@@ -8,7 +8,7 @@ module TimeBoss
       it 'knows its stuff' do
         expect(subject.start_date).to eq start_date
         expect(subject.end_date).to eq start_date
-        expect(subject.range).to eq start_date..start_date
+        expect(subject.to_range).to eq start_date..start_date
       end
 
       it 'knows its name' do

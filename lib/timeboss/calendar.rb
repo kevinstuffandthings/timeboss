@@ -4,6 +4,7 @@ require 'active_support/core_ext/numeric/time'
 
 %w[day week month quarter half year].each { |f| require_relative "./calendar/#{f}" }
 %w[waypoints period parser].each { |f| require_relative "./calendar/#{f}" }
+require_relative './calendar/support/month_basis'
 
 module TimeBoss
   class Calendar
