@@ -104,7 +104,7 @@ The examples above are just samples. Try different periods, operators, etc.
 To open an IRB shell for the broadcast calendar, use the `timeboss:broadcast_calendar:shell` rake task.
 You will find yourself in the context of an instantiated `TimeBoss::Calendars::Broadcast` object:
 ```bash
-$ rake timeboss:broadcast_calendar:shell
+$ rake timeboss:calendars:broadcast:shell
 2.4.1 :001 > next_quarter
  => #<TimeBoss::Calendar::Quarter:0x007fe04c16a1c8 @calendar=#<TimeBoss::Calendars::Broadcast:0x007fe04c1a0458 @basis=TimeBoss::Calendars::Broadcast::Basis>, @year_index=2020, @index=4, @start_date=#<Date: 2020-09-28 ((2459121j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2020-12-27 ((2459211j,0s,0n),+0s,2299161j)>>
 2.4.1 :002 > last_year
@@ -112,3 +112,9 @@ $ rake timeboss:broadcast_calendar:shell
 2.4.1 :003 > parse('this_quarter .. this_quarter+4').months.map(&:name)
  => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3", "2021M4", "2021M5", "2021M6", "2021M7", "2021M8", "2021M9"]
 ```
+
+## TODO
+- Add [Travis CI](https://travis-ci.com/)
+- More tests
+- More calendars
+- More documentation
