@@ -28,17 +28,21 @@ module TimeBoss
       end
 
       def current?
-        (start_date .. end_date).include?(Date.today)
+        range.include?(Date.today)
       end
 
       def days
-        (start_date .. end_date).map { |d| Day.new(calendar, d) }
+        range.map { |d| Day.new(calendar, d) }
       end
 
       def day
         entries = days
         return nil unless entries.length == 1
         entries.first
+      end
+
+      def range
+        start_date .. end_date
       end
 
       private

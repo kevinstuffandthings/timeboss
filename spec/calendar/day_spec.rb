@@ -8,6 +8,7 @@ module TimeBoss
       it 'knows its stuff' do
         expect(subject.start_date).to eq start_date
         expect(subject.end_date).to eq start_date
+        expect(subject.range).to eq start_date..start_date
       end
 
       it 'knows its name' do
@@ -22,6 +23,14 @@ module TimeBoss
         expect(subject.to_s).to eq subject.name
       end
 
+      describe '#index' do
+        before(:each) { allow(calendar).to receive(:year_for).with(start_date).and_return double(start_date: start_date - 3) }
+
+        it 'gets its index within the year' do
+          expect(subject.index).to eq 4
+        end
+      end
+
       describe '#current?' do
         it 'knows when it is' do
           allow(Date).to receive(:today).and_return start_date
@@ -30,6 +39,20 @@ module TimeBoss
 
         it 'knows when it is not' do
           expect(subject).not_to be_current
+        end
+      end
+
+      context 'navigation' do
+        it 'can get the previous date' do
+          result = subject.previous
+          expect(result).to be_a described_class
+          expect(result.start_date).to eq start_date - 1.day
+        end
+
+        it 'can get the next date' do
+          result = subject.next
+          expect(result).to be_a described_class
+          expect(result.start_date).to eq start_date + 1.day
         end
       end
     end
