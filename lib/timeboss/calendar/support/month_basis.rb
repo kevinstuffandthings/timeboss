@@ -9,14 +9,6 @@ module TimeBoss
           @month = month
         end
 
-        def year_index
-          year
-        end
-
-        def month_index
-          month
-        end
-
         def to_range
           @_to_range ||= start_date .. end_date
         end
