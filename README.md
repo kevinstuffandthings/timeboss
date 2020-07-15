@@ -38,20 +38,23 @@ period.offset(3).start_date.to_s # works with negatives, too!
 period.current? # does today fall within this period?
 # => false
 
-calendar.this_month_last_year.to_s # your results may vary
-# => "2018M12: 2018-11-26 thru 2018-12-30"
-
 calendar.year_for(Date.parse('2018-12-31')).to_s
 # => "2019: 2018-12-31 thru 2019-12-29"
 
 calendar.this_month.to_s # your results may vary
 # => "2019M12: 2019-11-25 thru 2019-12-29"
 
-calendar.years_back(2).map(&:start_date)
+calendar.years_back(2).map(&:start_date) # run in 2020
 # => [#<Date: 2018-01-01 ((2458120j,0s,0n),+0s,2299161j)>, #<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>]
+
+calendar.months_ago(3).name # run in 2020M7
+# => "2020M4"
+
+calendar.weeks_hence(3).name # run in 2020W29
+# => "2020W32"
 ```
 
-Additionally, each `year`, `quarter`, and `month` period support fetching of the constituent `weeks`.
+Additionally, each type of period can give you information about its constituent periods
 
 ```ruby
 calendar.this_month.weeks.map(&:to_s)
@@ -59,9 +62,26 @@ calendar.this_month.weeks.map(&:to_s)
 
 calendar.this_year.weeks.last.to_s
 # => "2020W52: 2020-12-21 thru 2020-12-27"
+
+calendar.parse('2020Q1').months.map(&:name)
+# => ["2020M1", "2020M2", "2020M3"]
 ```
 
-For more examples, check out the unit tests at [spec/broadcast_calendar_spec.rb](spec/broadcast_calendar_spec.rb).
+Complicated range expressions can be parsed using the `..` range operator:
+
+```ruby
+calendar.parse('2020M1 .. 2020M2').weeks.map(&:title)
+# => ["Week of December 30, 2019", "Week of January 6, 2020", "Week of January 13, 2020", "Week of January 20, 2020", "Week of January 27, 2020", "Week of February 3, 2020", "Week of February 10, 2020", "Week of February 17, 2020"]
+
+calendar.parse('this_quarter .. this_quarter+2').months.map(&:name) # run in 2020Q3
+# => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3"]
+
+period = calendar.parse('2020W3..2020Q1')
+"#{period.name}: from #{period.start_date} thru #{period.end_date} (current=#{period.current?})"
+# => "2020W3 .. 2020Q1: from 2020-01-13 thru 2020-03-29 (current=false)"
+```
+
+The examples above are just samples. Try different periods, operators, etc.
 
 ### Shell
 To open an IRB shell for the broadcast calendar, use the `timeboss:broadcast_calendar:shell` rake task:

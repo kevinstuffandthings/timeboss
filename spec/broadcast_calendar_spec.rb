@@ -90,12 +90,6 @@ module TimeBoss
           expect(subject.next_quarter).to eq quarter
         end
 
-        it 'can get this quarter last year' do
-          quarter = subject.this_quarter_last_year
-          expect(quarter).to be_a TimeBoss::Calendar::Quarter
-          expect(quarter.name).to eq '2014Q3'
-        end
-
         it 'can get some number of quarters' do
           quarters = subject.quarters(5)
           expect(quarters.length).to eq 5
@@ -204,12 +198,6 @@ module TimeBoss
         it 'can get the next month' do
           allow(this_month).to receive(:next).and_return month
           expect(subject.next_month).to eq month
-        end
-
-        it 'can get this month last year' do
-          month = subject.this_month_last_year
-          expect(month).to be_a TimeBoss::Calendar::Month
-          expect(month.name).to eq '2014M3'
         end
 
         it 'can get some number of months' do
@@ -340,12 +328,6 @@ module TimeBoss
         it 'can get the next year' do
           allow(this_year).to receive(:next).and_return year
           expect(subject.next_year).to eq year
-        end
-
-        it 'can get this year last year' do
-          year = subject.this_year_last_year
-          expect(year).to be_a TimeBoss::Calendar::Year
-          expect(year.name).to eq '2014'
         end
 
         it 'can get some number of years' do

@@ -18,16 +18,6 @@ module TimeBoss
           return window.next if date > window.end_date
           return window.previous if date < window.start_date
         end
-
-        define_method "this_#{type}_last_year" do
-          window = send("this_#{type}")
-          send(type, window.year - 1, window.index)
-        end
-
-        define_method "this_#{type}_next_year" do
-          window = send("this_#{type}")
-          send(type, window.year + 1, window.index)
-        end
       end
 
       %i[week month quarter half year].each do |type|
@@ -56,6 +46,10 @@ module TimeBoss
           windows.reverse
         end
 
+        define_method "#{type.to_s.pluralize}_ago" do |quantity|
+          send("#{type.to_s.pluralize}_back", quantity + 1).first
+        end
+
         define_method type.to_s.pluralize do |quantity|
           windows = []
           window = send("this_#{type}")
@@ -66,6 +60,10 @@ module TimeBoss
           end
           windows
         end
+
+        define_method "#{type.to_s.pluralize}_hence" do |quantity|
+          send(type.to_s.pluralize, quantity + 1).last
+        end
       end
 
       %i[yesterday today tomorrow].each do |period|
@@ -74,13 +72,6 @@ module TimeBoss
 
       def day(year, index)
         year(year).days[index - 1]
-      end
-
-      %i[last next].each do |period|
-        define_method "this_week_#{period}_year" do
-          week = this_week
-          send("#{period}_year").weeks.find { |w| w.index == week.index }
-        end
       end
 
       def week_for(date)

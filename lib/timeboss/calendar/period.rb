@@ -27,6 +27,10 @@ module TimeBoss
         end
       end
 
+      def current?
+        (start_date .. end_date).include?(Date.today)
+      end
+
       def days
         (start_date .. end_date).map { |d| Day.new(calendar, d) }
       end
