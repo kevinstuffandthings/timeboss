@@ -23,12 +23,16 @@ $ gem install timeboss
 ## Usage
 Supports `year`, `half`, `quarter`, `month`, `week`, and `day`.
 
+Prepare your calendar for use:
 ```ruby
 require 'timeboss/calendars/broadcast'
 
 calendar = TimeBoss::Calendars::Broadcast.new
 # => #<TimeBoss::Calendars::Broadcast:0x007f82d50f0af0 @basis=TimeBoss::Calendars::Broadcast::Basis>
+```
 
+You can ask simple questions of the calendar
+```ruby
 period = calendar.parse('2019Q4') # or '2018', or '2018M3', or '2019-12-21', or '2020W32', or '2020M3W2'
 # => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478>
 period.to_s
@@ -59,7 +63,6 @@ calendar.weeks_hence(3).name # run in 2020W29
 ```
 
 Additionally, each type of period can give you information about its constituent periods
-
 ```ruby
 calendar.this_month.weeks.map(&:to_s)
 # => ["2020M1W1: 2019-12-30 thru 2020-01-05", "2020M1W2: 2020-01-06 thru 2020-01-12", "2020M1W3: 2020-01-13 thru 2020-01-19", "2020M1W4: 2020-01-20 thru 2020-01-26"]
@@ -75,7 +78,6 @@ calendar.parse('2020Q1').months.map(&:name)
 ```
 
 Period shifting is easy. Note that the shifts are relative to today, not the base date. A shift examines the base period to find its offset into the shifting period size, and project it relative to now.
-
 ```ruby
 calendar.parse('Q3').years_ago(5).title
 # => "Q3 2015"
@@ -93,7 +95,6 @@ calendar.this_week.next_year.to_s # run 2020W29
 ```
 
 Complicated range expressions can be parsed using the `..` range operator, or evaluated with `thru`:
-
 ```ruby
 calendar.parse('2020M1 .. 2020M2').weeks.map(&:title)
 # => ["Week of December 30, 2019", "Week of January 6, 2020", "Week of January 13, 2020", "Week of January 20, 2020", "Week of January 27, 2020", "Week of February 3, 2020", "Week of February 10, 2020", "Week of February 17, 2020"]
@@ -121,8 +122,9 @@ $ rake timeboss:calendars:broadcast:shell
  => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3", "2021M4", "2021M5", "2021M6", "2021M7", "2021M8", "2021M9"]
 ```
 
+_Having trouble with the shell? If you are using the examples from the [Usage](#Usage) section, keep in mind that the shell is already in the context of the calendar -- so you don't need to specify the receiver!_
+
 ## TODO
 - Add [Travis CI](https://travis-ci.com/)
-- More tests
 - More calendars
 - More documentation
