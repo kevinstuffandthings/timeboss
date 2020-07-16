@@ -7,7 +7,7 @@ _This is a work in progress. Check back soon for the initial release!_
 Add this line to your application's Gemfile:
 ```ruby
 # update with the version of your choice
-gem 'timeboss', '0.0.1', git: "https://github.com/kevinstuffandthings/timeboss.git"
+gem 'timeboss'
 ```
 
 And then execute:
@@ -19,6 +19,8 @@ Or install it yourself as:
 ```bash
 $ gem install timeboss
 ```
+
+You can find the gem on [RubyGems](https://rubygems.org/gems/timeboss).
 
 ## Usage
 Supports `year`, `half`, `quarter`, `month`, `week`, and `day`.
