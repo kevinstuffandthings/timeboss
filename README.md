@@ -207,4 +207,4 @@ With the new calendar implemented, it can be accessed in one of 2 ways:
   ```
 
 ## TODO
-- [ ] Add gem deployment via [Travis-CI](https://docs.travis-ci.com/user/deployment/rubygems/#:~:text=Travis%20CI%20can%20automatically%20release,RubyGems%20after%20a%20successful%20build.&text=If%20you%20tag%20a%20commit,tags%20are%20uploaded%20to%20GitHub.&text=You%20will%20be%20prompted%20to,key%20on%20the%20command%20line.)
+- [x] Add gem deployment via [Travis-CI](https://docs.travis-ci.com/user/deployment/rubygems/#:~:text=Travis%20CI%20can%20automatically%20release,RubyGems%20after%20a%20successful%20build.&text=If%20you%20tag%20a%20commit,tags%20are%20uploaded%20to%20GitHub.&text=You%20will%20be%20prompted%20to,key%20on%20the%20command%20line.)

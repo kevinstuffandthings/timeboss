@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 require 'active_support/core_ext/class/subclasses'
-require './lib/timeboss/calendar'
-Dir['./lib/timeboss/calendars/*.rb'].each { |f| require f }
+require_relative 'calendar'
+
+Dir[File.expand_path('../calendars/*.rb', __FILE__)].each { |f| require f }
 
 module TimeBoss
   module Calendars
