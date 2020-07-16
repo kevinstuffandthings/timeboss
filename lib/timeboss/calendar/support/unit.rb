@@ -1,8 +1,12 @@
 # frozen_string_literal: true
+require_relative './shiftable'
+require_relative './formatter'
+
 module TimeBoss
   class Calendar
     module Support
       class Unit
+        include Shiftable
         attr_reader :calendar, :start_date, :end_date
 
         def self.type
@@ -19,6 +23,10 @@ module TimeBoss
           self.class == entry.class && self.start_date == entry.start_date && self.end_date == entry.end_date
         end
 
+        def format(*periods)
+          Formatter.new(self, periods.presence || Formatter::PERIODS).to_s
+        end
+
         def thru(unit)
           Period.new(calendar, self, unit)
         end
@@ -32,47 +40,6 @@ module TimeBoss
           base = self
           value.abs.times { base = base.send(method) }
           base
-        end
-
-        %w[day week month quarter half year].each do |period|
-          periods = period.pluralize
-
-          define_method periods do
-            calendar.send("#{periods}_for", self)
-          end
-
-          define_method period do
-            entries = send(periods)
-            return nil unless entries.length == 1
-            entries.first
-          end
-
-          define_method "in_#{period}" do
-            base = send(periods)
-            return unless base.length == 1
-            base.first.send(self.class.type.to_s.pluralize).find_index { |p| p == self } + 1
-          end
-
-          define_method "#{periods}_ago" do |offset|
-            base_offset = send("in_#{period}") or return
-            (calendar.send("this_#{period}") - offset).send(self.class.type.to_s.pluralize)[base_offset - 1]
-          end
-
-          define_method "last_#{period}" do
-            send("#{periods}_ago", 1)
-          end
-
-          define_method "this_#{period}" do
-            send("#{periods}_ago", 0)
-          end
-
-          define_method "#{periods}_hence" do |offset|
-            send("#{periods}_ago", offset * -1)
-          end
-
-          define_method "next_#{period}" do
-            send("#{periods}_hence", 1)
-          end
         end
 
         def +(value)
