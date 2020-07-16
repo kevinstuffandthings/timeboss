@@ -74,6 +74,7 @@ entry.format(:quarter)
 entry.format(:quarter, :month)
 # => "2020Q2M3W2"
 ```
+_Note: all parsable descriptors should be ordered by chronological specificity (from least to most)_
 
 Each type of period can give you information about its constituent periods:
 ```ruby
