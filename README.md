@@ -31,7 +31,7 @@ calendar = TimeBoss::Calendars::Broadcast.new
 # => #<TimeBoss::Calendars::Broadcast:0x007f82d50f0af0 @basis=TimeBoss::Calendars::Broadcast::Basis>
 ```
 
-You can ask simple questions of the calendar
+You can ask simple questions of the calendar:
 ```ruby
 period = calendar.parse('2019Q4') # or '2018', or '2018M3', or '2019-12-21', or '2020W32', or '2020M3W2'
 # => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478>
@@ -62,7 +62,20 @@ calendar.weeks_hence(3).name # run in 2020W29
 # => "2020W32"
 ```
 
-Additionally, each type of period can give you information about its constituent periods
+The resulting periods can be formatted a variety of (parsable) ways:
+```ruby
+entry = calendar.parse('2020M24')
+entry.format
+# => "2020H1Q2M3W2"
+
+entry.format(:quarter)
+# => "2020Q2W11"
+
+entry.format(:quarter, :month)
+# => "2020Q2M3W2"
+```
+
+Each type of period can give you information about its constituent periods:
 ```ruby
 calendar.this_month.weeks.map(&:to_s)
 # => ["2020M1W1: 2019-12-30 thru 2020-01-05", "2020M1W2: 2020-01-06 thru 2020-01-12", "2020M1W3: 2020-01-13 thru 2020-01-19", "2020M1W4: 2020-01-20 thru 2020-01-26"]

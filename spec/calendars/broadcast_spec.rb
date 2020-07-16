@@ -75,6 +75,22 @@ module TimeBoss
         end
       end
 
+      describe '#format' do
+        let(:entry) { subject.quarter(2015, 3) }
+
+        it 'can do a default format' do
+          expect(entry.format).to eq '2015H2Q1'
+        end
+
+        it 'can format with only the quarter' do
+          expect(entry.format(:quarter)).to eq '2015Q3'
+        end
+
+        it 'ignores stupidity' do
+          expect(entry.format(:day, :banana)).to eq '2015Q3'
+        end
+      end
+
       context 'relative' do
         let(:this_quarter) { subject.quarter(2015, 3) }
         let(:quarter) { double }
@@ -194,6 +210,22 @@ module TimeBoss
           allow(Date).to receive(:today).and_return today
           expect(subject).to receive(:month_for).with(today).and_return month
           expect(subject.this_month).to eq month
+        end
+      end
+
+      describe '#format' do
+        let(:entry) { subject.month(2015, 8) }
+
+        it 'can do a default format' do
+          expect(entry.format).to eq '2015H2Q1M2'
+        end
+
+        it 'can format with only the quarter' do
+          expect(entry.format(:quarter)).to eq '2015Q3M2'
+        end
+
+        it 'ignores stupidity' do
+          expect(entry.format(:banana, :half, :week)).to eq '2015H2M2'
         end
       end
 
@@ -335,6 +367,27 @@ module TimeBoss
           allow(Date).to receive(:today).and_return today
           expect(subject).to receive(:year_for).with(today).and_return year
           expect(subject.this_year).to eq year
+        end
+      end
+
+      describe '#format' do
+        let(:entry) { subject.parse('2020W24') }
+
+        it 'can do a default format' do
+          expect(entry.format).to eq '2020H1Q2M3W2'
+        end
+
+        it 'can format with only the quarter' do
+          expect(entry.format(:quarter)).to eq '2020Q2W11'
+        end
+
+        it 'can format with only the quarter + month' do
+          expect(entry.format(:quarter, :month)).to eq '2020Q2M3W2'
+          expect(entry.format(:month, :quarter)).to eq '2020Q2M3W2'
+        end
+
+        it 'ignores stupidity' do
+          expect(entry.format(:day, :month, :banana)).to eq '2020M6W2'
         end
       end
 
