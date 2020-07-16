@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Kevin McDonald"]
   spec.email         = ["kevinstuffandthings@gmail.com"]
   spec.summary       = %q{Broadcast Calendar navigation in Ruby made simple}
+  spec.description   = spec.summary
   spec.homepage      = "https://github.com/kevinstuffandthings/timeboss"
   spec.license       = "MIT"
 

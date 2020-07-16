@@ -5,3 +5,8 @@ rvm:
   - 2.6
 script:
   - bundle exec rspec
+deploy:
+  provider: rubygems
+  api_key: "ff1bada6f70ddd6cb9437ee72c17e112"
+  on:
+    tags: true
