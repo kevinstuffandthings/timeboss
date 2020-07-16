@@ -36,6 +36,7 @@ module TimeBoss
       def parse_term(identifier)
         return Day.new(calendar, Date.parse(identifier)) if identifier.match?(/^[0-9]{4}-?[01][0-9]-?[0-3][0-9]$/)
 
+        raise InvalidPeriodIdentifierError unless identifier.match?(/^[HQMWD0-9]+$/)
         period = if identifier.to_i == 0 then calendar.this_year else calendar.year(identifier.to_i) end
         %w[half quarter month week day].each do |size|
           prefix = size[0].upcase
