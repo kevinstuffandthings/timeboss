@@ -1,4 +1,4 @@
-# TimeBoss
+# TimeBoss [![Build Status](https://travis-ci.com/kevinstuffandthings/timeboss.svg?branch=master)](https://travis-ci.com/kevinstuffandthings/timeboss)
 A gem providing convenient navigation of the [Broadcast Calendar](https://en.wikipedia.org/wiki/Broadcast_calendar).
 
 _This is a work in progress. Check back soon for the initial release!_
