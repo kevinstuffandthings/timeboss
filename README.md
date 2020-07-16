@@ -137,6 +137,70 @@ $ rake timeboss:calendars:broadcast:shell
 
 _Having trouble with the shell? If you are using the examples from the [Usage](#Usage) section, keep in mind that the shell is already in the context of the calendar -- so you don't need to specify the receiver!_
 
+## Creating new calendars
+To create a custom calendar, simply extend the `TimeBoss::Calendar` class, and implement a new `TimeBoss::Calendar::Support::MonthBasis` for it.
+
+```ruby
+require 'timeboss/calendar'
+
+module MyCalendars
+  class AugustFiscal < TimeBoss::Calendar
+    def initialize
+      # For each calendar, operation, the class will be instantiated with an ordinal value for `year` and `month`.
+      # It is the instance's job to translate those ordinals into `start_date` and `end_date` values, based on the
+      # desired behavior of the calendar. With month rules defined, TimeBoss will be able to navigate all the relative
+      # periods within the calendar.
+      super(basis: Basis)
+    end
+
+    private
+
+    class Basis < TimeBoss::Calendar::Support::MonthBasis
+      # In this example, August is the first month of the fiscal year. So an incoming 2020/1 value would translate to
+      # a gregorian 2019/8.
+      START_MONTH = 8
+
+      def start_date
+        @_start_date ||= begin
+                           date = Date.civil(year_index, month_index, 1)
+                           date - (date.wday + 7) % 7 # We're additionally starting the month on a Sunday.
+                         end
+      end
+
+      def end_date
+        @_end_date ||= begin
+                         date = Date.civil(year_index, month_index, -1)
+                         date - (date.wday + 1)
+                       end
+      end
+
+      private
+
+      def month_index
+        ((month + START_MONTH - 2) % 12) + 1
+      end
+
+      def year_index
+        month >= START_MONTH ? year : year - 1
+      end
+    end
+  end
+end
+```
+
+With the new calendar implemented, it can be accessed in one of 2 ways:
+- via traditional instantiation:
+  ```ruby
+  calendar = MyCalendars::AugustFiscal.new
+  calendar.this_year
+  ```
+- via `TimeBoss::Calendars`:
+  ```ruby
+  require 'timeboss/calendars'
+  calendar = TimeBoss::Calendars[:august_fiscal] # the returned calendar is instantiated globally
+  calendar.this_year
+  ```
+
 ## TODO
 - Add [Travis CI](https://travis-ci.com/)
 - More calendars
