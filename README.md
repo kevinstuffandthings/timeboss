@@ -33,7 +33,7 @@ calendar = TimeBoss::Calendars::Broadcast.new
 
 You can ask simple questions of the calendar:
 ```ruby
-period = calendar.parse('2019Q4') # or '2018', or '2018M3', or '2019-12-21', or '2020W32', or '2020M3W2'
+period = calendar.parse('2019Q4') # or '2018', or '2019-12-21', or '2020W32', or '2020M3W2'
 # => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478>
 period.to_s
 # => "2019Q4: 2019-09-30 thru 2019-12-29"
@@ -99,7 +99,8 @@ week = calendar.this_week # run 2020W29
 "#{week.name}: #{week.in_quarter} of #{week.quarter.name}; #{week.in_year} of #{week.year.name}"
 # => "2020W29: 3 of 2020Q3; 29 of 2020"
 
-week = calendar.parse('2014W29').this_week # run 2020W29, this generates the same as above, because shifts are relative to date run!
+# run 2020W29, this generates the same as above, because shifts are relative to date run!
+week = calendar.parse('2014W29').this_week
 "#{week.name}: #{week.in_quarter} of #{week.quarter.name}; #{week.in_year} of #{week.year.name}"
 # => "2020W29: 3 of 2020Q3; 29 of 2020"
 
@@ -146,24 +147,25 @@ require 'timeboss/calendar'
 module MyCalendars
   class AugustFiscal < TimeBoss::Calendar
     def initialize
-      # For each calendar, operation, the class will be instantiated with an ordinal value for `year` and `month`.
-      # It is the instance's job to translate those ordinals into `start_date` and `end_date` values, based on the
-      # desired behavior of the calendar. With month rules defined, TimeBoss will be able to navigate all the relative
-      # periods within the calendar.
+      # For each calendar, operation, the class will be instantiated with an ordinal value
+      # for `year` and `month`. It is the instance's job to translate those ordinals into
+      # `start_date` and `end_date` values, based on the desired behavior of the calendar.
+      # With month rules defined, TimeBoss will be able to navigate all the relative periods
+      # within the calendar.
       super(basis: Basis)
     end
 
     private
 
     class Basis < TimeBoss::Calendar::Support::MonthBasis
-      # In this example, August is the first month of the fiscal year. So an incoming 2020/1 value would translate to
-      # a gregorian 2019/8.
+      # In this example, August is the first month of the fiscal year. So an incoming 2020/1
+      # value would translate to a gregorian 2019/8.
       START_MONTH = 8
 
       def start_date
         @_start_date ||= begin
                            date = Date.civil(year_index, month_index, 1)
-                           date - (date.wday + 7) % 7 # We're additionally starting the month on a Sunday.
+                           date - (date.wday + 7) % 7 # In this calendar, months start Sunday.
                          end
       end
 
@@ -197,7 +199,7 @@ With the new calendar implemented, it can be accessed in one of 2 ways:
 - via `TimeBoss::Calendars`:
   ```ruby
   require 'timeboss/calendars'
-  calendar = TimeBoss::Calendars[:august_fiscal] # the returned calendar is instantiated globally
+  calendar = TimeBoss::Calendars[:august_fiscal]
   calendar.this_year
   ```
 
