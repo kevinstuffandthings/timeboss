@@ -18,8 +18,6 @@ Or install it yourself as:
 $ gem install timeboss
 ```
 
-You can find the gem on [RubyGems](https://rubygems.org/gems/timeboss).
-
 ## Usage
 Supports `year`, `half`, `quarter`, `month`, `week`, and `day`.
 
