@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'active_support/core_ext/class/subclasses'
 require './lib/timeboss/calendar'
 Dir['./lib/timeboss/calendars/*.rb'].each { |f| require f }
