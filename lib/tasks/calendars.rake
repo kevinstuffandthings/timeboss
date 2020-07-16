@@ -5,9 +5,10 @@ namespace :timeboss do
       namespace calendar do
         desc "Open a shell with the #{calendar} calendar"
         task shell: ['timeboss:init'] do
+          require 'timeboss/support/shellable'
           require "timeboss/calendars/#{calendar}"
           klass = TimeBoss::Calendars.const_get(calendar.to_s.classify)
-          klass.new.extend(TimeBoss::Shellable).open_shell
+          TimeBoss::Support::Shellable.open(klass.new)
         end
       end
     end
