@@ -1,5 +1,6 @@
 # TimeBoss [![Build Status](https://travis-ci.com/kevinstuffandthings/timeboss.svg?branch=master)](https://travis-ci.com/kevinstuffandthings/timeboss) [![Gem Version](https://badge.fury.io/rb/timeboss.svg)](https://badge.fury.io/rb/timeboss)
 A gem providing convenient navigation of the [Broadcast Calendar](https://en.wikipedia.org/wiki/Broadcast_calendar).
+Originally developed for [Simulmedia](https://simulmedia.com).
 
 ## Installation
 Add this line to your application's Gemfile:
