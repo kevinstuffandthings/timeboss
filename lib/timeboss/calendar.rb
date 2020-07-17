@@ -11,6 +11,14 @@ module TimeBoss
     include Waypoints
     delegate :parse, to: :parser
 
+    def name
+      self.class.to_s.demodulize.underscore
+    end
+
+    def title
+      name.titleize
+    end
+
     protected
 
     attr_reader :basis

@@ -123,10 +123,10 @@ period = calendar.parse('2020W3..2020Q1')
 The examples above are just samples. Try different periods, operators, etc.
 
 ### Shell
-To open an IRB shell for the broadcast calendar, use the `timeboss:calendars:broadcast:shell` rake task.
+To open an IRB shell for the broadcast calendar, use the `tbsh` executable, or the `timeboss:calendars:broadcast:shell` rake task.
 You will find yourself in the context of an instantiated `TimeBoss::Calendars::Broadcast` object:
 ```bash
-$ rake timeboss:calendars:broadcast:shell
+$ tbsh
 2.4.1 :001 > next_quarter
  => #<TimeBoss::Calendar::Quarter:0x007fe04c16a1c8 @calendar=#<TimeBoss::Calendars::Broadcast:0x007fe04c1a0458 @basis=TimeBoss::Calendars::Broadcast::Basis>, @year_index=2020, @index=4, @start_date=#<Date: 2020-09-28 ((2459121j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2020-12-27 ((2459211j,0s,0n),+0s,2299161j)>>
 2.4.1 :002 > last_year

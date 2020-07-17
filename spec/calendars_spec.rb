@@ -28,10 +28,16 @@ module TimeBoss
         c2 = described_class[:broadcast]
         expect(c1).to be_instance_of TimeBoss::Calendars::Broadcast
         expect(c1).to be c2
+
+        expect(c1.name).to eq 'broadcast'
+        expect(c1.title).to eq 'Broadcast'
       end
 
       it 'can return a new calendar' do
-        expect(described_class[:my_test_calendar]).to be_instance_of MyTestCalendar
+        c1 = described_class[:my_test_calendar]
+        expect(c1).to be_instance_of MyTestCalendar
+        expect(c1.name).to eq 'my_test_calendar'
+        expect(c1.title).to eq 'My Test Calendar'
       end
 
       it 'can graceully give you nothing' do

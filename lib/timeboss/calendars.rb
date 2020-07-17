@@ -17,7 +17,7 @@ module TimeBoss
     end
 
     def [](name)
-      find { |e| e.name == name.to_sym }&.calendar
+      find { |e| e.name == name&.to_sym }&.calendar
     end
 
     private
