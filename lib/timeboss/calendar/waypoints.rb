@@ -38,16 +38,20 @@ module TimeBoss
       end
 
       %i[day week month quarter half year].each do |type|
+        types = type.to_s.pluralize
+
         define_method("this_#{type}") { send("#{type}_for", Date.today) }
         define_method("last_#{type}") { send("this_#{type}").previous }
         define_method("next_#{type}") { send("this_#{type}").next }
 
-        types = type.to_s.pluralize
         define_method("#{types}_for") { |p| send("#{type}_for", p.start_date).until(p.end_date) }
+
         define_method("#{types}_back") { |q| send("this_#{type}").previous(q) }
         define_method("#{types}_ago") { |q| send("this_#{type}").ago(q) }
-        define_method("#{types}") { |q| send("this_#{type}").next(q) }
+
+        define_method("#{types}_forward") { |q| send("this_#{type}").next(q) }
         define_method("#{types}_hence") { |q| send("this_#{type}").hence(q) }
+        alias_method types.to_sym, "#{types}_forward".to_sym
       end
 
       alias_method :yesterday, :last_day
