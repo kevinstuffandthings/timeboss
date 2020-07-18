@@ -32,7 +32,17 @@ module TimeBoss
           it 'can get the relevant weeks for the period' do
             result = subject.weeks
             result.each { |w| expect(w).to be_instance_of TimeBoss::Calendar::Week }
-            expect(result.map(&:name)).to eq %w[2018W26 2018W27 2018W28 2018W29 2018W30 2018W31 2018W32 2018W33 2018W34]
+            expect(result.map { |w| w.start_date.to_s }).to eq [
+              '2018-06-25',
+              '2018-07-02',
+              '2018-07-09',
+              '2018-07-16',
+              '2018-07-23',
+              '2018-07-30',
+              '2018-08-06',
+              '2018-08-13',
+              '2018-08-20'
+            ]
           end
         end
 

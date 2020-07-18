@@ -21,7 +21,11 @@ module TimeBoss
       end
 
       def index
-        @_index ||= (start_date - calendar.year_for(start_date).start_date).to_i + 1
+        @_index ||= (start_date - year.start_date).to_i + 1
+      end
+
+      def year_index
+        @_year_index ||= year.year_index
       end
 
       private

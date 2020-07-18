@@ -4,7 +4,7 @@ module TimeBoss
       let(:calendar) { instance_double(TimeBoss::Calendar) }
       let(:start_date) { Date.parse('2048-04-06') }
       let(:end_date) { Date.parse('2048-04-12') }
-      let(:subject) { described_class.new(calendar, 2048, 15, start_date, end_date) }
+      let(:subject) { described_class.new(calendar, start_date, end_date) }
 
       it 'knows its stuff' do
         expect(subject.start_date).to eq start_date
@@ -12,16 +12,8 @@ module TimeBoss
         expect(subject.to_range).to eq start_date..end_date
       end
 
-      it 'knows its name' do
-        expect(subject.name).to eq '2048W15'
-      end
-
       it 'knows its title' do
         expect(subject.title).to eq "Week of April 6, 2048"
-      end
-
-      it 'can stringify itself' do
-        expect(subject.to_s).to include(subject.name, start_date.to_s, end_date.to_s)
       end
 
       describe '#current?' do
@@ -46,13 +38,13 @@ module TimeBoss
           end
 
           it 'can wrap to the previous 52-week year' do
-            result = described_class.new(calendar, 2022, 1, Date.parse('2021-12-27'), Date.parse('2022-01-02')).previous
+            result = described_class.new(calendar, Date.parse('2021-12-27'), Date.parse('2022-01-02')).previous
             expect(result).to be_a described_class
             expect(result.to_s).to eq "2021W52: 2021-12-20 thru 2021-12-26"
           end
 
           it 'can wrap to the previous 53-week year' do
-            result = described_class.new(calendar, 2024, 1, Date.parse('2024-01-01'), Date.parse('2024-01-07')).previous
+            result = described_class.new(calendar, Date.parse('2024-01-01'), Date.parse('2024-01-07')).previous
             expect(result).to be_a described_class
             expect(result.to_s).to eq "2023W53: 2023-12-25 thru 2023-12-31"
           end
@@ -66,13 +58,13 @@ module TimeBoss
           end
 
           it 'can wrap from week 52 to the next year' do
-            result = described_class.new(calendar, 2021, 52, Date.parse('2021-12-20'), Date.parse('2021-12-26')).next
+            result = described_class.new(calendar, Date.parse('2021-12-20'), Date.parse('2021-12-26')).next
             expect(result).to be_a described_class
             expect(result.to_s).to eq "2022W1: 2021-12-27 thru 2022-01-02"
           end
 
           it 'can wrap from week 53 to the next year' do
-            result = described_class.new(calendar, 2023, 53, Date.parse('2023-12-25'), Date.parse('2023-12-31')).next
+            result = described_class.new(calendar, Date.parse('2023-12-25'), Date.parse('2023-12-31')).next
             expect(result).to be_a described_class
             expect(result.to_s).to eq "2024W1: 2024-01-01 thru 2024-01-07"
           end

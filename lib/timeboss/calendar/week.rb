@@ -4,12 +4,8 @@ require_relative './support/unit'
 module TimeBoss
   class Calendar
     class Week < Support::Unit
-      attr_reader :year_index, :index
-
-      def initialize(calendar, year_index, index, start_date, end_date)
+      def initialize(calendar, start_date, end_date)
         super(calendar, start_date, end_date)
-        @year_index = year_index
-        @index = index
       end
 
       def name
@@ -24,23 +20,22 @@ module TimeBoss
         "#{name}: #{start_date} thru #{end_date}"
       end
 
+      def index
+        @_index ||= (((start_date - year.start_date) + 1) / 7.0).to_i + 1
+      end
+
+      def year_index
+        @_year_index ||= year.year_index
+      end
+
       private
 
       def down
-        if index == 1
-          (calendar.year_for(start_date) - 1).weeks.last
-        else
-          self.class.new(calendar, year_index, index - 1, start_date - 1.week, end_date - 1.week)
-        end
+        self.class.new(calendar, start_date - 1.week, end_date - 1.week)
       end
 
       def up
-        weeks = calendar.year_for(start_date).weeks
-        if index == weeks.last.index
-          self.class.new(calendar, year_index + 1, 1, start_date + 1.week, end_date + 1.week)
-        else
-          weeks[index]
-        end
+        self.class.new(calendar, start_date + 1.week, end_date + 1.week)
       end
     end
   end

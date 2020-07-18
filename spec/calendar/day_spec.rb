@@ -24,7 +24,7 @@ module TimeBoss
       end
 
       describe '#index' do
-        before(:each) { allow(calendar).to receive(:year_for).with(start_date).and_return double(start_date: start_date - 3) }
+        before(:each) { allow(subject).to receive(:year).and_return double(start_date: start_date - 3) }
 
         it 'gets its index within the year' do
           expect(subject.index).to eq 4
