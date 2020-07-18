@@ -4,17 +4,20 @@ Originally developed for [Simulmedia](https://simulmedia.com).
 
 ## Installation
 Add this line to your application's Gemfile:
+
 ```ruby
 # update with the version of your choice
 gem 'timeboss'
 ```
 
 And then execute:
+
 ```bash
 $ bundle install
 ```
 
 Or install it yourself as:
+
 ```bash
 $ gem install timeboss
 ```
@@ -23,6 +26,7 @@ $ gem install timeboss
 Supports `year`, `half`, `quarter`, `month`, `week`, and `day`.
 
 Prepare your calendar for use:
+
 ```ruby
 require 'timeboss/calendars/broadcast'
 
@@ -31,6 +35,7 @@ calendar = TimeBoss::Calendars::Broadcast.new
 ```
 
 You can ask simple questions of the calendar:
+
 ```ruby
 period = calendar.parse('2019Q4') # or '2018', or '2019-12-21', or '2020W32', or '2020M3W2'
 # => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478>
@@ -62,6 +67,7 @@ calendar.weeks_hence(3).name # run in 2020W29
 ```
 
 The resulting periods can be formatted a variety of (parsable) ways:
+
 ```ruby
 entry = calendar.parse('2020M24')
 entry.format
@@ -73,9 +79,11 @@ entry.format(:quarter)
 entry.format(:quarter, :month)
 # => "2020Q2M3W2"
 ```
+
 _Note: all parsable descriptors should be ordered by chronological specificity (from least to most)_
 
 Each type of period can give you information about its constituent periods:
+
 ```ruby
 calendar.this_month.weeks.map(&:to_s)
 # => ["2020M1W1: 2019-12-30 thru 2020-01-05", "2020M1W2: 2020-01-06 thru 2020-01-12", "2020M1W3: 2020-01-13 thru 2020-01-19", "2020M1W4: 2020-01-20 thru 2020-01-26"]
@@ -91,6 +99,7 @@ calendar.parse('2020Q1').months.map(&:name)
 ```
 
 Period shifting is easy. Note that the shifts are relative to today, not the base date. A shift examines the base period to find its offset into the shifting period size, and project it relative to now.
+
 ```ruby
 calendar.parse('Q3').years_ago(5).title
 # => "Q3 2015"
@@ -109,6 +118,7 @@ calendar.this_week.next_year.to_s # run 2020W29
 ```
 
 Complicated range expressions can be parsed using the `..` range operator, or evaluated with `thru`:
+
 ```ruby
 calendar.parse('2020M1 .. 2020M2').weeks.map(&:title)
 # => ["Week of December 30, 2019", "Week of January 6, 2020", "Week of January 13, 2020", "Week of January 20, 2020", "Week of January 27, 2020", "Week of February 3, 2020", "Week of February 10, 2020", "Week of February 17, 2020"]
@@ -126,6 +136,7 @@ The examples above are just samples. Try different periods, operators, etc.
 ### Shell
 To open an IRB shell for the broadcast calendar, use the `tbsh` executable, or the `timeboss:calendars:broadcast:shell` rake task.
 You will find yourself in the context of an instantiated `TimeBoss::Calendars::Broadcast` object:
+
 ```bash
 $ tbsh
 2.4.1 :001 > next_quarter
@@ -191,17 +202,21 @@ end
 ```
 
 With the new calendar implemented, it can be accessed in one of 2 ways:
+
 - via traditional instantiation:
-  ```ruby
-  calendar = MyCalendars::AugustFiscal.new
-  calendar.this_year
-  ```
+
+    ```ruby
+    calendar = MyCalendars::AugustFiscal.new
+    calendar.this_year
+    ```
+
 - via `TimeBoss::Calendars`:
-  ```ruby
-  require 'timeboss/calendars'
-  calendar = TimeBoss::Calendars[:august_fiscal]
-  calendar.this_year
-  ```
+
+    ```ruby
+    require 'timeboss/calendars'
+    calendar = TimeBoss::Calendars[:august_fiscal]
+    calendar.this_year
+    ```
 
 ## TODO
 - [ ] Add comprehensive documentation

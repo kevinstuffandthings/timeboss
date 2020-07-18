@@ -67,9 +67,9 @@ module TimeBoss
         end
       end
 
-      %i[yesterday today tomorrow].each do |period|
-        define_method(period) { Day.new(self, Date.send(period)) }
-      end
+      alias_method :yesterday, :last_day
+      alias_method :today, :this_day
+      alias_method :tomorrow, :next_day
 
       def day(year_index, index)
         year(year_index).days[index - 1]
@@ -77,6 +77,10 @@ module TimeBoss
 
       def day_for(date)
         Day.new(self, date)
+      end
+
+      def week(year_index, index)
+        year(year_index).weeks[index - 1]
       end
 
       def week_for(date)

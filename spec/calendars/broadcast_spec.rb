@@ -2,6 +2,26 @@ module TimeBoss
   describe Calendars::Broadcast do
     let(:subject) { described_class.new }
 
+    context 'days' do
+      it 'can get today' do
+        day = subject.today
+        expect(day).to be_instance_of(TimeBoss::Calendar::Day)
+        expect(day.start_date).to eq Date.today
+      end
+
+      it 'can get yesterday' do
+        day = subject.yesterday
+        expect(day).to be_instance_of(TimeBoss::Calendar::Day)
+        expect(day.start_date).to eq Date.yesterday
+      end
+
+      it 'can get tomorrow' do
+        day = subject.tomorrow
+        expect(day).to be_instance_of(TimeBoss::Calendar::Day)
+        expect(day.start_date).to eq Date.tomorrow
+      end
+    end
+
     context 'quarters' do
       describe '#quarter' do
         it 'knows 2017Q2' do
