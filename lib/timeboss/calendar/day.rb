@@ -24,11 +24,13 @@ module TimeBoss
         @_index ||= (start_date - calendar.year_for(start_date).start_date).to_i + 1
       end
 
-      def previous
+      private
+
+      def down
         self.class.new(calendar, start_date - 1.day)
       end
 
-      def next
+      def up
         self.class.new(calendar, start_date + 1.day)
       end
     end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_relative './navigable'
 require_relative './shiftable'
 require_relative './formatter'
 
@@ -6,6 +7,7 @@ module TimeBoss
   class Calendar
     module Support
       class Unit
+        include Navigable
         include Shiftable
         attr_reader :calendar, :start_date, :end_date
 

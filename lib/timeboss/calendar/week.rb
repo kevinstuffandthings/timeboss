@@ -24,7 +24,9 @@ module TimeBoss
         "#{name}: #{start_date} thru #{end_date}"
       end
 
-      def previous
+      private
+
+      def down
         if index == 1
           (calendar.year_for(start_date) - 1).weeks.last
         else
@@ -32,7 +34,7 @@ module TimeBoss
         end
       end
 
-      def next
+      def up
         weeks = calendar.year_for(start_date).weeks
         if index == weeks.last.index
           self.class.new(calendar, year_index + 1, 1, start_date + 1.week, end_date + 1.week)

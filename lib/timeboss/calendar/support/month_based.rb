@@ -13,22 +13,6 @@ module TimeBoss
           @index = index
         end
 
-        def next
-          if index == max_index
-            calendar.send(self.class.type, year_index + 1, 1)
-          else
-            calendar.send(self.class.type, year_index, index + 1)
-          end
-        end
-
-        def previous
-          if index == 1
-            calendar.send(self.class.type, year_index - 1, max_index)
-          else
-            calendar.send(self.class.type, year_index, index - 1)
-          end
-        end
-
         def to_s
           "#{name}: #{start_date} thru #{end_date}"
         end
@@ -44,6 +28,22 @@ module TimeBoss
 
         def max_index
           12 / self.class::NUM_MONTHS
+        end
+
+        def up
+          if index == max_index
+            calendar.send(self.class.type, year_index + 1, 1)
+          else
+            calendar.send(self.class.type, year_index, index + 1)
+          end
+        end
+
+        def down
+          if index == 1
+            calendar.send(self.class.type, year_index - 1, max_index)
+          else
+            calendar.send(self.class.type, year_index, index - 1)
+          end
         end
       end
     end
