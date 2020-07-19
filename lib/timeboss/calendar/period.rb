@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 module TimeBoss
   class Calendar
-    # A calendar period represents a range of units.
     class Period
       attr_reader :begin, :end
 

@@ -4,7 +4,6 @@
 
 module TimeBoss
   class Calendar
-    # Provides implementations for known periods within a calendar.
     module Waypoints
       include Absolute
       include Relative

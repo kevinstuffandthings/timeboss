@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 module TimeBoss
   class Calendar
-    # The parser is responsible for the implementation of a calendar's identifier parsing abilities.
     class Parser
       RANGE_DELIMITER = '..'
       InvalidPeriodIdentifierError = Class.new(StandardError)

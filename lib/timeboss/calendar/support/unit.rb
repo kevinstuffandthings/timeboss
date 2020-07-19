@@ -6,7 +6,6 @@ require_relative './formatter'
 module TimeBoss
   class Calendar
     module Support
-      # A unit is the lowest-level base of all days/weeks/months, etc.
       class Unit
         include Navigable
         include Shiftable

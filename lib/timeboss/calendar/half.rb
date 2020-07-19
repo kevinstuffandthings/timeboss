@@ -3,7 +3,6 @@ require_relative './support/monthly_unit'
 
 module TimeBoss
   class Calendar
-    # Representation of a 6-month period within a calendar.
     class Half < Support::MonthlyUnit
       NUM_MONTHS = 6
 

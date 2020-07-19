@@ -7,7 +7,6 @@ require 'active_support/core_ext/numeric/time'
 require_relative './calendar/support/month_basis'
 
 module TimeBoss
-  # A calendar is built upon a basis, and provides methods for period identification and navigation.
   class Calendar
     include Waypoints
 

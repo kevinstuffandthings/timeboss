@@ -3,7 +3,6 @@ require_relative './support/unit'
 
 module TimeBoss
   class Calendar
-    # Representation of a single day within a calendar.
     class Day < Support::Unit
       def initialize(calendar, start_date)
         super(calendar, start_date, start_date)

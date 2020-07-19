@@ -2,7 +2,6 @@
 module TimeBoss
   class Calendar
     module Support
-      # Provides navigational abilities for units within a calendar.
       module Navigable
         # @overload previous
         #   Fetch the previous unit relative to this unit.

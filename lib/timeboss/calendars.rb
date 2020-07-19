@@ -5,7 +5,6 @@ require_relative 'calendar'
 Dir[File.expand_path('../calendars/*.rb', __FILE__)].each { |f| require f }
 
 module TimeBoss
-  # A home for specific calendar implementations.
   module Calendars
     extend self
     extend Enumerable
