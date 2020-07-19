@@ -133,8 +133,8 @@ module TimeBoss
           expect(quarters.map(&:name)).to eq ['2015Q3', '2015Q4', '2016Q1', '2016Q2', '2016Q3']
         end
 
-        it 'can get a quarter hence' do
-          quarter = subject.quarters_hence(4)
+        it 'can get a quarter ahead' do
+          quarter = subject.quarters_ahead(4)
           expect(quarter).to be_a TimeBoss::Calendar::Quarter
           expect(quarter.name).to eq '2016Q3'
         end
@@ -271,8 +271,8 @@ module TimeBoss
           expect(months.map(&:name)).to eq ['2015M3', '2015M4', '2015M5', '2015M6', '2015M7']
         end
 
-        it 'can get a month hence' do
-          month = subject.months_hence(4)
+        it 'can get a month ahead' do
+          month = subject.months_ahead(4)
           expect(month).to be_a TimeBoss::Calendar::Month
           expect(month.name).to eq '2015M7'
         end
@@ -510,7 +510,7 @@ module TimeBoss
       it 'can parse mathematic expressions' do
         result = subject.parse('this_month + 2')
         expect(result).to be_a TimeBoss::Calendar::Month
-        expect(result).to eq subject.months_hence(2)
+        expect(result).to eq subject.months_ahead(2)
       end
 
       context 'ranges' do
@@ -574,7 +574,7 @@ module TimeBoss
 
         it 'can shift to a different year' do
           allow(subject).to receive(:this_year).and_return subject.parse('2019')
-          result = basis.years_hence(3)
+          result = basis.years_ahead(3)
           expect(result).to be_a TimeBoss::Calendar::Day
           expect(result.to_s).to eq '2022-04-19'
           expect(basis.in_year).to eq 114
@@ -616,7 +616,7 @@ module TimeBoss
 
         it 'can shift to a different year' do
           allow(subject).to receive(:this_year).and_return subject.parse('2020')
-          result = basis.years_hence(4)
+          result = basis.years_ahead(4)
           expect(result).to be_a TimeBoss::Calendar::Month
           expect(result.name).to eq '2024M4'
           expect(basis.in_year).to eq 4

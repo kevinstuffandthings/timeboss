@@ -37,12 +37,12 @@ module TimeBoss
             send("#{periods}_ago", 0)
           end
 
-          define_method "#{periods}_hence" do |offset|
+          define_method "#{periods}_ahead" do |offset|
             send("#{periods}_ago", offset * -1)
           end
 
           define_method "next_#{period}" do
-            send("#{periods}_hence", 1)
+            send("#{periods}_ahead", 1)
           end
         end
       end

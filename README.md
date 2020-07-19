@@ -62,7 +62,7 @@ calendar.years_back(2).map { |y| y.start_date.to_s } # run in 2020
 calendar.months_ago(3).name # run in 2020M7
 # => "2020M4"
 
-calendar.weeks_hence(3).name # run in 2020W29
+calendar.weeks_ahead(3).name # run in 2020W29
 # => "2020W32"
 ```
 

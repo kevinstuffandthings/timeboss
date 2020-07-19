@@ -17,7 +17,7 @@ module TimeBoss
           previous(quantity + 1).first
         end
 
-        def hence(quantity)
+        def ahead(quantity)
           self.next(quantity + 1).last
         end
 

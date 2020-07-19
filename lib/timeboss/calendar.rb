@@ -11,10 +11,14 @@ module TimeBoss
     include Waypoints
     delegate :parse, to: :parser
 
+    # Get a name by which this calendar can be referenced.
+    # @return [String]
     def name
       self.class.to_s.demodulize.underscore
     end
 
+    # Get a friendly title for this calendar.
+    # @return [String]
     def title
       name.titleize
     end
