@@ -2,6 +2,7 @@
 module TimeBoss
   class Calendar
     module Waypoints
+      # Provides implementation for absolute periods within a calendar.
       module Absolute
         %i[month quarter half year].each do |type|
           klass = TimeBoss::Calendar.const_get(type.to_s.classify)

@@ -2,6 +2,7 @@
 module TimeBoss
   class Calendar
     module Support
+      # Provides the ability to take a unit, and shift it into a different period, relative to today.
       module Shiftable
         PERIODS = %w[day week month quarter half year]
 

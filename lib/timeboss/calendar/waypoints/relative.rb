@@ -2,6 +2,7 @@
 module TimeBoss
   class Calendar
     module Waypoints
+      # Provides implementation for periods relative to today within a calendar.
       module Relative
         %i[day week month quarter half year].each do |type|
           types = type.to_s.pluralize

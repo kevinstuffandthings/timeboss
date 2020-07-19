@@ -37,7 +37,7 @@
         <div id="menu">
   
     <a href="../../../_index.html">Index (N)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../TimeBoss.html" title="TimeBoss (module)">TimeBoss</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Calendar.html" title="TimeBoss::Calendar (class)">Calendar</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Support.html" title="TimeBoss::Calendar::Support (module)">Support</a></span></span>
+    <span class='title'><span class='object_link'><a href="../../../TimeBoss.html" title="TimeBoss (module)">TimeBoss</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Calendar.html" title="TimeBoss::Calendar (module)">Calendar</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Support.html" title="TimeBoss::Calendar::Support (module)">Support</a></span></span>
      &raquo; 
     <span class="title">Navigable</span>
   
@@ -88,7 +88,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Provides navigational abilities for units within a calendar.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -282,12 +293,12 @@
       <pre class="lines">
 
 
-33
 34
-35</pre>
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ago'>ago</span><span class='lparen'>(</span><span class='id identifier rubyid_quantity'>quantity</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous'>previous</span><span class='lparen'>(</span><span class='id identifier rubyid_quantity'>quantity</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -351,12 +362,12 @@
       <pre class="lines">
 
 
-40
 41
-42</pre>
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ahead'>ahead</span><span class='lparen'>(</span><span class='id identifier rubyid_quantity'>quantity</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='id identifier rubyid_quantity'>quantity</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span>
@@ -474,13 +485,13 @@
       <pre class="lines">
 
 
-25
 26
 27
-28</pre>
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='id identifier rubyid_quantity'>quantity</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_up'>up</span> <span class='kw'>if</span> <span class='id identifier rubyid_quantity'>quantity</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -599,13 +610,13 @@
       <pre class="lines">
 
 
-13
 14
 15
-16</pre>
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_previous'>previous</span><span class='lparen'>(</span><span class='id identifier rubyid_quantity'>quantity</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_down'>down</span> <span class='kw'>if</span> <span class='id identifier rubyid_quantity'>quantity</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -670,7 +681,6 @@
       <pre class="lines">
 
 
-47
 48
 49
 50
@@ -678,10 +688,11 @@
 52
 53
 54
-55</pre>
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/support/navigable.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='kw'>until</span><span class='lparen'>(</span><span class='id identifier rubyid_end_date'>end_date</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='kw'>self</span>
@@ -702,7 +713,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 19 10:03:38 2020 by
+  Generated on Sun Jul 19 10:12:10 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.4.1).
 </div>

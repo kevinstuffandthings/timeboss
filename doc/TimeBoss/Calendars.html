@@ -95,7 +95,18 @@
   
 </div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A home for specific calendar implementations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
@@ -237,12 +248,12 @@
       <pre class="lines">
 
 
-24
 25
-26</pre>
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendars.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendars.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_find'>find</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>==</span> <span class='id identifier rubyid_name'>name</span><span class='op'>&amp;.</span><span class='id identifier rubyid_to_sym'>to_sym</span> <span class='rbrace'>}</span><span class='op'>&amp;.</span><span class='id identifier rubyid_calendar'>calendar</span>
@@ -291,14 +302,14 @@
       <pre class="lines">
 
 
-15
 16
 17
 18
-19</pre>
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendars.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendars.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_all'>all</span>
   <span class='ivar'>@_all</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../TimeBoss.html" title="TimeBoss (module)">TimeBoss</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Calendar.html" title="TimeBoss::Calendar (class)">Calendar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_subclasses'>subclasses</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_klass'>klass</span><span class='op'>|</span>
@@ -315,7 +326,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 19 10:03:38 2020 by
+  Generated on Sun Jul 19 10:12:10 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.4.1).
 </div>
