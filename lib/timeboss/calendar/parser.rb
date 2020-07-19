@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 module TimeBoss
   class Calendar
-    # @private
+    # The parser is responsible for the implementation of a calendar's identifier parsing abilities.
     class Parser
-      # @private
       RANGE_DELIMITER = '..'
       InvalidPeriodIdentifierError = Class.new(StandardError)
       attr_reader :calendar
 
-      # @private
       def initialize(calendar)
         @calendar = calendar
       end
 
-      # @private
       def parse(identifier = nil)
         return parse_identifier(identifier.presence) unless identifier&.include?(RANGE_DELIMITER)
         bases = identifier.split(RANGE_DELIMITER).map { |i| parse_identifier(i.strip) } unless identifier.nil?

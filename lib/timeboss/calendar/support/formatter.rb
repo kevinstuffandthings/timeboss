@@ -3,11 +3,10 @@ require_relative './shiftable'
 
 module TimeBoss
   class Calendar
-    # @private
     module Support
       private
 
-      # @private
+      # The formatter is responsible for the implementation of name formatting for a unit.
       class Formatter
         PERIODS = Shiftable::PERIODS.reverse.map(&:to_sym).drop(1)
         attr_reader :unit, :periods

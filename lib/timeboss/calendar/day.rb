@@ -5,7 +5,6 @@ module TimeBoss
   class Calendar
     # Representation of a single day within a calendar.
     class Day < Support::Unit
-      # @private
       def initialize(calendar, start_date)
         super(calendar, start_date, start_date)
       end

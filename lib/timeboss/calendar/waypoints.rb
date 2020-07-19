@@ -4,7 +4,6 @@
 
 module TimeBoss
   class Calendar
-    # @private
     module Waypoints
       include Absolute
       include Relative

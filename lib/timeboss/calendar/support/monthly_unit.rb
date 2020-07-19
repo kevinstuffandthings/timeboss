@@ -6,10 +6,9 @@ module TimeBoss
     module Support
       # Units that are built off of month-granularities (months, quarters, etc).
       # Days and weeks are not built from these.
-      class MonthBased < Unit
+      class MonthlyUnit < Unit
         attr_reader :year_index, :index
 
-        # @private
         def initialize(calendar, year_index, index, start_date, end_date)
           super(calendar, start_date, end_date)
           @year_index = year_index

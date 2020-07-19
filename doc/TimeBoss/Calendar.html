@@ -100,7 +100,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/timeboss/calendar.rb<span class="defines">,<br />
-  lib/timeboss/calendar/day.rb,<br /> lib/timeboss/calendar/half.rb,<br /> lib/timeboss/calendar/week.rb,<br /> lib/timeboss/calendar/year.rb,<br /> lib/timeboss/calendar/month.rb,<br /> lib/timeboss/calendar/parser.rb,<br /> lib/timeboss/calendar/period.rb,<br /> lib/timeboss/calendar/quarter.rb,<br /> lib/timeboss/calendar/waypoints.rb,<br /> lib/timeboss/calendar/support/unit.rb,<br /> lib/timeboss/calendar/support/formatter.rb,<br /> lib/timeboss/calendar/support/navigable.rb,<br /> lib/timeboss/calendar/support/shiftable.rb,<br /> lib/timeboss/calendar/waypoints/absolute.rb,<br /> lib/timeboss/calendar/waypoints/relative.rb,<br /> lib/timeboss/calendar/support/month_based.rb,<br /> lib/timeboss/calendar/support/month_basis.rb</span>
+  lib/timeboss/calendar/day.rb,<br /> lib/timeboss/calendar/half.rb,<br /> lib/timeboss/calendar/week.rb,<br /> lib/timeboss/calendar/year.rb,<br /> lib/timeboss/calendar/month.rb,<br /> lib/timeboss/calendar/parser.rb,<br /> lib/timeboss/calendar/period.rb,<br /> lib/timeboss/calendar/quarter.rb,<br /> lib/timeboss/calendar/waypoints.rb,<br /> lib/timeboss/calendar/support/unit.rb,<br /> lib/timeboss/calendar/support/formatter.rb,<br /> lib/timeboss/calendar/support/navigable.rb,<br /> lib/timeboss/calendar/support/shiftable.rb,<br /> lib/timeboss/calendar/waypoints/absolute.rb,<br /> lib/timeboss/calendar/waypoints/relative.rb,<br /> lib/timeboss/calendar/support/month_basis.rb,<br /> lib/timeboss/calendar/support/monthly_unit.rb</span>
 </dd>
   </dl>
   
@@ -163,7 +163,9 @@ identification and navigation.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute basis.</p>
+</div></span>
   
 </li>
 
@@ -339,12 +341,12 @@ identification and navigation.</p>
       <pre class="lines">
 
 
-42
-43
-44</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>basis:</span><span class='rparen'>)</span>
   <span class='ivar'>@basis</span> <span class='op'>=</span> <span class='id identifier rubyid_basis'>basis</span>
@@ -370,18 +372,29 @@ identification and navigation.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute basis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
+38
 39
-40
-41</pre>
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_basis'>basis</span>
   <span class='ivar'>@basis</span>
@@ -580,7 +593,7 @@ or period expressions (like &quot;2020W1..2020W8&quot;, &quot;this_quarter-2..ne
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 19 09:53:28 2020 by
+  Generated on Sun Jul 19 10:03:38 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.4.1).
 </div>

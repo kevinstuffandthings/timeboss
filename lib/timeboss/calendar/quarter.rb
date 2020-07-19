@@ -1,10 +1,10 @@
 # frozen_string_literal: true
-require_relative './support/month_based'
+require_relative './support/monthly_unit'
 
 module TimeBoss
   class Calendar
     # Representation of a 3-month period within a calendar.
-    class Quarter < Support::MonthBased
+    class Quarter < Support::MonthlyUnit
       NUM_MONTHS = 3
 
       # Get a simple representation of this quarter.

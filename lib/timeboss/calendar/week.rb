@@ -5,7 +5,6 @@ module TimeBoss
   class Calendar
     # Representation of a single week within a calendar.
     class Week < Support::Unit
-      # @private
       def initialize(calendar, start_date, end_date)
         super(calendar, start_date, end_date)
       end

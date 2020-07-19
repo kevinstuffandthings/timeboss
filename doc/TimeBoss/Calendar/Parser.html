@@ -99,7 +99,19 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The parser is responsible for the implementation of a calendar&#39;s
+identifier parsing abilities.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
   
     <h2>
       Constant Summary
@@ -249,12 +261,12 @@
       <pre class="lines">
 
 
-12
-13
-14</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/parser.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/parser.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_calendar'>calendar</span><span class='rparen'>)</span>
   <span class='ivar'>@calendar</span> <span class='op'>=</span> <span class='id identifier rubyid_calendar'>calendar</span>
@@ -297,12 +309,12 @@
       <pre class="lines">
 
 
+8
 9
-10
-11</pre>
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/parser.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/parser.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_calendar'>calendar</span>
   <span class='ivar'>@calendar</span>
@@ -334,17 +346,17 @@
       <pre class="lines">
 
 
+14
+15
+16
 17
 18
 19
 20
-21
-22
-23
-24</pre>
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/parser.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/parser.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_identifier'>identifier</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_parse_identifier'>parse_identifier</span><span class='lparen'>(</span><span class='id identifier rubyid_identifier'>identifier</span><span class='period'>.</span><span class='id identifier rubyid_presence'>presence</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_identifier'>identifier</span><span class='op'>&amp;.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#RANGE_DELIMITER-constant" title="TimeBoss::Calendar::Parser::RANGE_DELIMITER (constant)">RANGE_DELIMITER</a></span></span><span class='rparen'>)</span>
@@ -364,7 +376,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 19 09:53:28 2020 by
+  Generated on Sun Jul 19 10:03:38 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.4.1).
 </div>

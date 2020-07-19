@@ -35,10 +35,8 @@ module TimeBoss
 
     protected
 
-    # @private
     attr_reader :basis
 
-    # @private
     def initialize(basis:)
       @basis = basis
     end

@@ -1,15 +1,15 @@
 module TimeBoss
   class Calendar
     module Support
-      describe MonthBased do
-        class ChunkMonthBased < described_class
+      describe MonthlyUnit do
+        class MonthBasedChunk < described_class
           NUM_MONTHS = 2
 
           def name
             "#{year_index}C#{index}"
           end
         end
-        let(:described_class) { ChunkMonthBased }
+        let(:described_class) { MonthBasedChunk }
         let(:calendar) { double }
         let(:start_date) { Date.parse('2018-06-25') }
         let(:end_date) { Date.parse('2018-08-26') }
@@ -51,24 +51,24 @@ module TimeBoss
 
           describe '#previous' do
             it 'moves easily within itself' do
-              expect(calendar).to receive(:chunk_month_based).with(48, 3).and_return result
+              expect(calendar).to receive(:month_based_chunk).with(48, 3).and_return result
               expect(described_class.new(calendar, 48, 4, nil, nil).previous).to eq result
             end
 
             it 'flips to the previous container' do
-              expect(calendar).to receive(:chunk_month_based).with(47, 6).and_return result
+              expect(calendar).to receive(:month_based_chunk).with(47, 6).and_return result
               expect(described_class.new(calendar, 48, 1, nil, nil).previous).to eq result
             end
           end
 
           describe '#next' do
             it 'moves easily within itself' do
-              expect(calendar).to receive(:chunk_month_based).with(48, 3).and_return result
+              expect(calendar).to receive(:month_based_chunk).with(48, 3).and_return result
               expect(described_class.new(calendar, 48, 2, nil, nil).next).to eq result
             end
 
             it 'flips to the previous container' do
-              expect(calendar).to receive(:chunk_month_based).with(48, 1).and_return result
+              expect(calendar).to receive(:month_based_chunk).with(48, 1).and_return result
               expect(described_class.new(calendar, 47, 6, nil, nil).next).to eq result
             end
           end

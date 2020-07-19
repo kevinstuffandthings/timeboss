@@ -1,10 +1,10 @@
 # frozen_string_literal: true
-require_relative './support/month_based'
+require_relative './support/monthly_unit'
 
 module TimeBoss
   class Calendar
     # Representation of a 6-month period within a calendar.
-    class Half < Support::MonthBased
+    class Half < Support::MonthlyUnit
       NUM_MONTHS = 6
 
       # Get a simple representation of this half.

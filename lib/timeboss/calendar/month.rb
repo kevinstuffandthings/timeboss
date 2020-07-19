@@ -1,10 +1,10 @@
 # frozen_string_literal: true
-require_relative './support/month_based'
+require_relative './support/monthly_unit'
 
 module TimeBoss
   class Calendar
     # Representation of a single month within a calendar.
-    class Month < Support::MonthBased
+    class Month < Support::MonthlyUnit
       NUM_MONTHS = 1
 
       # Get a simple representation of this month.
