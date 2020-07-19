@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 module TimeBoss
-  VERSION = "0.0.10"
+  VERSION = "0.1.0"
 end
