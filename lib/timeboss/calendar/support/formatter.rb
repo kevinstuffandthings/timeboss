@@ -14,6 +14,7 @@ module TimeBoss
         def initialize(unit, periods)
           @unit = unit
           @periods = PERIODS & periods.map(&:to_sym).push(unit.class.type.to_sym)
+          @periods -= [:week] unless unit.calendar.supports_weeks?
         end
 
         def to_s

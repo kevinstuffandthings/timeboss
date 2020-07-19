@@ -1,10 +1,15 @@
 module TimeBoss
   class Calendar
     describe Week do
-      let(:calendar) { instance_double(TimeBoss::Calendar) }
+      let(:calendar) { instance_double(TimeBoss::Calendar, supports_weeks?: true) }
       let(:start_date) { Date.parse('2048-04-06') }
       let(:end_date) { Date.parse('2048-04-12') }
       let(:subject) { described_class.new(calendar, start_date, end_date) }
+
+      it "doesn't even exist if its calendar doesn't support weeks" do
+        allow(calendar).to receive(:supports_weeks?).and_return false
+        expect { subject }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+      end
 
       it 'knows its stuff' do
         expect(subject.start_date).to eq start_date

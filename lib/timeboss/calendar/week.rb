@@ -5,6 +5,7 @@ module TimeBoss
   class Calendar
     class Week < Support::Unit
       def initialize(calendar, start_date, end_date)
+        raise UnsupportedUnitError unless calendar.supports_weeks?
         super(calendar, start_date, end_date)
       end
 

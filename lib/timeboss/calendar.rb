@@ -32,6 +32,10 @@ module TimeBoss
       name.titleize
     end
 
+    def supports_weeks?
+      false
+    end
+
     protected
 
     attr_reader :basis

@@ -13,6 +13,8 @@ module TimeBoss
         include Shiftable
         attr_reader :calendar, :start_date, :end_date
 
+        UnsupportedUnitError = Class.new(StandardError)
+
         def self.type
           self.name.demodulize.underscore
         end

@@ -30,6 +30,7 @@ module TimeBoss
           before(:each) { allow(calendar).to receive(:year).with(2018).and_return base }
 
           it 'can get the relevant weeks for the period' do
+            allow(calendar).to receive(:supports_weeks?).and_return true
             result = subject.weeks
             result.each { |w| expect(w).to be_instance_of TimeBoss::Calendar::Week }
             expect(result.map { |w| w.start_date.to_s }).to eq [
@@ -43,6 +44,11 @@ module TimeBoss
               '2018-08-13',
               '2018-08-20'
             ]
+          end
+
+          it 'blows up when weeks are not supported' do
+            allow(calendar).to receive(:supports_weeks?).and_return false
+            expect { subject.weeks }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
           end
         end
 
