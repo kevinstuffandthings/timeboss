@@ -8,10 +8,6 @@ module TimeBoss
         super(basis: Basis)
       end
 
-      def supports_weeks?
-        true
-      end
-
       private
 
       class Basis < Calendar::Support::MonthBasis

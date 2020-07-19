@@ -32,8 +32,12 @@ module TimeBoss
       name.titleize
     end
 
+    # Can this calendar support weeks?
+    # For custom calendars, this value can generally not be overridden.
+    # But for calendars like our Gregorian implementation, weeks are irrelevant, and should be suppressed.
+    # @return [Boolean]
     def supports_weeks?
-      false
+      true
     end
 
     protected
