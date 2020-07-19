@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require_relative './shiftable'
+require_relative './translatable'
 
 module TimeBoss
   class Calendar
@@ -8,7 +8,7 @@ module TimeBoss
 
       # The formatter is responsible for the implementation of name formatting for a unit.
       class Formatter
-        PERIODS = Shiftable::PERIODS.reverse.map(&:to_sym).drop(1)
+        PERIODS = Translatable::PERIODS.reverse.map(&:to_sym).drop(1)
         attr_reader :unit, :periods
 
         def initialize(unit, periods)

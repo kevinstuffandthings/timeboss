@@ -3,18 +3,8 @@ module TimeBoss
   class Calendar
     module Support
       module Shiftable
-        PERIODS = %w[day week month quarter half year]
-
-        PERIODS.each do |period|
+        Support::Translatable::PERIODS.each do |period|
           periods = period.pluralize
-
-          define_method(periods) { calendar.send("#{periods}_for", self) }
-
-          define_method(period) do
-            entries = send(periods)
-            return nil unless entries.length == 1
-            entries.first
-          end
 
           define_method("in_#{period}") do
             base = send(periods)
@@ -43,15 +33,6 @@ module TimeBoss
         #
 
         ### Days
-
-        # @!method days
-        # Get a list of days that fall within this unit.
-        # @return [Array<Calendar::Day>]
-
-        # @!method day
-        # Get the day this unit represents.
-        # Returns nil if no single day can be identified.
-        # @return [Array<Calendar::Day>, nil]
 
         # @!method in_day
         # Get the index within the day that this unit falls in.
@@ -84,6 +65,176 @@ module TimeBoss
         # Get the index-relative day 1 day forward.
         # Returns nil if no single day can be identified.
         # @return [Calendar::Day, nil]
+
+        ### Weeks
+
+        # @!method in_week
+        # Get the index within the week that this unit falls in.
+        # Returns nil if no single week can be identified.
+        # @return [Integer, nil]
+
+        # @!method weeks_ago
+        # Get the index-relative week some number of weeks ago.
+        # Returns nil if no single week can be identified.
+        # @param offset [Integer] the number of weeks back to shift this period
+        # @return [Calendar::Week, nil]
+
+        # @!method weeks_ahead
+        # Get the index-relative week some number of weeks ahead.
+        # Returns nil if no single week can be identified.
+        # @param offset [Integer] the number of weeks forward to shift this period
+        # @return [Calendar::Week, nil]
+
+        # @!method last_week
+        # Get the index-relative week 1 week ago.
+        # Returns nil if no single week can be identified.
+        # @return [Calendar::Week, nil]
+
+        # @!method this_week
+        # Get the index-relative week for this week.
+        # Returns nil if no single week can be identified.
+        # @return [Calendar::Week, nil]
+
+        # @!method next_week
+        # Get the index-relative week 1 week forward.
+        # Returns nil if no single week can be identified.
+        # @return [Calendar::Week, nil]
+
+        ### Months
+
+        # @!method in_month
+        # Get the index within the month that this unit falls in.
+        # Returns nil if no single month can be identified.
+        # @return [Integer, nil]
+
+        # @!method months_ago
+        # Get the index-relative month some number of months ago.
+        # Returns nil if no single month can be identified.
+        # @param offset [Integer] the number of months back to shift this period
+        # @return [Calendar::Month, nil]
+
+        # @!method months_ahead
+        # Get the index-relative month some number of months ahead.
+        # Returns nil if no single month can be identified.
+        # @param offset [Integer] the number of months forward to shift this period
+        # @return [Calendar::Month, nil]
+
+        # @!method last_month
+        # Get the index-relative month 1 month ago.
+        # Returns nil if no single month can be identified.
+        # @return [Calendar::Month, nil]
+
+        # @!method this_month
+        # Get the index-relative month for this month.
+        # Returns nil if no single month can be identified.
+        # @return [Calendar::Month, nil]
+
+        # @!method next_month
+        # Get the index-relative month 1 month forward.
+        # Returns nil if no single month can be identified.
+        # @return [Calendar::Month, nil]
+ 
+        ### Quarters
+
+        # @!method in_quarter
+        # Get the index within the quarter that this unit falls in.
+        # Returns nil if no single quarter can be identified.
+        # @return [Integer, nil]
+
+        # @!method quarters_ago
+        # Get the index-relative quarter some number of quarters ago.
+        # Returns nil if no single quarter can be identified.
+        # @param offset [Integer] the number of quarters back to shift this period
+        # @return [Calendar::Quarter, nil]
+
+        # @!method quarters_ahead
+        # Get the index-relative quarter some number of quarters ahead.
+        # Returns nil if no single quarter can be identified.
+        # @param offset [Integer] the number of quarters forward to shift this period
+        # @return [Calendar::Quarter, nil]
+
+        # @!method last_quarter
+        # Get the index-relative quarter 1 quarter ago.
+        # Returns nil if no single quarter can be identified.
+        # @return [Calendar::Quarter, nil]
+
+        # @!method this_quarter
+        # Get the index-relative quarter for this quarter.
+        # Returns nil if no single quarter can be identified.
+        # @return [Calendar::Quarter, nil]
+
+        # @!method next_quarter
+        # Get the index-relative quarter 1 quarter forward.
+        # Returns nil if no single quarter can be identified.
+        # @return [Calendar::Quarter, nil]
+ 
+        ### Halves
+
+        # @!method in_half
+        # Get the index within the half that this unit falls in.
+        # Returns nil if no single half can be identified.
+        # @return [Integer, nil]
+
+        # @!method halves_ago
+        # Get the index-relative half some number of halves ago.
+        # Returns nil if no single half can be identified.
+        # @param offset [Integer] the number of halves back to shift this period
+        # @return [Calendar::Half, nil]
+
+        # @!method halves_ahead
+        # Get the index-relative half some number of halves ahead.
+        # Returns nil if no single half can be identified.
+        # @param offset [Integer] the number of halves forward to shift this period
+        # @return [Calendar::Half, nil]
+
+        # @!method last_half
+        # Get the index-relative half 1 half ago.
+        # Returns nil if no single half can be identified.
+        # @return [Calendar::Half, nil]
+
+        # @!method this_half
+        # Get the index-relative half for this half.
+        # Returns nil if no single half can be identified.
+        # @return [Calendar::Half, nil]
+
+        # @!method next_half
+        # Get the index-relative half 1 half forward.
+        # Returns nil if no single half can be identified.
+        # @return [Calendar::Half, nil]
+ 
+        ### Years
+
+        # @!method in_year
+        # Get the index within the year that this unit falls in.
+        # Returns nil if no single year can be identified.
+        # @return [Integer, nil]
+
+        # @!method years_ago
+        # Get the index-relative year some number of years ago.
+        # Returns nil if no single year can be identified.
+        # @param offset [Integer] the number of years back to shift this period
+        # @return [Calendar::Year, nil]
+
+        # @!method years_ahead
+        # Get the index-relative year some number of years ahead.
+        # Returns nil if no single year can be identified.
+        # @param offset [Integer] the number of years forward to shift this period
+        # @return [Calendar::Year, nil]
+
+        # @!method last_year
+        # Get the index-relative year 1 year ago.
+        # Returns nil if no single year can be identified.
+        # @return [Calendar::Year, nil]
+
+        # @!method this_year
+        # Get the index-relative year for this year.
+        # Returns nil if no single year can be identified.
+        # @return [Calendar::Year, nil]
+
+        # @!method next_year
+        # Get the index-relative year 1 year forward.
+        # Returns nil if no single year can be identified.
+        # @return [Calendar::Year, nil]
       end
     end
   end
