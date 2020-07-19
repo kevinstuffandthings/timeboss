@@ -3,6 +3,7 @@ require_relative './support/month_based'
 
 module TimeBoss
   class Calendar
+    # Representation of a 12-month period within a calendar.
     class Year < Support::MonthBased
       NUM_MONTHS = 12
 

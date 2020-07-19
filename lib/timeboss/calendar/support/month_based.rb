@@ -4,6 +4,8 @@ require_relative './unit'
 module TimeBoss
   class Calendar
     module Support
+      # Units that are built off of month-granularities (months, quarters, etc).
+      # Days and weeks are not built from these.
       class MonthBased < Unit
         attr_reader :year_index, :index
 

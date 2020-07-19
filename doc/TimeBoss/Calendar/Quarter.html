@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: TimeBoss::Calendar::Quarter
+  
+    &mdash; Documentation by YARD 0.9.25
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "TimeBoss::Calendar::Quarter";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (Q)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../TimeBoss.html" title="TimeBoss (module)">TimeBoss</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Calendar.html" title="TimeBoss::Calendar (class)">Calendar</a></span></span>
+     &raquo; 
+    <span class="title">Quarter</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: TimeBoss::Calendar::Quarter
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Support/MonthBased.html" title="TimeBoss::Calendar::Support::MonthBased (class)">Support::MonthBased</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Support/Unit.html" title="TimeBoss::Calendar::Support::Unit (class)">Support::Unit</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Support/MonthBased.html" title="TimeBoss::Calendar::Support::MonthBased (class)">Support::MonthBased</a></span></li>
+          
+            <li class="next">TimeBoss::Calendar::Quarter</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/timeboss/calendar/quarter.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Representation of a 3-month period within a calendar.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="NUM_MONTHS-constant" class="">NUM_MONTHS =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="Support/Shiftable.html" title="TimeBoss::Calendar::Support::Shiftable (module)">Support::Shiftable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Support/Shiftable.html#PERIODS-constant" title="TimeBoss::Calendar::Support::Shiftable::PERIODS (constant)">Support::Shiftable::PERIODS</a></span></p>
+
+
+
+
+  <h2>Instance Attribute Summary</h2>
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Support/MonthBased.html" title="TimeBoss::Calendar::Support::MonthBased (class)">Support::MonthBased</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Support/MonthBased.html#index-instance_method" title="TimeBoss::Calendar::Support::MonthBased#index (method)">#index</a></span>, <span class='object_link'><a href="Support/MonthBased.html#year_index-instance_method" title="TimeBoss::Calendar::Support::MonthBased#year_index (method)">#year_index</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Support/Unit.html" title="TimeBoss::Calendar::Support::Unit (class)">Support::Unit</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Support/Unit.html#calendar-instance_method" title="TimeBoss::Calendar::Support::Unit#calendar (method)">#calendar</a></span>, <span class='object_link'><a href="Support/Unit.html#end_date-instance_method" title="TimeBoss::Calendar::Support::Unit#end_date (method)">#end_date</a></span>, <span class='object_link'><a href="Support/Unit.html#start_date-instance_method" title="TimeBoss::Calendar::Support::Unit#start_date (method)">#start_date</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get a simple representation of this quarter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title-instance_method" title="#title (instance method)">#<strong>title</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get a “pretty” representation of this quarter.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Support/MonthBased.html" title="TimeBoss::Calendar::Support::MonthBased (class)">Support::MonthBased</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Support/MonthBased.html#initialize-instance_method" title="TimeBoss::Calendar::Support::MonthBased#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="Support/MonthBased.html#to_s-instance_method" title="TimeBoss::Calendar::Support::MonthBased#to_s (method)">#to_s</a></span>, <span class='object_link'><a href="Support/MonthBased.html#weeks-instance_method" title="TimeBoss::Calendar::Support::MonthBased#weeks (method)">#weeks</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Support/Unit.html" title="TimeBoss::Calendar::Support::Unit (class)">Support::Unit</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Support/Unit.html#%2B-instance_method" title="TimeBoss::Calendar::Support::Unit#+ (method)">#+</a></span>, <span class='object_link'><a href="Support/Unit.html#--instance_method" title="TimeBoss::Calendar::Support::Unit#- (method)">#-</a></span>, <span class='object_link'><a href="Support/Unit.html#==-instance_method" title="TimeBoss::Calendar::Support::Unit#== (method)">#==</a></span>, <span class='object_link'><a href="Support/Unit.html#current%3F-instance_method" title="TimeBoss::Calendar::Support::Unit#current? (method)">#current?</a></span>, <span class='object_link'><a href="Support/Unit.html#format-instance_method" title="TimeBoss::Calendar::Support::Unit#format (method)">#format</a></span>, <span class='object_link'><a href="Support/Unit.html#initialize-instance_method" title="TimeBoss::Calendar::Support::Unit#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="Support/Unit.html#offset-instance_method" title="TimeBoss::Calendar::Support::Unit#offset (method)">#offset</a></span>, <span class='object_link'><a href="Support/Unit.html#thru-instance_method" title="TimeBoss::Calendar::Support::Unit#thru (method)">#thru</a></span>, <span class='object_link'><a href="Support/Unit.html#to_range-instance_method" title="TimeBoss::Calendar::Support::Unit#to_range (method)">#to_range</a></span>, <span class='object_link'><a href="Support/Unit.html#type-class_method" title="TimeBoss::Calendar::Support::Unit.type (method)">type</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Support/Navigable.html" title="TimeBoss::Calendar::Support::Navigable (module)">Support::Navigable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Support/Navigable.html#ago-instance_method" title="TimeBoss::Calendar::Support::Navigable#ago (method)">#ago</a></span>, <span class='object_link'><a href="Support/Navigable.html#ahead-instance_method" title="TimeBoss::Calendar::Support::Navigable#ahead (method)">#ahead</a></span>, <span class='object_link'><a href="Support/Navigable.html#next-instance_method" title="TimeBoss::Calendar::Support::Navigable#next (method)">#next</a></span>, <span class='object_link'><a href="Support/Navigable.html#previous-instance_method" title="TimeBoss::Calendar::Support::Navigable#previous (method)">#previous</a></span>, <span class='object_link'><a href="Support/Navigable.html#until-instance_method" title="TimeBoss::Calendar::Support::Navigable#until (method)">#until</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="Support/MonthBased.html#initialize-instance_method" title="TimeBoss::Calendar::Support::MonthBased#initialize (method)">TimeBoss::Calendar::Support::MonthBased</a></span></p>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get a simple representation of this quarter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>(e.g. “2020Q3”)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/quarter.rb', line 12</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_year_index'>year_index</span><span class='embexpr_end'>}</span><span class='tstring_content'>Q</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_index'>index</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="title-instance_method">
+  
+    #<strong>title</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get a “pretty” representation of this quarter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>(e.g. “Q3 2020”)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/timeboss/calendar/quarter.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_title'>title</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Q</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_index'>index</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_year_index'>year_index</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Jul 19 09:53:29 2020 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.25 (ruby-2.4.1).
+</div>
+
+    </div>
+  </body>
+</html>

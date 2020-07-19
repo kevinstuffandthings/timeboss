@@ -1,10 +1,31 @@
 # frozen_string_literal: true
 module TimeBoss
   class Calendar
+    # A calendar period represents a range of units.
     class Period
       attr_reader :begin, :end
+
+      # @!method start_date
+      # Get the start date of this period.
+      # @return [Date]
       delegate :start_date, to: :begin
+
+      # @!method end_date
+      # Get the end date of this period.
+      # @return [Date]
       delegate :end_date, to: :end
+
+      # @!method name
+      # Get a simple representation of this period.
+      # @return [String]
+
+      # @!method title
+      # Get a "pretty" representation of this period.
+      # @return [String]
+
+      # @!method to_s
+      # Get a stringified representation of this period.
+      # @return [String]
 
       %i[name title to_s].each do |message|
         define_method(message) do
@@ -14,7 +35,7 @@ module TimeBoss
         end
       end
 
-      %w[week month quarter half year].each do |size|
+      %w[day week month quarter half year].each do |size|
         define_method(size.pluralize) do
           entry = calendar.send("#{size}_for", self.begin.start_date)
           build_entries entry
@@ -27,20 +48,14 @@ module TimeBoss
         end
       end
 
+      # Does this period cover the current date?
+      # @return [Boolean]
       def current?
         to_range.include?(Date.today)
       end
 
-      def days
-        to_range.map { |d| Day.new(calendar, d) }
-      end
-
-      def day
-        entries = days
-        return nil unless entries.length == 1
-        entries.first
-      end
-
+      # Express this period as a date range.
+      # @return [Range<Date, Date>]
       def to_range
         @_to_range ||= start_date .. end_date
       end

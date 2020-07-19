@@ -3,6 +3,7 @@ require_relative './support/month_based'
 
 module TimeBoss
   class Calendar
+    # Representation of a single month within a calendar.
     class Month < Support::MonthBased
       NUM_MONTHS = 1
 

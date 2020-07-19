@@ -3,6 +3,7 @@ require_relative './shiftable'
 
 module TimeBoss
   class Calendar
+    # @private
     module Support
       private
 

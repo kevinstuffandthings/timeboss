@@ -2,6 +2,7 @@
 module TimeBoss
   class Calendar
     module Support
+      # @private
       module Shiftable
         PERIODS = %w[day week month quarter half year]
 

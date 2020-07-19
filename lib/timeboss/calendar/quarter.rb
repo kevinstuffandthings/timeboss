@@ -3,6 +3,7 @@ require_relative './support/month_based'
 
 module TimeBoss
   class Calendar
+    # Representation of a 3-month period within a calendar.
     class Quarter < Support::MonthBased
       NUM_MONTHS = 3
 

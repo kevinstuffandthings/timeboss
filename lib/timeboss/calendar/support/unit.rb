@@ -6,6 +6,7 @@ require_relative './formatter'
 module TimeBoss
   class Calendar
     module Support
+      # A unit is the lowest-level base of all days/weeks/months, etc.
       class Unit
         include Navigable
         include Shiftable
@@ -16,7 +17,6 @@ module TimeBoss
           self.name.demodulize.underscore
         end
 
-        # @private
         def initialize(calendar, start_date, end_date)
           @calendar = calendar
           @start_date = start_date
@@ -51,7 +51,7 @@ module TimeBoss
         end
 
         # Return the unit relative to this one by the specified offset.
-        #   Offset values can be positive or negative.
+        # Offset values can be positive or negative.
         # @param value [Integer]
         # @return [Unit]
         def offset(value)

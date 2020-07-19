@@ -1,6 +1,7 @@
 module TimeBoss
   class Calendar
     module Support
+      # @private
       class MonthBasis
         attr_reader :year, :month
 

@@ -7,8 +7,18 @@ require 'active_support/core_ext/numeric/time'
 require_relative './calendar/support/month_basis'
 
 module TimeBoss
+  # A calendar is built upon a basis, and provides methods for period identification and navigation.
   class Calendar
     include Waypoints
+
+    # @!method parse
+    # Parse an identifier into a unit or period.
+    #   Valid identifiers can include simple units (like "2020Q3", "2020M8W3", "last_quarter"),
+    #   mathematical expressions (like "this_month+6"),
+    #   or period expressions (like "2020W1..2020W8", "this_quarter-2..next_quarter")
+    # @param identifier [String]
+    # @return [Support::Unit, Period]
+
     delegate :parse, to: :parser
 
     # Get a name by which this calendar can be referenced.
@@ -25,8 +35,10 @@ module TimeBoss
 
     protected
 
+    # @private
     attr_reader :basis
 
+    # @private
     def initialize(basis:)
       @basis = basis
     end
