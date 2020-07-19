@@ -6,6 +6,7 @@ module TimeBoss
     module Support
       private
 
+      # @private
       class Formatter
         PERIODS = Shiftable::PERIODS.reverse.map(&:to_sym).drop(1)
         attr_reader :unit, :periods

@@ -7,16 +7,21 @@ module TimeBoss
       class MonthBased < Unit
         attr_reader :year_index, :index
 
+        # @private
         def initialize(calendar, year_index, index, start_date, end_date)
           super(calendar, start_date, end_date)
           @year_index = year_index
           @index = index
         end
 
+        # Get a stringified representation of this unit.
+        # @return [String] (e.g. "2020Q3: 2020-06-29 thru 2020-09-27")
         def to_s
           "#{name}: #{start_date} thru #{end_date}"
         end
 
+        # Get a list of weeks contained within this period.
+        # @return [Array<Week>]
         def weeks
           base = calendar.year(year_index)
           num_weeks = (((base.end_date - base.start_date) + 1) / 7.0).to_i

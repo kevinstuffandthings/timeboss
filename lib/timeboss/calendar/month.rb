@@ -6,10 +6,14 @@ module TimeBoss
     class Month < Support::MonthBased
       NUM_MONTHS = 1
 
+      # Get a simple representation of this month.
+      # @return [String] (e.g. "2020M8")
       def name
         "#{year_index}M#{index}"
       end
 
+      # Get a "pretty" representation of this month.
+      # @return [String] (e.g. "August 2020")
       def title
         "#{Date::MONTHNAMES[index]} #{year_index}"
       end

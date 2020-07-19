@@ -6,13 +6,13 @@ module TimeBoss
     class Year < Support::MonthBased
       NUM_MONTHS = 12
 
+      # Get a simple representation of this year.
+      # @return [String] (e.g. "2020")
       def name
         year_index.to_s
       end
 
-      def title
-        name
-      end
+      alias_method :title, :name
     end
   end
 end
