@@ -25,7 +25,7 @@ $ gem install timeboss
 ```
 
 ## Usage
-Supports `year`, `half`, `quarter`, `month`, `week`, and `day`.
+Supports `year`, `half`, `quarter`, `month`, `week` (non-gregorian calendars only), and `day`.
 
 Prepare your calendar for use:
 
@@ -133,11 +133,16 @@ period = calendar.parse('2020W3..2020Q1')
 # => "2020W3 .. 2020Q1: from 2020-01-13 thru 2020-03-29 (current=false)"
 ```
 
-The examples above are just samples. Try different periods, operators, etc.
+The examples above are just samples. Try different periods, operators, etc. All of the non-week-based operations will work similarly on the `TimeBoss::Calendars::Gregorian` calendar.
 
 ### Shell
 To open an IRB shell for the broadcast calendar, use the `tbsh` executable, or the `timeboss:calendars:broadcast:shell` rake task.
-You will find yourself in the context of an instantiated `TimeBoss::Calendars::Broadcast` object:
+
+For the Gregorian calendar (or any other implemented calendars), supply the name on the command line.
+- `tbsh gregorian`
+- `rake timeboss:calendars:gregorian:shell`
+
+You will find yourself in the context of an instantiated `TimeBoss::Calendar` object:
 
 ```bash
 $ tbsh
