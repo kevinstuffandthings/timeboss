@@ -4,7 +4,7 @@ require 'timeboss/calendars'
 require 'timeboss/support/shellable'
 
 calendar = if ARGV.length == 1
-             TimeBoss::Calendars[ARGV.first]&.calendar
+             TimeBoss::Calendars[ARGV.first]
            else
              TimeBoss::Calendars.first.calendar
            end
