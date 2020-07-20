@@ -1,2 +1,2 @@
 language = "ruby"
-run = "bash bin/tbsh"
+run = "ruby bin/tbsh"
