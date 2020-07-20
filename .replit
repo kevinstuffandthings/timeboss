@@ -1,2 +1,2 @@
 language = "ruby"
-run = "ruby .replit.rb"
+run = "rake timeboss:calendars:broadcast:shell"
