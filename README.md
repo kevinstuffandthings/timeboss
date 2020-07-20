@@ -135,12 +135,12 @@ period = calendar.parse('2020W3..2020Q1')
 
 The examples above are just samples. Try different periods, operators, etc. All of the non-week-based operations will work similarly on the `TimeBoss::Calendars::Gregorian` calendar.
 
-### Shell
-To open an IRB shell for the broadcast calendar, use the `tbsh` executable, or the `timeboss:calendars:broadcast:shell` rake task.
+### REPL
+To open a REPL for the broadcast calendar, use the `tbsh` executable, or the `timeboss:calendars:broadcast:repl` rake task.
 
 For the Gregorian calendar (or any other implemented calendars), supply the name on the command line.
 - `tbsh gregorian`
-- `rake timeboss:calendars:gregorian:shell`
+- `rake timeboss:calendars:gregorian:repl`
 
 You will find yourself in the context of an instantiated `TimeBoss::Calendar` object:
 
@@ -154,7 +154,7 @@ $ tbsh
  => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3", "2021M4", "2021M5", "2021M6", "2021M7", "2021M8", "2021M9"]
 ```
 
-_Having trouble with the shell? If you are using the examples from the [Usage](#Usage) section, keep in mind that the shell is already in the context of the calendar -- so you don't need to specify the receiver!_
+_Having trouble with the REPL? If you are using the examples from the [Usage](#Usage) section, keep in mind that the REPL is already in the context of the calendar -- so you don't need to specify the receiver!_
 
 ## Creating new calendars
 To create a custom calendar, simply extend the `TimeBoss::Calendar` class, and implement a new `TimeBoss::Calendar::Support::MonthBasis` for it.

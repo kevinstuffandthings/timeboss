@@ -1,2 +1,2 @@
 language = "ruby"
-run = "rake timeboss:calendars:broadcast:shell"
+run = "rake timeboss:calendars:broadcast:repl"

@@ -9,11 +9,13 @@ namespace :timeboss do
           puts entry.calendar.parse(args[:expression])
         end
 
-        desc "Open a shell with the #{entry.name} calendar"
-        task shell: ['timeboss:init'] do
+        desc "Open a REPL with the #{entry.name} calendar"
+        task repl: ['timeboss:init'] do
           require 'timeboss/support/shellable'
           TimeBoss::Support::Shellable.open(entry.calendar)
         end
+
+        task shell: ["timeboss:calendars:#{entry.name}:repl"]
       end
     end
   end
