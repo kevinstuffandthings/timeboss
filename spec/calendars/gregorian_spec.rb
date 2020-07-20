@@ -475,10 +475,9 @@ module TimeBoss
         expect(date.end_date).to eq Date.parse('2017-04-08')
       end
 
-      it 'gives you this year if you give it nothing' do
-        year = subject.this_year
-        expect(subject.parse(nil)).to eq year
-        expect(subject.parse('')).to eq year
+      it 'gives you nothing if you give it nothing' do
+        expect(subject.parse(nil)).to be nil
+        expect(subject.parse('')).to be nil
       end
     end
 

@@ -11,7 +11,8 @@ module TimeBoss
       end
 
       def parse(identifier = nil)
-        return parse_identifier(identifier.presence) unless identifier&.include?(RANGE_DELIMITER)
+        return nil unless identifier.present?
+        return parse_identifier(identifier) unless identifier&.include?(RANGE_DELIMITER)
         bases = identifier.split(RANGE_DELIMITER).map { |i| parse_identifier(i.strip) } unless identifier.nil?
         bases ||= [parse_identifier(nil)]
         Period.new(calendar, *bases)
