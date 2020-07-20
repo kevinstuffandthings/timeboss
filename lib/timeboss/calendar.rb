@@ -25,6 +25,7 @@ module TimeBoss
     def name
       self.class.to_s.demodulize.underscore
     end
+    alias_method :to_s, :name
 
     # Get a friendly title for this calendar.
     # @return [String]
