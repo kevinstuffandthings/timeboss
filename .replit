@@ -1,2 +1,2 @@
 language = "ruby"
-run = "ruby bin/tbsh"
+run = "ruby .replit.rb"
