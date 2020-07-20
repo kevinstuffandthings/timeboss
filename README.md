@@ -1,4 +1,4 @@
-# TimeBoss [![Build Status](https://travis-ci.com/kevinstuffandthings/timeboss.svg?branch=master)](https://travis-ci.com/kevinstuffandthings/timeboss) [![Gem Version](https://badge.fury.io/rb/timeboss.svg)](https://badge.fury.io/rb/timeboss)
+# TimeBoss [![Build Status](https://travis-ci.com/kevinstuffandthings/timeboss.svg?branch=master)](https://travis-ci.com/kevinstuffandthings/timeboss) [![Gem Version](https://badge.fury.io/rb/timeboss.svg)](https://badge.fury.io/rb/timeboss) [![Run on Repl.it](https://repl.it/badge/github/kevinstuffandthings/timeboss)](https://repl.it/github/kevinstuffandthings/timeboss)
 
 A gem providing convenient navigation of the [Broadcast Calendar](https://en.wikipedia.org/wiki/Broadcast_calendar), the standard Gregorian calendar, and is easily extensible to support multiple financial calendars.
 
