@@ -41,6 +41,12 @@ module TimeBoss
       true
     end
 
+    def self.register!
+      return unless TimeBoss::Calendars.method_defined?(:register)
+      TimeBoss::Calendars.register(self.name.to_s.demodulize.underscore, self)
+    end
+    private_class_method :register!
+
     protected
 
     attr_reader :basis

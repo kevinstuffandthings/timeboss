@@ -221,6 +221,10 @@ With the new calendar implemented, it can be accessed in one of 2 ways:
 
     ```ruby
     require 'timeboss/calendars'
+    TimeBoss::Calendars.register(:august_fiscal, MyCalendars::AugustFiscal)
+
+    # You'll get a cached instance of your calendar here.
+    # Handy when switching back and forth between different calendar implementations.
     calendar = TimeBoss::Calendars[:august_fiscal]
     calendar.this_year
     ```

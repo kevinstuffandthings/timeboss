@@ -1,8 +1,5 @@
 # frozen_string_literal: true
-require 'active_support/core_ext/class/subclasses'
 require_relative 'calendar'
-
-Dir[File.expand_path('../calendars/*.rb', __FILE__)].each { |f| require f }
 
 module TimeBoss
   module Calendars
@@ -10,19 +7,27 @@ module TimeBoss
     extend Enumerable
     delegate :each, :length, to: :all
 
+    # Register a new calendar
+    # @return [Entry]
+    def register(name, klass)
+      Entry.new(name.to_sym, klass).tap do |entry|
+        (@entries ||= {})[name.to_sym] = entry
+      end
+    end
+
     # Retrieve a list of all registered calendars.
     # @return [Array<Entry>]
     def all
-      @_all ||= TimeBoss::Calendar.subclasses.map do |klass|
-        Entry.new(klass.to_s.demodulize.underscore.to_sym, klass)
-      end
+      return if @entries.nil?
+      @entries.values.sort_by { |e| e.name.to_s }
     end
 
     # Retrieve an instance of the specified named calendar.
     # @param name [String, Symbol] the name of the calendar to retrieve.
     # @return [Calendar]
     def [](name)
-      find { |e| e.name == name&.to_sym }&.calendar
+      return if @entries.nil?
+      @entries[name&.to_sym]&.calendar
     end
 
     private
@@ -44,3 +49,5 @@ module TimeBoss
     end
   end
 end
+
+Dir[File.expand_path('../calendars/*.rb', __FILE__)].each { |f| require f }

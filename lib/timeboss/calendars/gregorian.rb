@@ -4,6 +4,8 @@ require_relative '../calendar'
 module TimeBoss
   module Calendars
     class Gregorian < Calendar
+      register!
+
       def initialize
         super(basis: Basis)
       end

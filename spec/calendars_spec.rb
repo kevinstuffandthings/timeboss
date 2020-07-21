@@ -1,10 +1,12 @@
 module TimeBoss
   describe Calendars do
-    class MyTestCalendar < TimeBoss::Calendar
+    class MyCal < TimeBoss::Calendar
       def initialize
         super(basis: nil)
       end
     end
+
+    TimeBoss::Calendars.register(:my_amazing_calendar, MyCal)
 
     describe '#all' do
       let(:all) { described_class.all }
@@ -17,7 +19,7 @@ module TimeBoss
 
       context 'enumerability' do
         it 'can get a list of names' do
-          expect(described_class.map(&:name)).to include(:broadcast, :my_test_calendar)
+          expect(described_class.map(&:name)).to include(:broadcast, :my_amazing_calendar)
         end
       end
     end
@@ -34,10 +36,10 @@ module TimeBoss
       end
 
       it 'can return a new calendar' do
-        c1 = described_class[:my_test_calendar]
-        expect(c1).to be_instance_of MyTestCalendar
-        expect(c1.name).to eq 'my_test_calendar'
-        expect(c1.title).to eq 'My Test Calendar'
+        c1 = described_class[:my_amazing_calendar]
+        expect(c1).to be_instance_of MyCal
+        expect(c1.name).to eq 'my_cal'
+        expect(c1.title).to eq 'My Cal'
       end
 
       it 'can graceully give you nothing' do
