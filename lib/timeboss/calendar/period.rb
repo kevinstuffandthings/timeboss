@@ -130,6 +130,10 @@ module TimeBoss
         @_to_range ||= start_date .. end_date
       end
 
+      def inspect
+        "#<#{self.class.name}[#{self.begin.inspect}..#{self.end.inspect}] start_date=#{start_date}, end_date=#{end_date}>"
+      end
+
       private
 
       attr_reader :calendar

@@ -82,6 +82,10 @@ module TimeBoss
         def to_range
           @_to_range ||= start_date .. end_date
         end
+
+        def inspect
+          "#<#{self.class.name} start_date=#{start_date}, end_date=#{end_date}>"
+        end
       end
     end
   end

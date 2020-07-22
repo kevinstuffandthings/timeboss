@@ -40,7 +40,7 @@ You can ask simple questions of the calendar:
 
 ```ruby
 period = calendar.parse('2019Q4') # or '2018', or '2019-12-21', or '2020W32', or '2020M3W2'
-# => #<TimeBoss::Calendar::Quarter:0x007f82d50e2478>
+# => #<TimeBoss::Calendar::Quarter start_date=2019-09-30, end_date=2019-12-29>
 period.to_s
 # => "2019Q4: 2019-09-30 thru 2019-12-29"
 period.next.start_date.to_s # try previous, too!
@@ -117,6 +117,9 @@ week = calendar.parse('2014W29').this_week
 
 calendar.this_week.next_year.to_s # run 2020W29
 # => "2021W29: 2021-07-12 thru 2021-07-18"
+
+calendar.week(2016, this_week.in_year) # run 2020-07-22
+# => #<TimeBoss::Calendar::Week start_date=2016-07-18, end_date=2016-07-24>
 ```
 
 Complicated range expressions can be parsed using the `..` range operator, or evaluated with `thru`:
@@ -147,9 +150,9 @@ You will find yourself in the context of an instantiated `TimeBoss::Calendar` ob
 ```bash
 $ tbsh
 2.4.1 :001 > next_quarter
- => #<TimeBoss::Calendar::Quarter:0x007fe04c16a1c8 @calendar=#<TimeBoss::Calendars::Broadcast:0x007fe04c1a0458 @basis=TimeBoss::Calendars::Broadcast::Basis>, @year_index=2020, @index=4, @start_date=#<Date: 2020-09-28 ((2459121j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2020-12-27 ((2459211j,0s,0n),+0s,2299161j)>>
+ => #<TimeBoss::Calendar::Quarter start_date=2020-09-28, end_date=2020-12-27>
 2.4.1 :002 > last_year
- => #<TimeBoss::Calendar::Year:0x007fe04c161ca8 @calendar=#<TimeBoss::Calendars::Broadcast:0x007fe04c1a0458 @basis=TimeBoss::Calendars::Broadcast::Basis>, @year_index=2019, @index=1, @start_date=#<Date: 2018-12-31 ((2458484j,0s,0n),+0s,2299161j)>, @end_date=#<Date: 2019-12-29 ((2458847j,0s,0n),+0s,2299161j)>>
+ => #<TimeBoss::Calendar::Year start_date=2018-12-31, end_date=2019-12-29>
 2.4.1 :003 > parse('this_quarter .. this_quarter+4').months.map(&:name)
  => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3", "2021M4", "2021M5", "2021M6", "2021M7", "2021M8", "2021M9"]
 ```
@@ -228,6 +231,3 @@ With the new calendar implemented, it can be accessed in one of 2 ways:
     calendar = TimeBoss::Calendars[:august_fiscal]
     calendar.this_year
     ```
-
-## TODO
-- [ ] Add comprehensive documentation
