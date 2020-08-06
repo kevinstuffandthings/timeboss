@@ -139,7 +139,7 @@ period = calendar.parse('2020W3..2020Q1')
 The examples above are just samples. Try different periods, operators, etc. All of the non-week-based operations will work similarly on the `TimeBoss::Calendars::Gregorian` calendar.
 
 ### REPL
-To open a REPL for the broadcast calendar, use the `tbsh` executable, or the `timeboss:calendars:broadcast:repl` rake task.
+To open a [REPL](https://repl.it/github/kevinstuffandthings/timeboss) locally for the broadcast calendar, use the `tbsh` executable, or the `timeboss:calendars:broadcast:repl` rake task.
 
 For the Gregorian calendar (or any other implemented calendars), supply the name on the command line.
 - `tbsh gregorian`
@@ -155,6 +155,12 @@ $ tbsh
  => #<TimeBoss::Calendar::Year start_date=2018-12-31, end_date=2019-12-29>
 2.4.1 :003 > parse('this_quarter .. this_quarter+4').months.map(&:name)
  => ["2020M7", "2020M8", "2020M9", "2020M10", "2020M11", "2020M12", "2021M1", "2021M2", "2021M3", "2021M4", "2021M5", "2021M6", "2021M7", "2021M8", "2021M9"]
+```
+
+If you want to try things out locally without installing the gem or updating your ruby environment, you can use [Docker](https://docker.com):
+
+```bash
+$ docker run --rm -it ruby:2.6.6-slim /bin/bash -c "gem install timeboss >/dev/null && tbsh"
 ```
 
 _Having trouble with the REPL? If you are using the examples from the [Usage](#Usage) section, keep in mind that the REPL is already in the context of the calendar -- so you don't need to specify the receiver!_
@@ -231,3 +237,7 @@ With the new calendar implemented, it can be accessed in one of 2 ways:
     calendar = TimeBoss::Calendars[:august_fiscal]
     calendar.this_year
     ```
+
+# Problems?
+Please submit an [issue](https://github.com/kevinstuffandthings/timeboss/issues).
+We'll figure out how to get you up and running with TimeBoss as smoothly as possible.
