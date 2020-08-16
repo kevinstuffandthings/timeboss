@@ -11,8 +11,8 @@ namespace :timeboss do
 
         desc "Open a REPL with the #{entry.name} calendar"
         task repl: ['timeboss:init'] do
-          require 'timeboss/support/shellable'
-          TimeBoss::Support::Shellable.open(entry.calendar)
+          require 'shellable'
+          Shellable.open(entry.calendar)
         end
 
         task shell: ["timeboss:calendars:#{entry.name}:repl"]

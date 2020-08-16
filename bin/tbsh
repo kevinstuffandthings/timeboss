@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'timeboss/calendars'
-require 'timeboss/support/shellable'
+require 'shellable'
 
 calendar = if ARGV.length == 1
              TimeBoss::Calendars[ARGV.first]
@@ -12,4 +12,4 @@ calendar = if ARGV.length == 1
 abort "Unknown calendar" if calendar.nil?
 
 puts "Active calendar: #{calendar.title}"
-TimeBoss::Support::Shellable.open(calendar)
+Shellable.open(calendar)
