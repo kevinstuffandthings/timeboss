@@ -14,7 +14,7 @@ module TimeBoss
           end
 
           define_method "#{type}_for" do |date|
-            window = send(type, date.year - 1, 1)
+            window = public_send(type, date.year - 1, 1)
             while true
               break window if window.to_range.include?(date)
               window = window.next

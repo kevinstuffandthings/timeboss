@@ -59,7 +59,7 @@ module TimeBoss
         def offset(value)
           method = value.negative? ? :previous : :next
           base = self
-          value.abs.times { base = base.send(method) }
+          value.abs.times { base = base.public_send(method) }
           base
         end
 

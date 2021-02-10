@@ -28,8 +28,8 @@ module TimeBoss
 
       %i[name title to_s].each do |message|
         define_method(message) do
-          text = self.begin.send(message)
-          text = "#{text} #{Parser::RANGE_DELIMITER} #{self.end.send(message)}" unless self.end == self.begin
+          text = self.begin.public_send(message)
+          text = "#{text} #{Parser::RANGE_DELIMITER} #{self.end.public_send(message)}" unless self.end == self.begin
           text
         end
       end
@@ -112,12 +112,12 @@ module TimeBoss
 
       %w[day week month quarter half year].each do |size|
         define_method(size.pluralize) do
-          entry = calendar.send("#{size}_for", self.begin.start_date)
+          entry = calendar.public_send("#{size}_for", self.begin.start_date)
           build_entries entry
         end
 
         define_method(size) do |index = nil|
-          entries = send(size.pluralize)
+          entries = public_send(size.pluralize)
           return entries[index - 1] unless index.nil?
           return nil unless entries.length == 1
           entries.first

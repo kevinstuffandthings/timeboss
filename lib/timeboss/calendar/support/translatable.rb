@@ -8,10 +8,10 @@ module TimeBoss
         PERIODS.each do |period|
           periods = period.pluralize
 
-          define_method(periods) { calendar.send("#{periods}_for", self) }
+          define_method(periods) { calendar.public_send("#{periods}_for", self) }
 
           define_method(period) do |index = nil|
-            entries = send(periods)
+            entries = public_send(periods)
             return entries[index - 1] unless index.nil?
             return nil unless entries.length == 1
             entries.first

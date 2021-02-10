@@ -36,17 +36,17 @@ module TimeBoss
 
         def up
           if index == max_index
-            calendar.send(self.class.type, year_index + 1, 1)
+            calendar.public_send(self.class.type, year_index + 1, 1)
           else
-            calendar.send(self.class.type, year_index, index + 1)
+            calendar.public_send(self.class.type, year_index, index + 1)
           end
         end
 
         def down
           if index == 1
-            calendar.send(self.class.type, year_index - 1, max_index)
+            calendar.public_send(self.class.type, year_index - 1, max_index)
           else
-            calendar.send(self.class.type, year_index, index - 1)
+            calendar.public_send(self.class.type, year_index, index - 1)
           end
         end
       end

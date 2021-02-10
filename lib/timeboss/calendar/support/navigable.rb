@@ -61,7 +61,7 @@ module TimeBoss
             entry = self
             while quantity > 0
               entries << entry
-              entry = entry.send(navigator)
+              entry = entry.public_send(navigator)
               quantity -= 1
             end
           end

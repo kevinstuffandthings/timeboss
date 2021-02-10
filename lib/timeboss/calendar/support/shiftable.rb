@@ -7,21 +7,21 @@ module TimeBoss
           periods = period.pluralize
 
           define_method("in_#{period}") do
-            base = send(periods)
+            base = public_send(periods)
             return unless base.length == 1
-            base.first.send(self.class.type.to_s.pluralize).find_index { |p| p == self } + 1
+            base.first.public_send(self.class.type.to_s.pluralize).find_index { |p| p == self } + 1
           end
 
           define_method("#{periods}_ago") do |offset|
-            base_offset = send("in_#{period}") or return
-            (calendar.send("this_#{period}") - offset).send(self.class.type.to_s.pluralize)[base_offset - 1]
+            base_offset = public_send("in_#{period}") or return
+            (calendar.public_send("this_#{period}") - offset).public_send(self.class.type.to_s.pluralize)[base_offset - 1]
           end
 
-          define_method("#{periods}_ahead") { |o| send("#{periods}_ago", o * -1) }
+          define_method("#{periods}_ahead") { |o| public_send("#{periods}_ago", o * -1) }
 
-          define_method("last_#{period}") { send("#{periods}_ago", 1) }
-          define_method("this_#{period}") { send("#{periods}_ago", 0) }
-          define_method("next_#{period}") { send("#{periods}_ahead", 1) }
+          define_method("last_#{period}") { public_send("#{periods}_ago", 1) }
+          define_method("this_#{period}") { public_send("#{periods}_ago", 0) }
+          define_method("next_#{period}") { public_send("#{periods}_ahead", 1) }
         end
 
         alias_method :yesterday, :last_day

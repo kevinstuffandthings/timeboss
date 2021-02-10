@@ -30,7 +30,7 @@ module TimeBoss
       end
 
       def parse_period(identifier)
-        return calendar.send(identifier) if calendar.respond_to?(identifier.to_s)
+        return calendar.public_send(identifier) if calendar.respond_to?(identifier.to_s)
         parse_term(identifier || Date.today.year.to_s)
       end
 
@@ -44,7 +44,7 @@ module TimeBoss
           next unless identifier.include?(prefix)
           junk, identifier = identifier.split(prefix)
           raise InvalidPeriodIdentifierError if junk.match?(/\D/)
-          period = period.send(size.pluralize)[identifier.to_i - 1] or raise InvalidPeriodIdentifierError
+          period = period.public_send(size.pluralize)[identifier.to_i - 1] or raise InvalidPeriodIdentifierError
         end
         period
       end
