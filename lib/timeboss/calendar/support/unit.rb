@@ -1,8 +1,9 @@
 # frozen_string_literal: true
-require_relative './navigable'
-require_relative './translatable'
-require_relative './shiftable'
-require_relative './formatter'
+
+require_relative "./navigable"
+require_relative "./translatable"
+require_relative "./shiftable"
+require_relative "./formatter"
 
 module TimeBoss
   class Calendar
@@ -16,7 +17,7 @@ module TimeBoss
         UnsupportedUnitError = Class.new(StandardError)
 
         def self.type
-          self.name.demodulize.underscore
+          name.demodulize.underscore
         end
 
         def initialize(calendar, start_date, end_date)
@@ -28,8 +29,8 @@ module TimeBoss
         # Is the specified unit equal to this one, based on its unit type and date range?
         # @param entry [Unit] the unit to compare
         # @return [Boolean] true when periods are equal
-        def ==(entry)
-          self.class == entry.class && self.start_date == entry.start_date && self.end_date == entry.end_date
+        def ==(other)
+          self.class == other.class && start_date == other.start_date && end_date == other.end_date
         end
 
         # Format this period based on specified granularities.
@@ -66,21 +67,21 @@ module TimeBoss
         # Move some number of units forward from this unit.
         # @param value [Integer]
         # @return [Unit]
-        def +(value)
-          offset(value)
+        def +(other)
+          offset(other)
         end
 
         # Move some number of units backward from this unit.
         # @param value [Integer]
         # @return [Unit]
-        def -(value)
-          offset(-value)
+        def -(other)
+          offset(-other)
         end
 
         # Express this period as a date range.
         # @return [Range<Date, Date>]
         def to_range
-          @_to_range ||= start_date .. end_date
+          @_to_range ||= start_date..end_date
         end
 
         def inspect

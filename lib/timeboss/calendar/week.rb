@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative './support/unit'
+
+require_relative "./support/unit"
 
 module TimeBoss
   class Calendar
@@ -18,7 +19,7 @@ module TimeBoss
       # Get a "pretty" representation of this week.
       # @return [String] (e.g. "Week of August 3, 2020")
       def title
-        "Week of #{start_date.strftime('%B %-d, %Y')}"
+        "Week of #{start_date.strftime("%B %-d, %Y")}"
       end
 
       # Get a stringified representation of this week.

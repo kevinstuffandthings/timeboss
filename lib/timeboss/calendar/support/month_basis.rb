@@ -13,7 +13,7 @@ module TimeBoss
         end
 
         def to_range
-          @_to_range ||= start_date .. end_date
+          @_to_range ||= start_date..end_date
         end
       end
     end

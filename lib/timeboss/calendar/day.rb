@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative './support/unit'
+
+require_relative "./support/unit"
 
 module TimeBoss
   class Calendar
@@ -17,7 +18,7 @@ module TimeBoss
       # Get a "pretty" representation of this day.
       # @return [String] (e.g. "August 3, 2020")
       def title
-        start_date.strftime('%B %-d, %Y')
+        start_date.strftime("%B %-d, %Y")
       end
 
       alias_method :to_s, :name

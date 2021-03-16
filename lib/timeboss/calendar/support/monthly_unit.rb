@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative './unit'
+
+require_relative "./unit"
 
 module TimeBoss
   class Calendar
@@ -25,7 +26,7 @@ module TimeBoss
           base = calendar.year(year_index)
           num_weeks = (((base.end_date - base.start_date) + 1) / 7.0).to_i
           num_weeks.times.map { |i| Week.new(calendar, base.start_date + (i * 7).days, base.start_date + ((i * 7) + 6).days) }
-                         .select { |w| w.start_date.between?(start_date, end_date) }
+            .select { |w| w.start_date.between?(start_date, end_date) }
         end
 
         private

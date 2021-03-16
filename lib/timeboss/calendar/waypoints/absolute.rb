@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module TimeBoss
   class Calendar
     module Waypoints
@@ -9,13 +10,13 @@ module TimeBoss
 
           define_method type do |year_index, index = 1|
             month = (index * size) - size + 1
-            months = (month .. month + size - 1).map { |i| basis.new(year_index, i) }
+            months = (month..month + size - 1).map { |i| basis.new(year_index, i) }
             klass.new(self, year_index, index, months.first.start_date, months.last.end_date)
           end
 
           define_method "#{type}_for" do |date|
             window = public_send(type, date.year - 1, 1)
-            while true
+            loop do
               break window if window.to_range.include?(date)
               window = window.next
             end

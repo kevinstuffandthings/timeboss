@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module TimeBoss
   class Calendar
     module Support

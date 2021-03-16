@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative '../calendar'
+
+require_relative "../calendar"
 
 module TimeBoss
   module Calendars

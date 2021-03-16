@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative 'calendar'
+
+require_relative "calendar"
 
 module TimeBoss
   module Calendars
@@ -50,4 +51,4 @@ module TimeBoss
   end
 end
 
-Dir[File.expand_path('../calendars/*.rb', __FILE__)].each { |f| require f }
+Dir[File.expand_path("../calendars/*.rb", __FILE__)].each { |f| require f }

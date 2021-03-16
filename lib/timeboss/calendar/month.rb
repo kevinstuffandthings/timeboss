@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative './support/monthly_unit'
+
+require_relative "./support/monthly_unit"
 
 module TimeBoss
   class Calendar

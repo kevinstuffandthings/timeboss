@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module TimeBoss
   class Calendar
     module Waypoints
@@ -66,7 +67,7 @@ module TimeBoss
         # Get the day that occurred the specified number of days ahead.
         # @param quantity [Integer] the number of days after today
         # @return [Calendar::Day]
- 
+
         ### Weeks
 
         # @!method this_week
@@ -105,7 +106,7 @@ module TimeBoss
         # Get the week that occurred the specified number of weeks ahead.
         # @param quantity [Integer] the number of weeks after this week
         # @return [Calendar::Week]
- 
+
         ### Months
 
         # @!method this_month
@@ -144,7 +145,7 @@ module TimeBoss
         # Get the month that occurred the specified number of months ahead.
         # @param quantity [Integer] the number of months after this month
         # @return [Calendar::Month]
- 
+
         ### Quarters
 
         # @!method this_quarter
@@ -183,7 +184,7 @@ module TimeBoss
         # Get the quarter that occurred the specified number of days ahead.
         # @param quantity [Integer] the number of quarters after this quarter
         # @return [Calendar::Quarter]
- 
+
         ### Halves
 
         # @!method this_half
@@ -222,7 +223,7 @@ module TimeBoss
         # Get the half that occurred the specified number of halves ahead.
         # @param quantity [Integer] the number of halves after this half
         # @return [Calendar::Half]
- 
+
         ### Years
 
         # @!method this_year

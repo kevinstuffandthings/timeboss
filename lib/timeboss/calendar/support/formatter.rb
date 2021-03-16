@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative './translatable'
+
+require_relative "./translatable"
 
 module TimeBoss
   class Calendar
@@ -18,9 +19,9 @@ module TimeBoss
         end
 
         def to_s
-          base, text = 'year', unit.year.name
+          base, text = "year", unit.year.name
           periods.each do |period|
-            sub = unit.public_send(period) or break
+            (sub = unit.public_send(period)) || break
             index = sub.public_send("in_#{base}")
             text += "#{period[0].upcase}#{index}"
             base = period

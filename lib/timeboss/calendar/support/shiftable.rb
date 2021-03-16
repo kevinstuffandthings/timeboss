@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module TimeBoss
   class Calendar
     module Support
@@ -13,7 +14,7 @@ module TimeBoss
           end
 
           define_method("#{periods}_ago") do |offset|
-            base_offset = public_send("in_#{period}") or return
+            (base_offset = public_send("in_#{period}")) || return
             (calendar.public_send("this_#{period}") - offset).public_send(self.class.type.to_s.pluralize)[base_offset - 1]
           end
 
@@ -133,7 +134,7 @@ module TimeBoss
         # Get the index-relative month 1 month forward.
         # Returns nil if no single month can be identified.
         # @return [Calendar::Month, nil]
- 
+
         ### Quarters
 
         # @!method in_quarter
@@ -167,7 +168,7 @@ module TimeBoss
         # Get the index-relative quarter 1 quarter forward.
         # Returns nil if no single quarter can be identified.
         # @return [Calendar::Quarter, nil]
- 
+
         ### Halves
 
         # @!method in_half
@@ -201,7 +202,7 @@ module TimeBoss
         # Get the index-relative half 1 half forward.
         # Returns nil if no single half can be identified.
         # @return [Calendar::Half, nil]
- 
+
         ### Years
 
         # @!method in_year

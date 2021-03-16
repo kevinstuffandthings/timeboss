@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-require 'active_support/inflector'
-require 'active_support/core_ext/numeric/time'
+
+require "active_support/inflector"
+require "active_support/core_ext/numeric/time"
 
 %w[day week month quarter half year].each { |f| require_relative "./calendar/#{f}" }
 %w[waypoints period parser].each { |f| require_relative "./calendar/#{f}" }
-require_relative './calendar/support/month_basis'
+require_relative "./calendar/support/month_basis"
 
 module TimeBoss
   class Calendar
@@ -43,7 +44,7 @@ module TimeBoss
 
     def self.register!
       return unless TimeBoss::Calendars.method_defined?(:register)
-      TimeBoss::Calendars.register(self.name.to_s.demodulize.underscore, self)
+      TimeBoss::Calendars.register(name.to_s.demodulize.underscore, self)
     end
     private_class_method :register!
 
