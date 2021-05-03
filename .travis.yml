@@ -6,3 +6,12 @@ rvm:
 - 3.0
 script:
 - bundle exec rspec
+deploy:
+  provider: rubygems
+  api_key:
+    secure: f7s86k3ZRgaao32goumx0EFSquj8v8vwLBQP0uPd5lZ5OlDjUIbzAGCLpP4IARFf7MhYUUxWqwU7A0Z2MJHgmf4hT2VdVco4kGC4WztMgSI2JwY8Uo21/QJgI82jIfZ6yfSjF8OC3eh9irqJxXfhzspO9DY4p+nJkMJnpG5Y1e5FjS9zM3gS80TD9fauIMEi3fOLDNYEZ95SgjrkX2MHDYQWN1nfFlkRtybSHJ2u2Ad3Ulr5c/1gIoJviJCm8l5Bwo3MnvBtSuHHjFOaH9UTcmDUGpBjr7GMoqn3m053aB1F3ImYwL9+il0rtj+PE1lNaVbUM/QDKp8gDcbo433m8oMiGRpouz0fdIi95fqsshZmSU9sZX6HPiOuURXXwrjW7n3bj71+qZ7zWPTyZB8p3Y6ocp/r6Aj0ewELJksjnbYqSuyYv0o5sKTh2AUMawcqWAnDlZWgMq4UqKQiaWlhZMN1guQIWO6Xq9xdoiIxcqRUTJ7dUAGsfv+GIs2iPLvh20DHudYN70J5b4xzZLFgPQOJbTGlQQtC18m2PaYvcdsZ1qzttQIs0fcgeKno1Ltcman6/yqbAdKsSjifLUcdqHiWOUk5Dh5l4S+iSVazILVFFHwV89JI1+ipuS1nnIaRcmfIkV3GB+aXcbwwYc89mLkXBVmezs+scygK0KUhoyU=
+  gem: timeboss
+  on:
+    tags: true
+    repo: kevinstuffandthings/timeboss
+  skip_cleanup: 'true'
