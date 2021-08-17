@@ -160,7 +160,7 @@ $ tbsh
 If you want to try things out locally without installing the gem or updating your ruby environment, you can use [Docker](https://docker.com):
 
 ```bash
-$ docker run --rm -it ruby:2.6.6-slim /bin/bash -c "gem install timeboss >/dev/null && tbsh"
+$ docker run --rm -it ruby:3.0-slim /bin/bash -c "gem install timeboss shellable >/dev/null && tbsh"
 ```
 
 _Having trouble with the REPL? If you are using the examples from the [Usage](#Usage) section, keep in mind that the REPL is already in the context of the calendar -- so you don't need to specify the receiver!_
