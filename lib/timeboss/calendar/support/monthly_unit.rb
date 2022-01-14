@@ -23,10 +23,9 @@ module TimeBoss
         # Get a list of weeks contained within this period.
         # @return [Array<Week>]
         def weeks
+          raise UnsupportedUnitError unless calendar.supports_weeks?
           base = calendar.year(year_index)
-          num_weeks = (((base.end_date - base.start_date) + 1) / 7.0).to_i
-          num_weeks.times.map { |i| Week.new(calendar, base.start_date + (i * 7).days, base.start_date + ((i * 7) + 6).days) }
-            .select { |w| w.start_date.between?(start_date, end_date) }
+          calendar.weeks_in(year: base).select { |w| w.start_date.between?(start_date, end_date) }
         end
 
         private

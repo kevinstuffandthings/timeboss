@@ -11,6 +11,11 @@ module TimeBoss
         super(basis: Basis)
       end
 
+      def weeks_in(year:)
+        num_weeks = (((year.end_date - year.start_date) + 1) / 7.0).to_i
+        num_weeks.times.map { |i| Week.new(self, year.start_date + (i * 7).days, year.start_date + ((i * 7) + 6).days) }
+      end
+
       private
 
       class Basis < Calendar::Support::MonthBasis

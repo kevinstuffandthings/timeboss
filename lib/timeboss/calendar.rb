@@ -35,11 +35,11 @@ module TimeBoss
     end
 
     # Can this calendar support weeks?
-    # For custom calendars, this value can generally not be overridden.
-    # But for calendars like our Gregorian implementation, weeks are irrelevant, and should be suppressed.
+    # To support weeks, a calendar must implement a `#weeks_in(year:)` method that returns an array of
+    # `Calendar::Week` objects.
     # @return [Boolean]
     def supports_weeks?
-      true
+      respond_to?(:weeks_in)
     end
 
     def self.register!

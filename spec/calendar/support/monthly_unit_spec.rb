@@ -11,7 +11,7 @@ module TimeBoss
 
       describe MonthlyUnit do
         let(:described_class) { TestMonthBasedChunk }
-        let(:calendar) { double }
+        let(:calendar) { double(supports_weeks?: false, weeks_in: nil) }
         let(:start_date) { Date.parse("2018-06-25") }
         let(:end_date) { Date.parse("2018-08-26") }
         let(:subject) { described_class.new(calendar, 2018, 4, start_date, end_date) }
@@ -27,29 +27,34 @@ module TimeBoss
         end
 
         describe "#weeks" do
-          let(:base) { double(start_date: Date.parse("2018-01-01"), end_date: Date.parse("2018-12-30")) }
-          before(:each) { allow(calendar).to receive(:year).with(2018).and_return base }
+          let(:supports_weeks) { false }
+          before(:each) { allow(calendar).to receive(:supports_weeks?).and_return supports_weeks }
 
-          it "can get the relevant weeks for the period" do
-            allow(calendar).to receive(:supports_weeks?).and_return true
-            result = subject.weeks
-            result.each { |w| expect(w).to be_instance_of TimeBoss::Calendar::Week }
-            expect(result.map { |w| w.start_date.to_s }).to eq [
-              "2018-06-25",
-              "2018-07-02",
-              "2018-07-09",
-              "2018-07-16",
-              "2018-07-23",
-              "2018-07-30",
-              "2018-08-06",
-              "2018-08-13",
-              "2018-08-20"
-            ]
+          context "unsupported" do
+            it "blows up when weeks are not supported" do
+              expect { subject.weeks }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+            end
           end
 
-          it "blows up when weeks are not supported" do
-            allow(calendar).to receive(:supports_weeks?).and_return false
-            expect { subject.weeks }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+          context "supported" do
+            let(:supports_weeks) { true }
+            let(:base) { double(start_date: Date.parse("2018-01-01"), end_date: Date.parse("2018-12-30")) }
+            let(:weeks) do
+              ["2018-04-19", "2018-06-25", "2018-07-16", "2018-08-20", "2018-09-30"].map do |date|
+                start_date = Date.parse(date)
+                TimeBoss::Calendar::Week.new(calendar, start_date, start_date + 6.days)
+              end
+            end
+            before(:each) do
+              allow(calendar).to receive(:year).with(2018).and_return base
+              allow(calendar).to receive(:weeks_in).with(year: base).and_return weeks
+            end
+
+            it "can get the relevant weeks for the period" do
+              result = subject.weeks
+              result.each { |w| expect(w).to be_instance_of TimeBoss::Calendar::Week }
+              expect(result.map { |w| w.start_date.to_s }).to eq ["2018-06-25", "2018-07-16", "2018-08-20"]
+            end
           end
         end
 
