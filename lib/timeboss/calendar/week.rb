@@ -31,7 +31,7 @@ module TimeBoss
       # Get the index of this week within its containing year.
       # @return [Integer]
       def index
-        @_index ||= (((start_date - year.start_date) + 1) / 7.0).to_i + 1
+        @_index ||= year.weeks.find_index { |w| w.start_date == start_date } + 1
       end
 
       # Get the year number for this week.
