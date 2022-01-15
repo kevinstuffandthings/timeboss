@@ -43,11 +43,11 @@ module TimeBoss
       private
 
       def down
-        self.class.new(calendar, start_date - 1.week, end_date - 1.week)
+        calendar.send(:build_week, year, start_date - 1.week)
       end
 
       def up
-        self.class.new(calendar, start_date + 1.week, end_date + 1.week)
+        calendar.send(:build_week, year, start_date + 1.week)
       end
     end
   end
