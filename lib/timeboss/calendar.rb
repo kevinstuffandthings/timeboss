@@ -56,10 +56,6 @@ module TimeBoss
       @basis = basis
     end
 
-    def build_week(year, start_date)
-      Week.new(self, start_date, start_date + 6.days)
-    end
-
     private
 
     def parser

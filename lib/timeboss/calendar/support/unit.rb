@@ -87,6 +87,12 @@ module TimeBoss
         def inspect
           "#<#{self.class.name} start_date=#{start_date}, end_date=#{end_date}>"
         end
+
+        protected
+
+        def dates
+          @_dates ||= to_range.to_a
+        end
       end
     end
   end

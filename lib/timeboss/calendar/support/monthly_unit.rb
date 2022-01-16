@@ -25,7 +25,7 @@ module TimeBoss
         def weeks
           raise UnsupportedUnitError unless calendar.supports_weeks?
           base = calendar.year(year_index)
-          calendar.weeks_in(year: base).select { |w| w.start_date <= end_date && start_date <= w.end_date }
+          calendar.weeks_in(year: base).select { |w| (w.dates & dates).count >= 4 }
         end
 
         private
