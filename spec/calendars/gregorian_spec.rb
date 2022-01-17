@@ -599,7 +599,8 @@ module TimeBoss
           it "can get the weeks included in a range" do
             entries = result.weeks
             entries.each { |e| expect(e).to be_a TimeBoss::Calendars::Gregorian::Week }
-            expect(entries.map(&:name)).to include("2016W1", "2016W38", "2017W15", "2017W53", "2018W52")
+            expect(entries.count).to eq 156
+            expect(entries.map(&:name)).to include("2016W1", "2016W38", "2017W15", "2017W52", "2018W52")
           end
 
           it "can get the days included in a range" do
