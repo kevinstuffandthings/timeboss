@@ -170,9 +170,14 @@ To create a custom calendar, simply extend the `TimeBoss::Calendar` class, and i
 
 ```ruby
 require 'timeboss/calendar'
+require 'timeboss/calendar/support/has_fiscal_weeks'
 
 module MyCalendars
   class AugustFiscal < TimeBoss::Calendar
+    # The calendar we wish to implement has "fiscal weeks", meaning that the weeks start on
+    # the day of the containing period.
+    include TimeBoss::Calendar::Support::HasFiscalWeeks
+
     def initialize
       # For each calendar, operation, the class will be instantiated with an ordinal value
       # for `year` and `month`. It is the instance's job to translate those ordinals into
