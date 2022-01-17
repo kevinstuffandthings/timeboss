@@ -1,7 +1,6 @@
 module TimeBoss
   describe Calendars::Gregorian do
-    let(:subject) { described_class.new }
-
+    subject { described_class.new }
     context "days" do
       it "can get today" do
         day = subject.today
@@ -293,10 +292,80 @@ module TimeBoss
     end
 
     context "weeks" do
-      it "is uninterested in weeks" do
-        expect { subject.this_week }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
-        expect { subject.parse("2020W3") }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
-        expect { subject.weeks_ago(2) }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+      before(:each) { allow(Date).to receive(:today).and_return Date.parse("2019-08-23") }
+
+      it "knows this week " do
+        expect(subject.this_week.name).to eq "2019W34"
+        expect(subject.this_week.title).to eq "Week of August 19, 2019"
+      end
+
+      it "knows last week" do
+        expect(subject.last_week.name).to eq "2019W33"
+        expect(subject.last_week.title).to eq "Week of August 12, 2019"
+      end
+
+      it "knows next week" do
+        expect(subject.next_week.name).to eq "2019W35"
+        expect(subject.next_week.title).to eq "Week of August 26, 2019"
+      end
+
+      describe "over the years" do
+        [
+          [2010, "2010-01-04", 52, "2010-12-27"],
+          [2011, "2011-01-03", 52, "2011-12-26"],
+          [2012, "2012-01-02", 52, "2012-12-24"],
+          [2013, "2012-12-31", 52, "2013-12-23"],
+          [2014, "2013-12-30", 52, "2014-12-22"],
+          [2015, "2014-12-29", 53, "2015-12-28"],
+          [2016, "2016-01-04", 52, "2016-12-26"],
+          [2017, "2017-01-02", 52, "2017-12-25"],
+          [2018, "2018-01-01", 52, "2018-12-24"],
+          [2019, "2018-12-31", 52, "2019-12-23"],
+          [2020, "2019-12-30", 53, "2020-12-28"],
+          [2021, "2021-01-04", 52, "2021-12-27"],
+          [2022, "2022-01-03", 52, "2022-12-26"],
+          [2023, "2023-01-02", 52, "2023-12-25"],
+          [2024, "2024-01-01", 52, "2024-12-23"],
+          [2025, "2024-12-30", 52, "2025-12-22"],
+          [2026, "2025-12-29", 53, "2026-12-28"],
+          [2027, "2027-01-04", 52, "2027-12-27"],
+          [2028, "2028-01-03", 52, "2028-12-25"],
+          [2029, "2029-01-01", 52, "2029-12-24"],
+          [2030, "2029-12-31", 52, "2030-12-23"]
+        ].each do |year_number, first_start, num_weeks, last_start|
+          context "year #{year_number}" do
+            let(:year) { subject.year(year_number) }
+            let(:weeks) { year.weeks }
+
+            it "knows the first week of #{year_number} starts on #{first_start}" do
+              expect(weeks.first.start_date).to eq Date.parse(first_start)
+            end
+
+            it "can navigate to the second week of the year" do
+              week = weeks.first.next
+              expect(week.start_date).to eq Date.parse(first_start) + 7.days
+              expect(week.year).to eq year
+            end
+
+            it "knows that every week is 7 days" do
+              weeks.each { |w| expect(w.end_date - w.start_date).to eq 6 }
+            end
+
+            it "knows there are #{num_weeks} in #{year_number}" do
+              expect(weeks.count).to eq num_weeks
+            end
+
+            it "knows the last week of #{year_number} starts on #{last_start}" do
+              expect(weeks.first.start_date).to eq Date.parse(first_start)
+            end
+
+            it "can navigate to the first week of the next year" do
+              week = weeks.last.next
+              expect(week.start_date).to eq Date.parse(last_start) + 7.days
+              expect(week.year).to eq year.next
+            end
+          end
+        end
       end
     end
 
@@ -394,7 +463,7 @@ module TimeBoss
           let(:entry) { subject.parse("2020D201") }
 
           it "can do a default format" do
-            expect(entry.format).to eq "2020H2Q1M1D19"
+            expect(entry.format).to eq "2020H2Q1M1W3D7"
           end
         end
       end
@@ -449,16 +518,25 @@ module TimeBoss
         expect(date.name).to eq "2017M4"
       end
 
-      it "cannot parse a week within a year" do
-        expect { subject.parse("2018W37") }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+      it "can parse a week within a year" do
+        date = subject.parse("2018W37")
+        expect(date).to be_a TimeBoss::Calendar::Week
+        expect(date).to be_instance_of TimeBoss::Calendars::Gregorian::Week
+        expect(date.name).to eq "2018W37"
       end
 
-      it "cannot parse a week within a quarter" do
-        expect { subject.parse("2017Q2W2") }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+      it "can parse a week within a quarter" do
+        date = subject.parse("2017Q2W2")
+        expect(date).to be_a TimeBoss::Calendar::Week
+        expect(date).to be_instance_of TimeBoss::Calendars::Gregorian::Week
+        expect(date.name).to eq "2017W15"
       end
 
-      it "cannot parse a week within a month" do
-        expect { subject.parse("2017M4W1") }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+      it "can parse a week within a month" do
+        date = subject.parse("2017M4W1")
+        expect(date).to be_a TimeBoss::Calendar::Week
+        expect(date).to be_instance_of TimeBoss::Calendars::Gregorian::Week
+        expect(date.name).to eq "2017W14"
       end
 
       it "can parse a date" do
@@ -518,8 +596,10 @@ module TimeBoss
             expect(entries.map(&:name)).to include("2016M1", "2016M9", "2017M3", "2018M12")
           end
 
-          it "cannot get the weeks included in a range" do
-            expect { result.weeks }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+          it "can get the weeks included in a range" do
+            entries = result.weeks
+            entries.each { |e| expect(e).to be_a TimeBoss::Calendars::Gregorian::Week }
+            expect(entries.map(&:name)).to include("2016W1", "2016W38", "2017W15", "2017W53", "2018W52")
           end
 
           it "can get the days included in a range" do
@@ -535,9 +615,12 @@ module TimeBoss
       context "from day" do
         let(:basis) { subject.parse("2020-04-21") }
 
-        it "cannot shift to a different week" do
-          expect { basis.last_week }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
-          expect { basis.in_week }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+        it "can shift to a different week" do
+          allow(subject).to receive(:this_week).and_return subject.parse("2020W23")
+          result = basis.last_week
+          expect(result).to be_a TimeBoss::Calendar::Day
+          expect(result.to_s).to eq "2020-05-26"
+          expect(basis.in_week).to eq 2
         end
 
         it "can shift to a different quarter" do
@@ -557,12 +640,37 @@ module TimeBoss
         end
       end
 
+      context "from week" do
+        let(:basis) { subject.parse("2017W8") }
+
+        it "cannot shift to a different day" do
+          expect(basis.last_day).to be nil
+          expect(basis.in_day).to be nil
+        end
+
+        it "can shift to a different month" do
+          allow(subject).to receive(:this_month).and_return subject.parse("2020M4")
+          result = basis.next_month
+          expect(result).to be_a TimeBoss::Calendars::Gregorian::Week
+          expect(result.to_s).to eq "2020W22: 2020-05-25 thru 2020-05-31"
+          expect(basis.in_month).to eq 4
+        end
+
+        it "can shift to a different half" do
+          allow(subject).to receive(:this_half).and_return subject.parse("2019H1")
+          result = basis.last_half
+          expect(result).to be_a TimeBoss::Calendars::Gregorian::Week
+          expect(result.to_s).to eq "2018W34: 2018-08-20 thru 2018-08-26"
+          expect(basis.in_half).to eq 8
+        end
+      end
+
       context "from month" do
         let(:basis) { subject.parse("2017M4") }
 
         it "cannot shift to a different week" do
-          expect { basis.last_week }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
-          expect { basis.in_week }.to raise_error TimeBoss::Calendar::Support::Unit::UnsupportedUnitError
+          expect(basis.last_week).to be nil
+          expect(basis.in_week).to be nil
         end
 
         it "can shift to a different year" do
