@@ -114,7 +114,9 @@ module TimeBoss
       %w[day week month quarter half year].each do |size|
         define_method(size.pluralize) do
           entry = calendar.public_send("#{size}_for", self.begin.start_date) || self.begin.public_send(size, 1)
-          build_entries entry
+          entries = build_entries(entry)
+          entries.pop if size == "week" && self.end.next.public_send(size, 1) == entries.last
+          entries
         end
 
         define_method(size) do |index = nil|
