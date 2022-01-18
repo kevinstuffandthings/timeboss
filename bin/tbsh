@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
 
-require 'timeboss/calendars'
-require 'shellable'
+require "timeboss"
+require "timeboss/calendars"
+require "shellable"
 
 calendar = if ARGV.length == 1
-             TimeBoss::Calendars[ARGV.first]
-           else
-             TimeBoss::Calendars.first.calendar
-           end
+  TimeBoss::Calendars[ARGV.first]
+else
+  TimeBoss::Calendars.first.calendar
+end
 
 abort "Unknown calendar" if calendar.nil?
 
