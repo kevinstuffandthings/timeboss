@@ -28,6 +28,57 @@ module TimeBoss
           end
         end
 
+        describe "#clamp" do
+          let(:clamp_start_date) { Date.parse("2018-06-21") }
+          let(:clamp_end_date) { Date.parse("2018-08-30") }
+          let(:result) { subject.clamp(described_class.new(calendar, clamp_start_date, clamp_end_date)) }
+          let(:period) { double }
+
+          context "open" do
+            it "does not restrict the returned period" do
+              expect(calendar).to receive(:parse).with("#{start_date}..#{end_date}").and_return period
+              expect(result).to eq period
+            end
+          end
+
+          context "left clamped" do
+            let(:clamp_start_date) { Date.parse("2018-06-30") }
+
+            it "brings the beginning date inward" do
+              expect(calendar).to receive(:parse).with("#{clamp_start_date}..#{end_date}").and_return period
+              expect(result).to eq period
+            end
+          end
+
+          context "right clamped" do
+            let(:clamp_end_date) { Date.parse("2018-07-30") }
+
+            it "brings the beginning date inward" do
+              expect(calendar).to receive(:parse).with("#{start_date}..#{clamp_end_date}").and_return period
+              expect(result).to eq period
+            end
+          end
+
+          context "fully clamped" do
+            let(:clamp_start_date) { Date.parse("2018-06-30") }
+            let(:clamp_end_date) { Date.parse("2018-07-30") }
+
+            it "brings the beginning date inward" do
+              expect(calendar).to receive(:parse).with("#{clamp_start_date}..#{clamp_end_date}").and_return period
+              expect(result).to eq period
+            end
+          end
+
+          context "obliterated" do
+            let(:clamp_start_date) { Date.parse("2018-09-01") }
+            let(:clamp_end_date) { Date.parse("2018-09-06") }
+
+            it "returns nil" do
+              expect(result).to be_nil
+            end
+          end
+        end
+
         context "periods" do
           before(:each) do
             allow(calendar).to receive(:days_for).with(subject).and_return %w[D1 D2 D3 D4 D5 D6 D7 D8]
