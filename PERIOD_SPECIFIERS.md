@@ -35,7 +35,25 @@ _Assuming today is April 29, 2022, in the Gregorian calendar:_
 | `yesterday`     | April 28, 2022                      |
 | `next_year`     | 2023                                
 
-The relative prefixes (`last`, `this`, `next`) can be used in conjuction with any period granularity (`day`, `week`, etc). The terms here should be joined with the underscore (`_`) character as in the examples above.
+The relative prefixes can be used in conjuction with any period granularity. The terms here should be joined with the underscore (`_`) character as in the examples above.
+
+Relative prefixes are:
+- `last`
+- `this`
+- `next`
+
+Period granularities are:
+- `day`
+- `week`
+- `month`
+- `quarter`
+- `half`
+- `year`
+
+Accepted single-day specifiers:
+- `yesterday`
+- `today`
+- `tomorrow`
 
 ## Compound Periods
 Absolute and/or relative periods can be combined together to build "compound" periods by utilizing TimeBoss' "range" operator (`..`):
