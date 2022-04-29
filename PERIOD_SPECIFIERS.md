@@ -9,14 +9,14 @@ An "absolute" period is one that never changes, regardless of the current date. 
 regardless of what today is.
 
 _Assuming the Broadcast calendar is in use:_
-| Specifier       | Description                         | Details                                              | Resolution              |
-| --------------- | ----------------------------------- | ---------------------------------------------------- | ----------------------- |
-| `2020Q3`        | 3rd quarter of 2020                 |                                                      | 6/29/2020 - 9/27/2020   |
-| `2022M1`        | 1st month of 2022                   |                                                      | 12/27/2021 - 1/30/2022  |
-| `2021H1M2`      | 2nd month of the first half of 2021 | When using "nested periods", go from broad -> narrow | 2/1/2021 - 2/28/2021    |
-| `2020W40`       | 40th week of 2020                   |                                                      | 9/28/2020 - 10/4/2020   |
-| `2027`          | 2027                                |                                                      | 12/28/2026 - 12/26/2027 |
-| `1999-07-31`    | July 31, 1999                       | Can be specified with/without dashes                 | 7/31/1999 - 7/31/1999   |
+| Specifier                  | Description                         | Resolution              |
+| -------------------------- | ----------------------------------- | ----------------------- |
+| `2020Q3`                   | 3rd quarter of 2020                 | 6/29/2020 - 9/27/2020   |
+| `2022M1`                   | 1st month of 2022                   | 12/27/2021 - 1/30/2022  |
+| `2021H1M2`                 | 2nd month of the first half of 2021 | 2/1/2021 - 2/28/2021    |
+| `2020W40`                  | 40th week of 2020                   | 9/28/2020 - 10/4/2020   |
+| `2027`                     | 2027                                | 12/28/2026 - 12/26/2027 |
+| `1999-07-31` or `19990731` | July 31, 1999                       | 7/31/1999 - 7/31/1999   |
 
 The sub-identifiers for period granularities are:
 - `D`: day
