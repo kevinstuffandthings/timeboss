@@ -4,7 +4,7 @@ you understand how to communicate with TimeBoss.
 
 All specifiers are resolved within the context of the utilized calendar (Gregorian, Broadcast, etc).
 
-## Simple Absolute Periods
+## Absolute Periods
 An "absolute" period is one that never changes, regardless of the current date. "December of 2019" always references the same time period,
 regardless of what today is.
 
@@ -24,15 +24,17 @@ The sub-identifiers for period granularities are:
 - `Q`: quarter
 - `H`: half
 
-## Simple Relative Periods
+## Relative Periods
 A "relative" period is one that changes based on the current date. "Last week" means something different today than it will a month from now.
 
 _Assuming today is April 29, 2022, in the Gregorian calendar:_
 | Specifier       | Description                         |
 | --------------- | ----------------------------------- |
-| `last_month`    | March 2020                          |
+| `last_month`    | March 2022                          |
+| `this_month-2`  | February 2022                       |
 | `this_week`     | Week of April 25, 2022              |
 | `yesterday`     | April 28, 2022                      |
+| `today+4`       | May 3, 2022                         |
 | `next_year`     | 2023                                
 
 The relative prefixes can be used in conjuction with any period granularity. The terms here should be joined with the underscore (`_`) character as in the examples above.
