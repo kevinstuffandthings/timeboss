@@ -15,6 +15,7 @@ regardless of what today is.
 | `2021H1M2`      | 2nd month of the first half of 2021 | When using "nested periods", go from broad -> narrow |
 | `2020W40`       | 40th week of 2020                   |                                                      |
 | `2027`          | 2027                                |                                                      |
+| `1999-07-31`    | July 31, 1999                       | Can be specified with/without dashes                 |
 
 The sub-identifiers for period granularities are:
 - `D`: day
