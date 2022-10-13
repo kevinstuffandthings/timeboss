@@ -1,3 +1,4 @@
+require "./lib/timeboss"
 require "./lib/timeboss/calendars"
 
 namespace :timeboss do
