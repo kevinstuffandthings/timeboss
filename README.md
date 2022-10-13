@@ -25,7 +25,7 @@ $ gem install timeboss
 ```
 
 ## Usage
-Supports `year`, `half`, `quarter`, `month`, `week` (non-gregorian calendars only), and `day`.
+Supports `year`, `half`, `quarter`, `month`, `week`, and `day`.
 
 Prepare your calendar for use:
 
