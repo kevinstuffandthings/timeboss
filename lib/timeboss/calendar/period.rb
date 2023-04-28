@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require_relative "./support/clampable"
+
 module TimeBoss
   class Calendar
     class Period
+      include Calendar::Support::Clampable
       attr_reader :begin, :end
 
       # @!method start_date
