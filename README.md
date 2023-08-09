@@ -71,7 +71,7 @@ calendar.weeks_ahead(3).name # run in 2020W29
 The resulting periods can be formatted a variety of (parsable) ways:
 
 ```ruby
-entry = calendar.parse('2020M24')
+entry = calendar.parse('2020W24')
 entry.format
 # => "2020H1Q2M3W2"
 
